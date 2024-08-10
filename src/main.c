@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/10 22:31:39 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/10 22:31:24 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/cubed.h"
 
-#ifndef FUNCTIONS_H
-# define FUNCTIONS_H
-
-# include "./cubed.h"
-
-int	ft_isnum(char c);
-int	check_args(int argc, char **argv);
-
-#endif
+int	main(int argc, char **argv)
+{
+	if (!check_args(argc, argv))
+		return (1);
+	return (0);
+}

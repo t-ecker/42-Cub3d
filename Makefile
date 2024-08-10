@@ -1,34 +1,32 @@
-NAME			= cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
+#    Updated: 2024/08/10 22:47:11 by dolifero         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+NAME            = cub3d
 
-LIBFT_DIR 		= Libft
-LIBFT			= $(LIBFT_DIR)/libft.a
+CC              = cc
+CFLAGS          = -Wall -Wextra -Werror
 
-SRC_DIR			= ./src
-OBJ_DIR			= ./obj
+LIBFT_DIR       = Libft
+LIBFT           = $(LIBFT_DIR)/libft.a
 
-SRC_FILES		= 	checkers.c\
-					parsing.c
+SRC_DIR         = ./src
+OBJ_DIR         = ./obj
 
-OBJ_FILES		= $(patsubst $(SRC_DIR)/main.c, $(OBJ_DIR)/%.o, $(SRC_DIR)/$(SRC_FILES))
+SRC_FILES       = src/checkers.c\
+				src/main.c
 
-all:				$(NAME)
+OBJ_FILES       = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-$(NAME): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(foreach dir, $(SUBDIRS), $(OBJ_DIR)/$(dir))
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
+all:            clear_screen $(NAME) visual_feedback
 
 BOLD_PURPLE	=	\033[1;35m
 BOLD_CYAN	=	\033[1;36m
@@ -47,55 +45,66 @@ CYAN		=	\033[2;96m
 BR_CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
-all:
-				clear;
-				@$(MAKE) CUBED_CYAN
-				@$(MAKE) loading
-				clear;
-				@$(MAKE) CUBED_GREEN
-				@echo "             $(BOLD_GREEN)${NAME} DONE!\n$(DEF_COLOR)"
+$(NAME): $(OBJ_FILES) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(LIBFT):
+	@make -C $(LIBFT_DIR)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clear_screen:
+	@clear
+
+visual_feedback:
+	@$(MAKE) CUBED_CYAN
+	@$(MAKE) loading
+	@clear
+	@$(MAKE) CUBED_GREEN
+	@echo "             $(BOLD_GREEN)${NAME} DONE!\n$(DEF_COLOR)"
 
 clean:
-				@echo "$(CYAN)"
-				rm -rf $(OBJ_DIR)
-				make clean -C $(LIBFT_DIR)
-				clear;
-				@echo "$(DEF_COLOR)"
+	@echo "$(CYAN)"
+	rm -rf $(OBJ_DIR)
+	make clean -C $(LIBFT_DIR)
+	@clear
+	@echo "$(DEF_COLOR)"
 
-fclean:	clean
-				@echo "$(CYAN)"
-				rm -f $(NAME)
-				make fclean -C $(LIBFT_DIR)
-				clear;
-				@echo "$(DEF_COLOR)"
+fclean: clean
+	@echo "$(CYAN)"
+	rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
+	@clear
+	@echo "$(DEF_COLOR)"
 
-re:				fclean all
+re: fclean all
 
 CUBED_CYAN:
-				@echo "\n$(BR_CYAN) ________  ___  ___  ________  ________  ________     "
-				@echo "|\   ____\|\  \|\  \|\   __  \|\_____  \|\   ___ \    "
-				@echo "\ \  \___|\ \  \\\  \ \  \|\ /\|____|\ /\ \  \_|\ \   "
-				@echo " \ \  \    \ \  \\\  \ \   __  \    \|\  \ \  \ \\ \  "
-				@echo "  \ \  \____\ \  \\\  \ \  \|\  \  __\_\  \ \  \_\\ \ "
-				@echo "   \ \_______\ \_______\ \_______\|\_______\ \_______\"
-				@echo "    \|_______|\|_______|\|_______|\|_______|\|_______|$(DEF_COLOR)\n"
-                                                      
-                                                      
-                                                      
+	@echo "\n$(BR_CYAN) ________  ___  ___  ________  ________  ________     "
+	@echo "|\   ____\|\  \ \  \|\   __  \|\_____  \|\   ___ \    "
+	@echo "\ \  \___|\ \  \ \  \ \  \|\ /\|____|\  \ \  \_|\ \   "
+	@echo " \ \  \    \ \  \ \  \ \   __  \    \|\  \ \  \  \ \  "
+	@echo "  \ \  \____\ \  \_\  \ \  \|\  \  __\_\  \ \  \__\ \ "
+	@echo "   \ \_______\ \_______\ \_______\|\_______\ \_______\ "
+	@echo "    \|_______|\|_______|\|_______|\|_______|\|_______|$(DEF_COLOR)\n"
 
 CUBED_GREEN:
-				@echo "\n$(GREEN) ________  ___  ___  ________  ________  ________     "
-				@echo "|\   ____\|\  \|\  \|\   __  \|\_____  \|\   ___ \    "
-				@echo "\ \  \___|\ \  \\\  \ \  \|\ /\|____|\ /\ \  \_|\ \   "
-				@echo " \ \  \    \ \  \\\  \ \   __  \    \|\  \ \  \ \\ \  "
-				@echo "  \ \  \____\ \  \\\  \ \  \|\  \  __\_\  \ \  \_\\ \ "
-				@echo "   \ \_______\ \_______\ \_______\|\_______\ \_______\"
-				@echo "    \|_______|\|_______|\|_______|\|_______|\|_______|$(DEF_COLOR)\n"
+	@echo "\n$(GREEN) ________  ___  ___  ________  ________  ________     "
+	@echo "|\   ____\|\  \ \  \|\   __  \|\_____  \|\   ___ \    "
+	@echo "\ \  \___|\ \  \ \  \ \  \|\ /\|____|\  \ \  \_|\ \   "
+	@echo " \ \  \    \ \  \ \  \ \   __  \    \|\  \ \  \  \ \  "
+	@echo "  \ \  \____\ \  \_\  \ \  \|\  \  __\_\  \ \  \__\ \ "
+	@echo "   \ \_______\ \_______\ \_______\|\_______\ \_______\ "
+	@echo "    \|_______|\|_______|\|_______|\|_______|\|_______|$(DEF_COLOR)\n"
 
 loading:
-				@for i in {1..42}; do \
-					printf '%s' "█"; \
-					sleep 0.01; \
-				done
+	@for i in {1..42}; do \
+		printf '%s' "█"; \
+		sleep 0.01; \
+	done
 
-.PHONY:			all clean fclean re
+.PHONY: all clean fclean re CUBED_CYAN CUBED_GREEN loading clear_screen visual_feedback
