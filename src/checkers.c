@@ -6,18 +6,20 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:23:59 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 02:26:08 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
 
-int ft_isappr(char c)
+int	ft_isappr(char c)
 {
-	return ((c >= 0 && c <= 9) || c == 'N' || c == 'W' || c == 'S' || c == 'E' || c == ' ');
+	return ((c >= 0 && c <= 9) || c == 'N'
+		|| c == 'W' || c == 'S' || c == 'E'
+		|| c == ' ');
 }
 
-int check_args(int argc, char **argv)
+int	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 		return (ft_putendl_fd("Insufficient amount of arguments", 2), 0);
