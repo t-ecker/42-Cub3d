@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:11:23 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/12 01:46:29 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/12 02:12:36 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FUNCTIONS_H
-# define FUNCTIONS_H
+#include "../include/cubed.h"
 
-# include "./cubed.h"
-
-//CHECKING
-int		ft_isappr(char c);
-int		check_args(int argc, char **argv);
-
-//PARSING
-t_input	*parse_file(char *filename);
-
-//FREEING
-void	free_params(t_input *input);
-void	free_input(t_input *input);
-
-//UTILS
-void	remove_newline(char *line);
-
-//DEBUG
-void	print_input(t_input *input);
-
-#endif
+void	print_input(t_input *input)
+{
+	ft_printf("\n");
+	ft_printf("%s\n", input->wall_n);
+	ft_printf("%s\n", input->wall_s);
+	ft_printf("%s\n", input->wall_w);
+	ft_printf("%s\n", input->wall_e);
+	ft_printf("\n");
+	ft_printf("%s\n", input->ceiling);
+	ft_printf("%s\n", input->floor);
+	ft_printf("\n");
+}

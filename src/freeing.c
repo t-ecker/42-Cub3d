@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.h                                        :+:      :+:    :+:   */
+/*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:11:23 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/12 01:53:49 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FUNCTIONS_H
-# define FUNCTIONS_H
+#include "../include/cubed.h"
 
-# include "./cubed.h"
+void	free_params(t_input *input)
+{
+	if (input->wall_n)
+		free(input->wall_n);
+	if (input->wall_e)
+		free(input->wall_e);
+	if (input->wall_w)
+		free(input->wall_w);
+	if (input->wall_s)
+		free(input->wall_s);
+	if (input->ceiling)
+		free(input->ceiling);
+	if (input->floor)
+		free(input->floor);
+}
 
-//CHECKING
-int		ft_isappr(char c);
-int		check_args(int argc, char **argv);
-
-//PARSING
-t_input	*parse_file(char *filename);
-
-//FREEING
-void	free_params(t_input *input);
-void	free_input(t_input *input);
-
-//UTILS
-void	remove_newline(char *line);
-
-//DEBUG
-void	print_input(t_input *input);
-
-#endif
+void	free_input(t_input *input)
+{
+	free_params(input);
+	free(input);
+}

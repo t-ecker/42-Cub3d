@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:01 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/10 23:00:25 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 02:06:24 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include "../Libft/libft.h"
 
 //INTERNAL INCLUDES
-# include "functions.h"
-# include "structs.h"
+# include "./structs.h"
+# include "./functions.h"
 
 //EXTERNAL INCLUDES
-# include "stdio.h"
-# include "stdlib.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
 
 #endif
