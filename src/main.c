@@ -6,11 +6,16 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 03:19:48 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:21:19 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
+
+void	leaks(void)
+{
+	system("leaks cub3d");
+}
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 03:38:22 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:19:33 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	ft_parse_param(char *line, t_input *input)
 		input->ceiling = ft_strdup(line + 2);
 	else if (ft_strncmp(line, "F ", 2) == 0 && input->floor == NULL)
 		input->floor = ft_strdup(line + 2);
+	else
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Ivalid file content", 2);
+		free_params(input);
+		exit(1);
+	}
 }
 
 void	ft_parse_map_line(char *line, t_input *input)
