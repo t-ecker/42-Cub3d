@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:11:46 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:38:22 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_input	*ft_init_input(void)
 	input = malloc(sizeof(t_input));
 	if (!input)
 		return (NULL);
+	input->map_height = 0;
 	input->wall_w = NULL;
 	input->wall_e = NULL;
 	input->wall_n = NULL;
 	input->wall_s = NULL;
 	input->floor = NULL;
 	input->ceiling = NULL;
+	input->map = NULL;
 	return (input);
 }
 
@@ -44,6 +46,31 @@ void	ft_parse_param(char *line, t_input *input)
 		input->floor = ft_strdup(line + 2);
 }
 
+void	ft_parse_map_line(char *line, t_input *input)
+{
+	int		i;
+	char	**new_map;
+
+	i = 0;
+	input->map_height++;
+	if (input->map == NULL)
+	{
+		input->map = malloc(sizeof(char *) * 2);
+		input->map[0] = ft_strdup(line);
+		input->map[1] = NULL;
+	}
+	else
+	{
+		new_map = ft_realloc(input->map, sizeof(char *) * (input->map_height),
+				sizeof(char *) * (input->map_height + 1));
+		input->map = new_map;
+		while (input->map[i] != NULL)
+			i++;
+		input->map[i] = ft_strdup(line);
+		input->map[i + 1] = NULL;
+	}
+}
+
 t_input	*parse_file(char *filename)
 {
 	int		fd;
@@ -60,7 +87,10 @@ t_input	*parse_file(char *filename)
 		if (ft_strncmp(line, "\n", 1) != 0)
 		{
 			remove_newline(line);
-			ft_parse_param(line, input);
+			if (!check_params(input))
+				ft_parse_param(line, input);
+			else
+				ft_parse_map_line(line, input);
 		}
 		free(line);
 		line = get_next_line(fd);

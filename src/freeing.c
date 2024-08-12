@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 01:53:49 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:21:42 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,22 @@ void	free_params(t_input *input)
 		free(input->floor);
 }
 
+void	free_map(t_input *input)
+{
+	int	i;
+
+	i = 0;
+	while (input->map[i])
+	{
+		free(input->map[i]);
+		i++;
+	}
+	free(input->map);
+}
+
 void	free_input(t_input *input)
 {
 	free_params(input);
+	free_map(input);
 	free(input);
 }

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:24:05 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:48:03 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 int		ft_isappr(char c);
 int		check_args(int argc, char **argv);
 int		check_input(t_input *input);
+int		check_params(t_input *input);
+int		check_map(char **map);
 
 //PARSING
 t_input	*parse_file(char *filename);
@@ -32,5 +34,6 @@ void	remove_newline(char *line);
 
 //DEBUG
 void	print_input(t_input *input);
+void	print_map(t_input *input);
 
 #endif

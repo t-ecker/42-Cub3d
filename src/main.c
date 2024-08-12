@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:22:37 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:19:48 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	if (!check_input(input))
 		return (1);
 	print_input(input);
+	print_map(input);
 	free_input(input);
 	return (0);
 }

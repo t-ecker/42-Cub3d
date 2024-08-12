@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:26:08 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:49:22 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isappr(char c)
 {
-	return ((c >= 0 && c <= 9) || c == 'N'
+	return ((c >= '0' && c <= '9') || c == 'N'
 		|| c == 'W' || c == 'S' || c == 'E'
 		|| c == ' ');
 }
@@ -34,16 +34,30 @@ int	check_args(int argc, char **argv)
 	return (1);
 }
 
+int	check_params(t_input *input)
+{
+	if (!input->wall_e || !input->wall_n
+		|| !input->wall_s || !input->wall_w
+		|| !input->ceiling || !input->floor)
+		return (0);
+	return (1);
+}
+
 int	check_input(t_input *input)
 {
 	if (!input)
 		return (ft_putendl_fd("Input allocation failed", 2), 0);
-	if (!input->wall_e || !input->wall_n
-		|| !input->wall_s || !input->wall_w
-		|| !input->ceiling || !input->floor)
+	if (!check_params(input))
 	{
 		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("One of the parameters is missing", 2);
+		ft_putendl_fd("Missing parameters", 2);
+		free_input(input);
+		return (0);
+	}
+	if (!check_map(input->map))
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Wrong map", 2);
 		free_input(input);
 		return (0);
 	}

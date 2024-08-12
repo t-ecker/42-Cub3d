@@ -6,7 +6,7 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/12 02:12:14 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/12 03:47:41 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ SRC_DIR         = ./src
 OBJ_DIR         = ./obj
 
 SRC_FILES       =	src/checkers.c\
+					src/map_checkers.c\
 					src/parsing.c\
-					src/debug.c\
 					src/freeing.c\
 					src/utils.c\
+					src/debug.c\
 					src/main.c
 
 OBJ_FILES       = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

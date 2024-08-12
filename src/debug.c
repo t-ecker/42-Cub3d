@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:46:29 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:12:36 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 03:35:35 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,16 @@ void	print_input(t_input *input)
 	ft_printf("%s\n", input->ceiling);
 	ft_printf("%s\n", input->floor);
 	ft_printf("\n");
+}
+
+void	print_map(t_input *input)
+{
+	int	i;
+
+	i = 0;
+	while (input->map[i])
+	{
+		ft_printf("%s\n", input->map[i]);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 02:00:13 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/12 02:58:52 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_input
 {
 	char	**map;
+	int		map_height;
 	char	*wall_n;
 	char	*wall_e;
 	char	*wall_w;
