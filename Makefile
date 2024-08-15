@@ -6,17 +6,21 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/12 03:47:41 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/15 17:04:11 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = cub3d
 
 CC              = cc
-CFLAGS			= -Wall -Wextra -Werror -I./include -I../Libft
+CFLAGS			= -Wall -Wextra -Werror
+HEADERFLAGS		=  -I./include -I../Libft -I $(LIBMLX)/include/MLX42
 
 LIBFT_DIR       = Libft
 LIBFT           = $(LIBFT_DIR)/libft.a
+LIBS			= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBMLX			= ./MLX42
+MAKELIBMLX		= ./MLX42/build/libmlx42.a
 
 SRC_DIR         = ./src
 OBJ_DIR         = ./obj
@@ -29,9 +33,13 @@ SRC_FILES       =	src/checkers.c\
 					src/debug.c\
 					src/main.c
 
-OBJ_FILES       = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+OBJ_FILES		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-all:            clear_screen $(NAME) visual_feedback
+all:			clear_screen $(NAME) visual_feedback
+
+libmlx:
+				mkdir -p $(LIBMLX)/build
+				cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 BOLD_PURPLE	=	\033[1;35m
 BOLD_CYAN	=	\033[1;36m
@@ -50,11 +58,21 @@ CYAN		=	\033[2;96m
 BR_CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
-$(NAME): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(MAKELIBMLX) $(OBJ_FILES) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $^ $(HEADERFLAGS)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
+
+$(MAKELIBMLX):	$(LIBMLX)
+			@echo "\n$(BOLD_CYAN)Starting $(BOLD_WHITE)[${LIBMLX}] $(BOLD_CYAN)compilation..$(DEF_COLOR)\n"
+			@mkdir -p $(LIBMLX)/build
+			@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+			@echo "\n$(BOLD_GREEN)${LIBMLX} DONE!\n$(DEF_COLOR)"
+
+$(LIBMLX):
+				touch .gitmodules
+				git submodule add -f https://github.com/codam-coding-college/MLX42.git
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -83,6 +101,7 @@ fclean: clean
 	@echo "$(CYAN)"
 	rm -f $(NAME)
 	make fclean -C $(LIBFT_DIR)
+	rm -rf $(LIBMLX)/build
 	@clear
 	@echo "$(DEF_COLOR)"
 
