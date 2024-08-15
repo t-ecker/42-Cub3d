@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 03:48:03 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:09:28 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int		check_map(char **map);
 
 //PARSING
 t_input	*parse_file(char *filename);
+
+//DRAWING
+void	my_put_pixel(mlx_image_t *img, int x, int y, int color);
 
 //FREEING
 void	free_params(t_input *input);
