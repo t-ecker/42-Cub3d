@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:53:31 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:01:04 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@ void	leaks(void)
 	system("leaks cub3d");
 }
 
-int	init_image(t_input *input, t_cubed *cubed)
+int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
 	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	ceiling_floor(cubed, input);
 	ft_hook(cubed);
 	if (!cubed->bg || (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
+	{
+		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
+		free_input(input);
+		free_cubed(cubed);
+		return (0);
+	}
+	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
+	walls(cubed, data);
+	if (!cubed->walls || (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
 		free_input(input);
@@ -99,7 +108,7 @@ int	main(int argc, char **argv)
 	print_input(input);
 	print_map(input);
 	print_dist(data);
-	if (!init_image(input, cubed))
+	if (!init_image(input, cubed, data))
 		return (1);
 	free_all(data, cubed, input);
 

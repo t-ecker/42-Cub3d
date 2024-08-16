@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
+#    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/16 15:03:53 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/16 16:01:18 by tomecker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT_DIR       = Libft
 LIBFT           = $(LIBFT_DIR)/libft.a
 LIBMLX			= ./MLX42
 MAKELIBMLX		= ./MLX42/build/libmlx42.a
-LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -lft -ldl -lglfw -pthread -lm
+LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -L/opt/homebrew/lib -lft -ldl -lglfw -pthread -lm
 
 SRC_DIR         = ./src
 OBJ_DIR         = ./obj
@@ -34,6 +34,8 @@ SRC_FILES       =	src/checkers.c\
 					src/utils.c\
 					src/debug.c\
 					src/wall_dist.c\
+					src/draw_walls.c\
+					src/bresenham.c\
 					src/main.c
 
 OBJ_FILES		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
