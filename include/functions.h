@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/15 17:09:28 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:15:02 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,34 @@
 # include "./cubed.h"
 
 //CHECKING
-int		ft_isappr(char c);
-int		check_args(int argc, char **argv);
-int		check_input(t_input *input);
-int		check_params(t_input *input);
-int		check_map(char **map);
+int				ft_isappr(char c);
+int				check_args(int argc, char **argv);
+int				check_input(t_input *input);
+int				check_params(t_input *input);
+int				check_map(char **map);
 
 //PARSING
-t_input	*parse_file(char *filename);
+t_input			*parse_file(char *filename);
 
 //DRAWING
-void	my_put_pixel(mlx_image_t *img, int x, int y, int color);
+void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
+void			ceiling_floor(t_cubed *cubed, t_input *input);
+
+//CONTROLS
+void			ft_window_hook(void *param);
+void			ft_hook(t_cubed *cubed);
 
 //FREEING
-void	free_params(t_input *input);
-void	free_input(t_input *input);
+void			free_params(t_input *input);
+void			free_input(t_input *input);
+void			free_cubed(t_cubed *cubed);
 
 //UTILS
-void	remove_newline(char *line);
+void			remove_newline(char *line);
+int				rgb_to_rgba_hex(int r, int g, int b, int a);
 
 //DEBUG
-void	print_input(t_input *input);
-void	print_map(t_input *input);
+void			print_input(t_input *input);
+void			print_map(t_input *input);
 
 #endif

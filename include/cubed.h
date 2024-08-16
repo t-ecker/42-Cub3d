@@ -6,15 +6,15 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:01 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/15 17:14:16 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:17:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBED_H
 # define CUBED_H
 
-# define WIDTH 320
-# define HEIGHT 200
+# define WIDTH 1280
+# define HEIGHT 720
 
 //LIBRAIRES
 # include "../Libft/libft.h"

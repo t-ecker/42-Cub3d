@@ -1,48 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:14:27 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/16 01:04:59 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
 
-int	clamp(int value)
+void	ft_window_hook(void *param)
 {
-	if (value < 0)
-	{
-		return (0);
-	}
-	else if (value > 255)
-	{
-		return (255);
-	}
-	return (value);
+	mlx_t	*mlx;
+
+	mlx = param;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
 }
 
-void	remove_newline(char *line)
+void	ft_hook(t_cubed *cubed)
 {
-	size_t len;
-
-	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
-}
-
-int	rgb_to_rgba_hex(int r, int g, int b, int a)
-{
-	int	rgba;
-
-	r = clamp(r);
-	g = clamp(g);
-	b = clamp(b);
-	a = clamp(a);
-
-	rgba = (r << 24) | (g << 16) | (b << 8) | a;
-	return (rgba);
+	mlx_loop_hook(cubed->mlx, ft_window_hook, cubed->mlx);
 }

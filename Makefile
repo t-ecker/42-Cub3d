@@ -6,7 +6,7 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/15 17:04:11 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/16 02:06:07 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@ NAME            = cub3d
 
 CC              = cc
 CFLAGS			= -Wall -Wextra -Werror
-HEADERFLAGS		=  -I./include -I../Libft -I $(LIBMLX)/include/MLX42
+HEADERFLAGS		=  -I./include -I../Libft -I$(LIBMLX)/include/MLX42
 
 LIBFT_DIR       = Libft
 LIBFT           = $(LIBFT_DIR)/libft.a
-LIBS			= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLX			= ./MLX42
 MAKELIBMLX		= ./MLX42/build/libmlx42.a
+LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -lft -ldl -lglfw -pthread -lm
 
 SRC_DIR         = ./src
 OBJ_DIR         = ./obj
@@ -28,6 +28,8 @@ OBJ_DIR         = ./obj
 SRC_FILES       =	src/checkers.c\
 					src/map_checkers.c\
 					src/parsing.c\
+					src/controls.c\
+					src/draw_bg.c\
 					src/freeing.c\
 					src/utils.c\
 					src/debug.c\
@@ -58,8 +60,14 @@ CYAN		=	\033[2;96m
 BR_CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
-$(NAME): $(MAKELIBMLX) $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $^ $(HEADERFLAGS)
+$(NAME): $(OBJ_FILES) $(LIBFT) $(MAKELIBMLX)
+	$(CC) $(CFLAGS) $(HEADERFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBS)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(HEADERFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
@@ -73,12 +81,6 @@ $(MAKELIBMLX):	$(LIBMLX)
 $(LIBMLX):
 				touch .gitmodules
 				git submodule add -f https://github.com/codam-coding-college/MLX42.git
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clear_screen:
 	@clear

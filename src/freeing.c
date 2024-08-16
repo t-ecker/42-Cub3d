@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 03:21:42 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:07:04 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	free_params(t_input *input)
 		free(input->wall_w);
 	if (input->wall_s)
 		free(input->wall_s);
-	if (input->ceiling)
-		free(input->ceiling);
-	if (input->floor)
-		free(input->floor);
 }
 
 void	free_map(t_input *input)
@@ -46,4 +42,10 @@ void	free_input(t_input *input)
 	free_params(input);
 	free_map(input);
 	free(input);
+}
+
+void	free_cubed(t_cubed *cubed)
+{
+	free(cubed->title);
+	free(cubed);
 }

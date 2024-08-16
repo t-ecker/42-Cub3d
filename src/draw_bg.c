@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   draw_bg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:14:27 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/16 01:06:15 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/16 01:51:10 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
 
-int	clamp(int value)
+void	ceiling_floor(t_cubed *cubed, t_input *input)
 {
-	if (value < 0)
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < HEIGHT / 2)
 	{
-		return (0);
+		j = -1;
+		while (++j < WIDTH)
+			mlx_put_pixel((*cubed).bg, j, i, input->ceiling);
 	}
-	else if (value > 255)
+	while (++i < HEIGHT)
 	{
-		return (255);
+		j = -1;
+		while (++j < WIDTH)
+			mlx_put_pixel((*cubed).bg, j, i, input->floor);
 	}
-	return (value);
-}
-
-void	remove_newline(char *line)
-{
-	size_t len;
-
-	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
-}
-
-int	rgb_to_rgba_hex(int r, int g, int b, int a)
-{
-	int	rgba;
-
-	r = clamp(r);
-	g = clamp(g);
-	b = clamp(b);
-	a = clamp(a);
-
-	rgba = (r << 24) | (g << 16) | (b << 8) | a;
-	return (rgba);
 }
