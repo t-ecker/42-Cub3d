@@ -16,7 +16,6 @@ void castRays(t_data *data)
 
         ray.mapX = (int)data->posX;
         ray.mapY = (int)data->posY;
-        // printf("x%f, y%f\n", data->posX, data->posY);
 
         ray.deltaDistX = fabs(1 / ray.rayDirX);
        	ray.deltaDistY = fabs(1 / ray.rayDirY);
@@ -58,9 +57,6 @@ void castRays(t_data *data)
                 ray.mapY += ray.stepY;
                 ray.side = 1;
             }
-            // printf("x%i, y%i\n", ray.mapX, ray.mapY);
-            // printf("uu%c\n", data->Map[11][26]);
-            // write(1, "oo\n", 3);
             if (data->Map[ray.mapY][ray.mapX] == '1')
 				hit = 1;
         }
@@ -69,6 +65,15 @@ void castRays(t_data *data)
 			data->wallDistances[x] = ray.sideDistX - ray.deltaDistX;
 		else
 			data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
+
+        if (ray.side && ray.rayDirY > 0)
+            data->hit_side[x] = 'w';
+        else if(ray.side && ray.rayDirY < 0)
+            data->hit_side[x] = 'e';
+        else if (!ray.side && ray.rayDirX < 0)
+            data->hit_side[x] = 'n';
+        else if (!ray.side && ray.rayDirX > 0)
+            data->hit_side[x] = 's';
 
 		x++;
     }

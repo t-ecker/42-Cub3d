@@ -1,5 +1,18 @@
 #include "../include/cubed.h"
 
+int get_color(char hit_side)
+{
+    if (hit_side == 'n')
+        return (0xE6E6FAFF);
+    if (hit_side == 's')
+        return (0xF08080FF);
+    if (hit_side == 'w')
+        return (0x90EE90FF);
+    if (hit_side == 'e')
+        return (0xFFC0CBFF);
+    return (0);
+}
+
 void	draw_walls(t_cubed *cubed, t_data *data)
 {
 	int x;
@@ -17,9 +30,7 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		start.y = -height / 2 + HEIGHT / 2;
 		end.y = height / 2 + HEIGHT / 2;
 	
-		bresenham(start, end, cubed->walls);
+		bresenham(start, end, cubed->walls, get_color(data->hit_side[x]));
 		x++;
 	}
-
-
 }

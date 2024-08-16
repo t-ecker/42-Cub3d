@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 20:53:21 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:32:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,13 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances)
 	{
+		free(data);
+		return (NULL);
+	}
+	data->hit_side = malloc(sizeof(char) * WIDTH);
+	if (!data->hit_side)
+	{
+		free(data->wallDistances);
 		free(data);
 		return (NULL);
 	}

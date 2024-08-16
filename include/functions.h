@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 20:08:30 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:21:01 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_input			*parse_file(char *filename);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw_walls(t_cubed *cubed, t_data *data);
-void			bresenham(t_point src, t_point dest, mlx_image_t *img);
+void			bresenham(t_point src, t_point dest, mlx_image_t *img, int color);
 void			setPlane(t_data *data);
 
 //CONTROLS
