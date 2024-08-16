@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:07:04 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:22:38 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ void	free_cubed(t_cubed *cubed)
 {
 	free(cubed->title);
 	free(cubed);
+}
+
+void	free_data(t_data *data)
+{
+	free(data->wallDistances);
+	free(data);
+}
+
+void	free_all(t_data *data, t_cubed *cubed, t_input *input)
+{
+	if (data)
+		free_data(data);
+	if (cubed)
+		free_cubed(cubed);
+	if (input)
+		free_input(input);
 }

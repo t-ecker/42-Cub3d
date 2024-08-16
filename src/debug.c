@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:46:29 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:10:35 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:09:38 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,10 @@ void	print_map(t_input *input)
 		ft_printf("%s\n", input->map[i]);
 		i++;
 	}
+}
+
+void	print_dist(t_data *data)
+{
+	for (int x = 0; x < WIDTH; x++)
+        printf("Ray %d: Distance to wall = %f\n", x, data->wallDistances[x]);
 }
