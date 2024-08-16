@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 16:01:04 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 17:14:32 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,45 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 	return (cubed);
 }
 
+void	setDir(t_data *data, t_input *input)
+{
+	if (input->view_dir == 'N' || input->view_dir == 'S')
+	{
+		if (input->view_dir == 'N')
+		{
+			data->dirX = 0.0;
+			data->dirY = -1.0;
+		}
+		else
+		{
+			data->dirX = 0.0;
+			data->dirY = 1.0;
+		}
+	}
+	else
+	{
+		if (input->view_dir == 'E')
+		{
+			data->dirX = 1.0;
+			data->dirY = 0.0;
+		}
+		else
+		{
+			data->dirX = -1.0;
+			data->dirY = 0.0;
+		}
+	}
+}
+
+void	setPlane(t_data *data)
+{
+	double fov;
+
+	fov = data->fov * (M_PI / 180);
+	data->planeX = (-(tan(fov / 2))) * data->dirY;
+	data->planeY = (tan(fov / 2)) * data->dirX;
+}
+
 t_data	*init_data(t_input *input)
 {
 	t_data	*data;
@@ -68,14 +107,12 @@ t_data	*init_data(t_input *input)
 
 	data->Map = input->map;
 
-	data->posX = 2.5;
-	data->posY = 2.5;
+	data->posX = input->pos_x;
+	data->posY = input->pos_y;
 
-	data->dirX = 1.0;
-	data->dirY = 0.0;
-
-	data->planeX = 0.0;
-	data->planeY = 0.66;
+	data->fov = 90;
+	setDir(data, input);
+	setPlane(data);
 
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances)
@@ -91,7 +128,6 @@ int	main(int argc, char **argv)
 	t_input	*input;
 	t_cubed	*cubed;
 	t_data	*data;
-
 	if (!check_args(argc, argv))
 		return (1);
 
@@ -101,15 +137,17 @@ int	main(int argc, char **argv)
 	cubed = init_cubed(input, argv[1]);
 	data = init_data(input);
 	if (!data || !cubed)
-		return (free_all(data, cubed, input), 1);
-
+		return (free_all(data, cubed, input), write(1, "tot\n", 4), 1);
+	printf("%ihi\n", input->map_height);
 	castRays(data);
 
+	write(1, "ll\n", 3);
 	print_input(input);
 	print_map(input);
 	print_dist(data);
 	if (!init_image(input, cubed, data))
 		return (1);
+	printf("dir: %c\n", input->view_dir);
 	free_all(data, cubed, input);
 
 	return (0);
