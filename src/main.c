@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 16:01:04 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:32:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	leaks(void)
 
 int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
+	setPlane(data);
+	castRays(data);
 	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	ceiling_floor(cubed, input);
-	ft_hook(cubed);
+	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
+	draw_walls(cubed, data);
+	ft_hook(data);
 	if (!cubed->bg || (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
@@ -29,8 +33,6 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 		free_cubed(cubed);
 		return (0);
 	}
-	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	walls(cubed, data);
 	if (!cubed->walls || (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
@@ -58,28 +60,72 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 	return (cubed);
 }
 
-t_data	*init_data(t_input *input)
+void	setDir(t_data *data, t_input *input)
+{
+	if (input->view_dir == 'N' || input->view_dir == 'S')
+	{
+		if (input->view_dir == 'N')
+		{
+			data->dirX = 0.0;
+			data->dirY = -1.0;
+		}
+		else
+		{
+			data->dirX = 0.0;
+			data->dirY = 1.0;
+		}
+	}
+	else
+	{
+		if (input->view_dir == 'E')
+		{
+			data->dirX = 1.0;
+			data->dirY = 0.0;
+		}
+		else
+		{
+			data->dirX = -1.0;
+			data->dirY = 0.0;
+		}
+	}
+}
+
+void	setPlane(t_data *data)
+{
+	double fov;
+
+	fov = data->fov * (M_PI / 180);
+	data->planeX = (-(tan(fov / 2))) * data->dirY;
+	data->planeY = (tan(fov / 2)) * data->dirX;
+}
+
+t_data	*init_data(t_input *input, t_cubed *cubed)
 {
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->cubed = cubed;
 
 	data->Map = input->map;
 
-	data->posX = 2.5;
-	data->posY = 2.5;
+	data->posX = input->pos_x;
+	data->posY = input->pos_y;
 
-	data->dirX = 1.0;
-	data->dirY = 0.0;
-
-	data->planeX = 0.0;
-	data->planeY = 0.66;
+	data->fov = 90;
+	setDir(data, input);
 
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances)
 	{
+		free(data);
+		return (NULL);
+	}
+	data->hit_side = malloc(sizeof(char) * WIDTH);
+	if (!data->hit_side)
+	{
+		free(data->wallDistances);
 		free(data);
 		return (NULL);
 	}
@@ -91,7 +137,6 @@ int	main(int argc, char **argv)
 	t_input	*input;
 	t_cubed	*cubed;
 	t_data	*data;
-
 	if (!check_args(argc, argv))
 		return (1);
 
@@ -99,17 +144,16 @@ int	main(int argc, char **argv)
 	if (!check_input(input))
 		return (1);
 	cubed = init_cubed(input, argv[1]);
-	data = init_data(input);
+	data = init_data(input, cubed);
 	if (!data || !cubed)
-		return (free_all(data, cubed, input), 1);
-
-	castRays(data);
+		return (free_all(data, cubed, input), write(1, "tot\n", 4), 1);
 
 	print_input(input);
 	print_map(input);
 	print_dist(data);
 	if (!init_image(input, cubed, data))
 		return (1);
+	printf("dir: %c\n", input->view_dir);
 	free_all(data, cubed, input);
 
 	return (0);

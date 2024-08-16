@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 16:00:51 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:31:33 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_bresenham
 	int	sx;
 	int	sy;
 	int	err;
+	int color;
 }				t_bresenham;
 
 typedef struct s_input
@@ -73,6 +74,7 @@ typedef struct s_point
 
 typedef struct s_data
 {
+	float fov;
 	double posX;
 	double posY;
 	double planeX;
@@ -81,6 +83,8 @@ typedef struct s_data
 	double dirY;
 	char **Map;
 	double *wallDistances;
+	char *hit_side;
+	t_cubed *cubed;
 }	t_data;
 
 #endif

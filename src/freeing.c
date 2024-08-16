@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:22:38 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:51:36 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	free_cubed(t_cubed *cubed)
 void	free_data(t_data *data)
 {
 	free(data->wallDistances);
+	free(data->hit_side);
 	free(data);
 }
 

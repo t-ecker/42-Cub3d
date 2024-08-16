@@ -22,7 +22,6 @@ void castRays(t_data *data)
 
 
 
-
         if (ray.rayDirX < 0)
 		{
             ray.stepX = -1;
@@ -58,7 +57,7 @@ void castRays(t_data *data)
                 ray.mapY += ray.stepY;
                 ray.side = 1;
             }
-            if (data->Map[ray.mapX][ray.mapY] == '1')
+            if (data->Map[ray.mapY][ray.mapX] == '1')
 				hit = 1;
         }
 
@@ -66,6 +65,15 @@ void castRays(t_data *data)
 			data->wallDistances[x] = ray.sideDistX - ray.deltaDistX;
 		else
 			data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
+
+        if (ray.side && ray.rayDirY > 0)
+            data->hit_side[x] = 'w';
+        else if(ray.side && ray.rayDirY < 0)
+            data->hit_side[x] = 'e';
+        else if (!ray.side && ray.rayDirX < 0)
+            data->hit_side[x] = 'n';
+        else if (!ray.side && ray.rayDirX > 0)
+            data->hit_side[x] = 's';
 
 		x++;
     }
