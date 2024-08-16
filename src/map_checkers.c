@@ -6,13 +6,13 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 03:42:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 13:31:56 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:11:55 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
 
-int	check_map_characters(char **map)
+int	check_map_characters(char **map, t_input *input)
 {
 	int	i;
 	int	j;
@@ -25,6 +25,18 @@ int	check_map_characters(char **map)
 		{
 			if (!ft_isappr(map[j][i]))
 				return (0);
+			if ((map[j][i] == 'N' || map[j][i] == 'W' || map[j][i] == 'S'
+				|| map[j][i] == 'E'))
+			{
+				if (!input->view_dir)
+				{
+					input->view_dir = map[j][i];
+					input->pos_x = (double)i + 0.5;
+					input->pos_y = (double)j + 0.5;
+				}
+				else
+					return (0);
+			}
 			i++;
 		}
 		j++;
@@ -86,10 +98,12 @@ int	check_map_top_bottom(char **map)
 	return (1);
 }
 
-int	check_map(char **map)
+int	check_map(char **map, t_input *input)
 {
-	if (!check_map_characters(map))
+	if (!check_map_characters(map, input))
 		return (0);
+	// if (!input->view_dir)
+	// 	return (0);
 	if (!check_map_horizontal(map))
 		return (0);
 	if (!check_map_top_bottom(map))

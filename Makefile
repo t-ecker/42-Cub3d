@@ -6,7 +6,7 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/16 02:06:07 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/16 15:03:53 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES       =	src/checkers.c\
 					src/freeing.c\
 					src/utils.c\
 					src/debug.c\
+					src/wall_dist.c\
 					src/main.c
 
 OBJ_FILES		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 13:29:39 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:55:04 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_input	*ft_init_input(void)
 	input->floor = 0;
 	input->ceiling = 0;
 	input->map = NULL;
+	input->view_dir = '\0';
+	input->pos_x = 0;
+	input->pos_y = 0;
 	return (input);
 }
 

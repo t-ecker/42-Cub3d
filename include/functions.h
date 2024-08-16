@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:23:09 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:58:28 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				ft_isappr(char c);
 int				check_args(int argc, char **argv);
 int				check_input(t_input *input);
 int				check_params(t_input *input);
-int				check_map(char **map);
+int				check_map(char **map, t_input *input);
 
 //PARSING
 t_input			*parse_file(char *filename);

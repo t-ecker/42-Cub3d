@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:23:18 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:53:31 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 
 t_data	*init_data(t_input *input)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -64,10 +64,10 @@ t_data	*init_data(t_input *input)
 
 	data->dirX = 1.0;
 	data->dirY = 0.0;
-	
+
 	data->planeX = 0.0;
 	data->planeY = 0.66;
-	
+
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances)
 	{
@@ -102,6 +102,6 @@ int	main(int argc, char **argv)
 	if (!init_image(input, cubed))
 		return (1);
 	free_all(data, cubed, input);
-	
+
 	return (0);
 }

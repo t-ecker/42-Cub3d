@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:15:58 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:53:23 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_input
 	char			*wall_s;
 	int				floor;
 	int				ceiling;
+	double			pos_x;
+	double			pos_y;
+	char			view_dir;
 }				t_input;
 
 typedef struct s_cubed

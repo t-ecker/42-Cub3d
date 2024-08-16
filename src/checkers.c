@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 19:14:11 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:58:44 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_input(t_input *input)
 		free_input(input);
 		return (0);
 	}
-	if (!check_map(input->map))
+	if (!check_map(input->map, input))
 	{
 		ft_putendl_fd("Error", 2);
 		ft_putendl_fd("Wrong map", 2);
