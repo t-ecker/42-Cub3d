@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:14:27 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:25:50 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 int	clamp(int value)
 {
 	if (value < 0)
-	{
 		return (0);
-	}
-	else if (value > 255)
-	{
+	if (value > 255)
 		return (255);
-	}
 	return (value);
 }
 
 void	remove_newline(char *line)
 {
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')

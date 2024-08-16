@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:14:51 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 02:48:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ unsigned int	parse_color(char *colors)
 
 	i = 0;
 	splitted = ft_split(colors, ',');
-	hex_color =	rgb_to_rgba_hex(ft_atoi(splitted[0]),
-		ft_atoi(splitted[1]), ft_atoi(splitted[2]), 255);
+	hex_color = rgb_to_rgba_hex(ft_atoi(splitted[0]),
+			ft_atoi(splitted[1]), ft_atoi(splitted[2]), 255);
 	while (splitted[i])
+	{
+		ft_printf("%d\n", ft_atoi(splitted[i]));
 		free(splitted[i++]);
+	}
 	free(splitted);
 	free(colors);
 	return (hex_color);
@@ -50,17 +53,17 @@ unsigned int	parse_color(char *colors)
 void	ft_parse_param(char *line, t_input *input)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0 && input->wall_n == NULL)
-		input->wall_n = ft_strdup(line + 3);
+		input->wall_n = ft_strtrim(line + 2, " \t");
 	else if (ft_strncmp(line, "SO ", 3) == 0 && input->wall_s == NULL)
-		input->wall_s = ft_strdup(line + 3);
+		input->wall_s = ft_strtrim(line + 2, " \t");
 	else if (ft_strncmp(line, "WE ", 3) == 0 && input->wall_w == NULL)
-		input->wall_w = ft_strdup(line + 3);
+		input->wall_w = ft_strtrim(line + 2, " \t");
 	else if (ft_strncmp(line, "EA ", 3) == 0 && input->wall_e == NULL)
-		input->wall_e = ft_strdup(line + 3);
+		input->wall_e = ft_strtrim(line + 2, " \t");
 	else if (ft_strncmp(line, "C ", 2) == 0 && input->ceiling == 0)
-		input->ceiling = parse_color(ft_strdup(line + 3));
+		input->ceiling = parse_color(ft_strtrim(line + 1, " \t"));
 	else if (ft_strncmp(line, "F ", 2) == 0 && input->floor == 0)
-		input->floor = parse_color(ft_strdup(line + 3));
+		input->floor = parse_color(ft_strtrim(line + 1, " \t"));
 	else
 	{
 		ft_putendl_fd("Error", 2);
