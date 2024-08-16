@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:25:50 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:25:05 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	rgb_to_rgba_hex(int r, int g, int b, int a)
 	g = clamp(g);
 	b = clamp(b);
 	a = clamp(a);
-
 	rgba = (r << 24) | (g << 16) | (b << 8) | a;
 	return (rgba);
 }

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:48:07 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:29:39 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ unsigned int	parse_color(char *colors)
 	hex_color = rgb_to_rgba_hex(ft_atoi(splitted[0]),
 			ft_atoi(splitted[1]), ft_atoi(splitted[2]), 255);
 	while (splitted[i])
-	{
-		ft_printf("%d\n", ft_atoi(splitted[i]));
 		free(splitted[i++]);
-	}
 	free(splitted);
 	free(colors);
 	return (hex_color);

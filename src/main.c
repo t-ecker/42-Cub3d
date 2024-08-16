@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 01:33:23 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:34:54 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	main(int argc, char **argv)
 	if (!check_args(argc, argv))
 		return (1);
 	input = parse_file(argv[1]);
-	cubed = init_cubed(input, argv[1]);
 	if (!check_input(input))
 		return (1);
+	cubed = init_cubed(input, argv[1]);
 	print_input(input);
 	print_map(input);
 	if (!init_image(input, cubed))

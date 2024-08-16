@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 03:42:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/12 04:35:19 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/16 13:31:56 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	check_map_top_bottom(char **map)
 	int	j;
 
 	i = 0;
+	j = 0;
 	while (map[0][i])
 	{
 		if (map[0][i] != '1' && map[0][i] != ' ')
