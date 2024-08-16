@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 20:08:44 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:53:21 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void	leaks(void)
 
 int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
+	setPlane(data);
+	castRays(data);
 	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	ceiling_floor(cubed, input);
+	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
+	draw_walls(cubed, data);
 	ft_hook(data);
 	if (!cubed->bg || (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
 	{
@@ -29,8 +33,6 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 		free_cubed(cubed);
 		return (0);
 	}
-	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	draw_walls(cubed, data);
 	if (!cubed->walls || (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
@@ -113,7 +115,6 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 
 	data->fov = 90;
 	setDir(data, input);
-	setPlane(data);
 
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances)
@@ -139,10 +140,7 @@ int	main(int argc, char **argv)
 	data = init_data(input, cubed);
 	if (!data || !cubed)
 		return (free_all(data, cubed, input), write(1, "tot\n", 4), 1);
-	printf("%ihi\n", input->map_height);
-	castRays(data);
 
-	write(1, "ll\n", 3);
 	print_input(input);
 	print_map(input);
 	print_dist(data);
