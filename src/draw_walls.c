@@ -1,6 +1,6 @@
 #include "../include/cubed.h"
 
-void	walls(t_cubed *cubed, t_data *data)
+void	draw_walls(t_cubed *cubed, t_data *data)
 {
 	int x;
 	int height;

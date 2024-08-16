@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 17:05:28 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:59:02 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_data
 	double dirY;
 	char **Map;
 	double *wallDistances;
+	t_cubed *cubed;
 }	t_data;
 
 #endif

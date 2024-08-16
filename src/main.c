@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 17:14:32 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:08:44 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
 	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	ceiling_floor(cubed, input);
-	ft_hook(cubed);
+	ft_hook(data);
 	if (!cubed->bg || (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
@@ -30,7 +30,7 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 		return (0);
 	}
 	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	walls(cubed, data);
+	draw_walls(cubed, data);
 	if (!cubed->walls || (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
 	{
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
@@ -97,13 +97,14 @@ void	setPlane(t_data *data)
 	data->planeY = (tan(fov / 2)) * data->dirX;
 }
 
-t_data	*init_data(t_input *input)
+t_data	*init_data(t_input *input, t_cubed *cubed)
 {
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->cubed = cubed;
 
 	data->Map = input->map;
 
@@ -135,7 +136,7 @@ int	main(int argc, char **argv)
 	if (!check_input(input))
 		return (1);
 	cubed = init_cubed(input, argv[1]);
-	data = init_data(input);
+	data = init_data(input, cubed);
 	if (!data || !cubed)
 		return (free_all(data, cubed, input), write(1, "tot\n", 4), 1);
 	printf("%ihi\n", input->map_height);
