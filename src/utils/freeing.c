@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:26:58 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:52:19 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,17 @@ void	free_data(t_data *data)
 {
 	free(data->wallDistances);
 	free(data->hit_side);
+	free(data->texture);
+	free(data->texX);
 	free(data);
+}
+
+void	delete_textures(t_data *data)
+{
+	mlx_delete_texture(data->texture->n);
+	mlx_delete_texture(data->texture->s);
+	mlx_delete_texture(data->texture->w);
+	mlx_delete_texture(data->texture->e);
 }
 
 void	free_all(t_data *data, t_cubed *cubed, t_input *input)
