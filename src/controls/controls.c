@@ -6,43 +6,43 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 14:21:28 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:24:04 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	movement(t_data *data, mlx_t *mlx)
+void movement(t_data *data, mlx_t *mlx)
 {
 	double	newX;
 	double	newY;
 
+	newX = data->posX;
+	newY = data->posY;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		newX = data->posX + data->dirX / 20;
-		newY = data->posY + data->dirY / 20;
+		newX += data->dirX / 20;
+		newY += data->dirY / 20;
 	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		newX = data->posX - data->dirX / 20;
-		newY = data->posY - data->dirY / 20;
+		newX -= data->dirX / 20;
+		newY -= data->dirY / 20;
 	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		newX = data->posX + data->planeX / 20;
-		newY = data->posY + data->planeY / 20;
+		newX += data->planeX / 20;
+		newY += data->planeY / 20;
 	}
-	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		newX = data->posX - data->planeX / 20;
-		newY = data->posY - data->planeY / 20;
+		newX -= data->planeX / 20;
+		newY -= data->planeY / 20;
 	}
-	else
-		return ;
 	collision(data, newX, newY);
 }
 
-void	ft_camera_hook(void *param)
+void ft_camera_hook(void *param)
 {
 	t_data	*data;
 	double	angle;
@@ -67,9 +67,9 @@ void	ft_camera_hook(void *param)
 	}
 }
 
-void	ft_window_hook(void *param)
+void ft_window_hook(void *param)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = param;
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_ESCAPE))
@@ -77,7 +77,7 @@ void	ft_window_hook(void *param)
 	movement(data, data->cubed->mlx);
 }
 
-void	ft_hook(t_data *data)
+void ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);

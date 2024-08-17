@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 23:49:26 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:16:52 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	castRays(data);
 	draw_walls(cubed, data);
 	ft_hook(data);
-	if (!init_bg_img(cubed, data) || !init_walls_img(cubed, data)
-		|| !init_overlay_img(cubed, data))
+	if (!init_bg_img(cubed, input, data) || !init_walls_img(cubed, input, data)
+		|| !init_overlay_img(cubed, input, data))
 		return (0);
 	mlx_loop(cubed->mlx);
 	mlx_terminate(cubed->mlx);
@@ -56,7 +56,6 @@ t_texture *init_texture(t_input *input)
 	texture->s = mlx_load_png(input->wall_s);
 	texture->w = mlx_load_png(input->wall_w);
 	texture->e = mlx_load_png(input->wall_e);
-
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
