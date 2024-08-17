@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 12:10:44 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:29:06 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,41 @@ void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
 		mlx_put_pixel(img, x, y, color);
 }
 
-int get_color(char hit_side)
+int get_texture_color(mlx_texture_t *texture, int x, int y)
 {
-    if (hit_side == 'n')
-        return (0xE6E6FAFF);
-    if (hit_side == 's')
-        return (0xF08080FF);
-    if (hit_side == 'w')
-        return (0x90EE90FF);
-    if (hit_side == 'e')
-        return (0xFFC0CBFF);
-    return (0);
+	int index;
+	t_color color;
+
+    if (x < 0 || x >= textureW || y < 0 || y >= textureH)
+        return (0);
+    index = (y * texture->width + x) * 4;    
+    color.r = texture->pixels[index];
+    color.g = texture->pixels[index + 1];
+    color.b = texture->pixels[index + 2];
+    color.a = texture->pixels[index + 3];
+    color.final = (color.r << 24) | (color.g << 16) | (color.b << 8) | color.a;
+    return (color.final);
+}
+
+
+mlx_texture_t *get_texture(t_data *data, int x)
+{
+	mlx_texture_t *texture;
+
+    if (data->hit_side[x] == 'n')
+		texture = data->texture->n;
+    if (data->hit_side[x] == 's')
+		texture = data->texture->s;
+    if (data->hit_side[x] == 'w')
+		texture = data->texture->w;
+    if (data->hit_side[x] == 'e')
+		texture = data->texture->e;
+    return (texture);
 }
 
 void	draw_walls(t_cubed *cubed, t_data *data)
 {
 	int x;
-	int y;
 	int height;
 	int startY;
 	int endY;
@@ -45,13 +63,18 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		height = HEIGHT / data->wallDistances[x];
 		startY = -height / 2 + HEIGHT / 2;
 		endY = height / 2 + HEIGHT / 2;
-		y = startY;
-		while(y < endY)
+		
+		mlx_texture_t *texture = get_texture(data, x);
+        data->texture->step = 1.0 * textureH / height;
+        data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+		
+		while(startY < endY)
 		{
-        	my_put_pixel(cubed->walls, x, y, get_color(data->hit_side[x]));
-			y++;
+			data->texture->texY = (int)data->texture->tex_pos % textureH;
+			data->texture->tex_pos += data->texture->step;
+        	my_put_pixel(cubed->walls, x, startY, get_texture_color(texture, data->texX[x], data->texture->texY));
+			startY++;
 		}
-
 		x++;
 	}
 }
