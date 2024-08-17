@@ -6,32 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 14:07:16 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 01:22:11 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
-
-t_input	*ft_init_input(void)
-{
-	t_input	*input;
-
-	input = malloc(sizeof(t_input));
-	if (!input)
-		return (NULL);
-	input->map_height = 0;
-	input->wall_w = NULL;
-	input->wall_e = NULL;
-	input->wall_n = NULL;
-	input->wall_s = NULL;
-	input->floor = 0;
-	input->ceiling = 0;
-	input->map = NULL;
-	input->view_dir = '\0';
-	input->pos_x = 0;
-	input->pos_y = 0;
-	return (input);
-}
 
 void	ft_parse_param(char *line, t_input *input)
 {
@@ -43,9 +22,9 @@ void	ft_parse_param(char *line, t_input *input)
 		input->wall_w = ft_strtrim(line + 2, " \t");
 	else if (ft_strncmp(line, "EA ", 3) == 0 && input->wall_e == NULL)
 		input->wall_e = ft_strtrim(line + 2, " \t");
-	else if (ft_strncmp(line, "C ", 2) == 0 && input->ceiling == 0)
+	else if (ft_strncmp(line, "C ", 2) == 0 && input->ceiling == -1)
 		input->ceiling = parse_color(ft_strtrim(line + 1, " \t"));
-	else if (ft_strncmp(line, "F ", 2) == 0 && input->floor == 0)
+	else if (ft_strncmp(line, "F ", 2) == 0 && input->floor == -1)
 		input->floor = parse_color(ft_strtrim(line + 1, " \t"));
 	else
 	{
@@ -87,7 +66,7 @@ t_input	*parse_file(char *filename)
 	char	*line;
 	t_input	*input;
 
-	input = ft_init_input();
+	input = init_input();
 	if (!input)
 		return (NULL);
 	fd = open(filename, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 14:03:20 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 01:13:08 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	check_params(t_input *input)
 {
 	if (!input->wall_e || !input->wall_n
 		|| !input->wall_s || !input->wall_w
-		|| !input->ceiling || !input->floor)
+		|| input->ceiling == -1
+		|| input->floor == -1)
 		return (0);
 	return (1);
 }

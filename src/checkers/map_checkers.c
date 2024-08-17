@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 03:42:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:26:04 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 01:15:27 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	check_map(char **map, t_input *input)
 {
 	if (!check_map_characters(map, input))
 		return (0);
-	// if (!input->view_dir)
-	// 	return (0);
+	if (!input->view_dir)
+		return (0);
 	if (!check_map_horizontal(map))
 		return (0);
 	if (!check_map_top_bottom(map))

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 23:59:56 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 01:18:13 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ int				check_map(char **map, t_input *input);
 void			setDir(t_data *data, t_input *input);
 void			setPlane(t_data *data);
 t_input			*parse_file(char *filename);
+t_input			*init_input(void);
+t_cubed			*init_cubed(t_input *input, char *filename);
+t_data			*init_data(t_input *input, t_cubed *cubed);
 int				init_image(t_input *input, t_cubed *cubed, t_data *data);
 int				init_overlay_img(t_cubed *cubed, t_input *input, t_data *data);
 int				init_walls_img(t_cubed *cubed, t_input *input, t_data *data);
 int				init_bg_img(t_cubed *cubed, t_input *input, t_data *data);
-t_cubed			*init_cubed(t_input *input, char *filename);
-t_data			*init_data(t_input *input, t_cubed *cubed);
 unsigned int	parse_color(char *colors);
 
 //DRAWING

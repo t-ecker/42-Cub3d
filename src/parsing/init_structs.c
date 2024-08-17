@@ -6,27 +6,31 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 00:16:52 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 01:20:03 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-int	init_image(t_input *input, t_cubed *cubed, t_data *data)
+t_input	*init_input(void)
 {
-	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	ceiling_floor(cubed, input);
-	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	setPlane(data);
-	castRays(data);
-	draw_walls(cubed, data);
-	ft_hook(data);
-	if (!init_bg_img(cubed, input, data) || !init_walls_img(cubed, input, data)
-		|| !init_overlay_img(cubed, input, data))
-		return (0);
-	mlx_loop(cubed->mlx);
-	mlx_terminate(cubed->mlx);
-	return (1);
+	t_input	*input;
+
+	input = malloc(sizeof(t_input));
+	if (!input)
+		return (NULL);
+	input->map_height = 0;
+	input->wall_w = NULL;
+	input->wall_e = NULL;
+	input->wall_n = NULL;
+	input->wall_s = NULL;
+	input->floor = -1;
+	input->ceiling = -1;
+	input->map = NULL;
+	input->view_dir = '\0';
+	input->pos_x = 0;
+	input->pos_y = 0;
+	return (input);
 }
 
 t_cubed	*init_cubed(t_input *input, char *filename)
