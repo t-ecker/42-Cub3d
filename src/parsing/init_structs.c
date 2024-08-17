@@ -48,6 +48,7 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 	if (!cubed)
 		return (NULL);
 	cubed->title = ft_strjoin("cub3d - ", filename);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	cubed->mlx = mlx_init(WIDTH, HEIGHT, cubed->title, 1);
 	if (!cubed->mlx)
 		return (ft_putendl_fd("Window initialization fail.", 2),

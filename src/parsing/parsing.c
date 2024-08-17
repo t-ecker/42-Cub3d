@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:26:30 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 14:07:16 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,6 @@ t_input	*ft_init_input(void)
 	input->pos_x = 0;
 	input->pos_y = 0;
 	return (input);
-}
-
-unsigned int	parse_color(char *colors)
-{
-	int		hex_color;
-	char	**splitted;
-	int		i;
-
-	i = 0;
-	splitted = ft_split(colors, ',');
-	hex_color = rgb_to_rgba_hex(ft_atoi(splitted[0]),
-			ft_atoi(splitted[1]), ft_atoi(splitted[2]), 255);
-	while (splitted[i])
-		free(splitted[i++]);
-	free(splitted);
-	free(colors);
-	return (hex_color);
 }
 
 void	ft_parse_param(char *line, t_input *input)
