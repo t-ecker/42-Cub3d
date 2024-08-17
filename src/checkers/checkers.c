@@ -6,11 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:58:44 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:25:59 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 int	ft_isappr(char c)
 {

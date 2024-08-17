@@ -6,11 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 13:25:05 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:27:02 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 int	clamp(int value)
 {
@@ -40,4 +40,24 @@ int	rgb_to_rgba_hex(int r, int g, int b, int a)
 	a = clamp(a);
 	rgba = (r << 24) | (g << 16) | (b << 8) | a;
 	return (rgba);
+}
+
+void	clear_image(mlx_image_t *image)
+{
+	uint32_t transparent_color;
+	uint32_t y;
+	uint32_t x;
+
+	y = 0;
+	transparent_color = 0x00000000;
+    while(y < image->height)
+    {
+		x = 0;
+        while (x < image->width)
+        {
+            mlx_put_pixel(image, x, y, transparent_color);
+        	x++;
+		}
+		y++;
+    }
 }

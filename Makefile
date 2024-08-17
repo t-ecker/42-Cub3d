@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
+#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/16 16:01:18 by tomecker         ###   ########.fr        #
+#    Updated: 2024/08/17 01:54:58 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,20 @@ LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -L/opt/homebrew/lib -lft -ldl -lglfw -pthr
 SRC_DIR         = ./src
 OBJ_DIR         = ./obj
 
-SRC_FILES       =	src/checkers.c\
-					src/map_checkers.c\
-					src/parsing.c\
-					src/controls.c\
-					src/draw_bg.c\
-					src/freeing.c\
-					src/utils.c\
-					src/debug.c\
-					src/wall_dist.c\
-					src/draw_walls.c\
-					src/bresenham.c\
+SRC_FILES       =	src/checkers/checkers.c\
+					src/checkers/map_checkers.c\
+					src/parsing/parsing.c\
+					src/parsing/init_structs.c\
+					src/parsing/parsing_utils.c\
+					src/controls/controls.c\
+					src/controls/control_utils.c\
+					src/drawing/draw_bg.c\
+					src/drawing/wall_dist.c\
+					src/drawing/draw_walls.c\
+					src/drawing/bresenham.c\
+					src/utils/utils.c\
+					src/utils/freeing.c\
+					src/utils/debug.c\
 					src/main.c
 
 OBJ_FILES		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

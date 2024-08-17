@@ -6,11 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:46:29 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 15:16:56 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:54 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 void	print_input(t_input *input)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 22:51:36 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:58 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 void	free_params(t_input *input)
 {

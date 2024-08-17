@@ -6,11 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 14:55:04 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:30 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 t_input	*ft_init_input(void)
 {

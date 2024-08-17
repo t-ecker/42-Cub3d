@@ -6,11 +6,11 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:06:15 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 02:31:46 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:13 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 void	ceiling_floor(t_cubed *cubed, t_input *input)
 {

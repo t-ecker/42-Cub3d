@@ -1,11 +1,23 @@
-#include "../include/cubed.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_dist.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/17 01:33:33 by dolifero         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/cubed.h"
 
 void castRays(t_data *data)
 {
 	int x;
 	t_ray ray;
 	int hit;
-	
+
 	x = 0;
     while (x < WIDTH)
 	{

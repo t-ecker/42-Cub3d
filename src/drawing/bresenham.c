@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 18:24:08 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/16 22:20:36 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/17 01:26:09 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cubed.h"
+#include "../../include/cubed.h"
 
 void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
 {
@@ -45,7 +45,7 @@ void bresenham_line(mlx_image_t *img, t_point src, t_point dest, t_bresenham *pa
 void bresenham(t_point src, t_point dest, mlx_image_t *img, int color)
 {
     t_bresenham params;
-    
+
     params.color = color;
     params.dx = abs(dest.x - src.x);
     params.dy = abs(dest.y - src.y);
@@ -58,6 +58,6 @@ void bresenham(t_point src, t_point dest, mlx_image_t *img, int color)
     else
         params.sy = -1;
     params.err = params.dx - params.dy;
-    
+
     bresenham_line(img, src, dest, &params);
 }
