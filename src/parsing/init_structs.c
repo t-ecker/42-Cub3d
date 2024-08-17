@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 14:20:51 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:27:14 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,9 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	draw_walls(cubed, data);
 	write(1, "tot\n", 4);
 	ft_hook(data);
-	if (!cubed->bg || (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
-	{
-		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-		free_input(input);
-		free_cubed(cubed);
+	if (!init_bg_img(cubed, data) || !init_walls_img(cubed, data)
+		|| !init_overlay_img(cubed, data))
 		return (0);
-	}
-	if (!cubed->walls || (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
-	{
-		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-		free_input(input);
-		free_cubed(cubed);
-		return (0);
-	}
 	mlx_loop(cubed->mlx);
 	mlx_terminate(cubed->mlx);
 	return (1);

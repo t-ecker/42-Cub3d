@@ -6,7 +6,7 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/17 01:54:58 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/17 17:27:05 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/checkers/map_checkers.c\
 					src/parsing/parsing.c\
 					src/parsing/init_structs.c\
+					src/parsing/init_images.c\
 					src/parsing/parsing_utils.c\
 					src/controls/controls.c\
 					src/controls/control_utils.c\
