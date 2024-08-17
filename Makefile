@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
+#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/08/17 17:27:05 by dolifero         ###   ########.fr        #
-=======
-#    Updated: 2024/08/17 12:10:57 by tomecker         ###   ########.fr        #
->>>>>>> refs/remotes/origin/main
+#    Updated: 2024/08/17 23:52:25 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
