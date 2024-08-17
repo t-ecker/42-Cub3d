@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/17 23:42:45 by dolifero         ###   ########.fr       */
@@ -38,8 +38,6 @@ unsigned int	parse_color(char *colors);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw_walls(t_cubed *cubed, t_data *data);
-void			bresenham(t_point src, t_point dest,
-					mlx_image_t *img, int color);
 void			setPlane(t_data *data);
 void			redraw(t_data *data);
 

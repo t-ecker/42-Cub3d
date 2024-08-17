@@ -1,0 +1,18 @@
+NO ./textures/bluestone.png
+SO ./textures/greystone.png
+WE ./textures/redbrick.png
+EA ./textures/wood.png
+
+C 135,206,250
+F 105,105,105
+
+1111111111
+1000000001
+1000000001
+10000W0001
+1000001111
+1000001
+1000001111
+1000000001
+1000000001
+1111111111

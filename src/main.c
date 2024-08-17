@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:45:47 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:40:16 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ int	main(int argc, char **argv)
 	cubed = init_cubed(input, argv[1]);
 	data = init_data(input, cubed);
 	if (!data || !cubed)
-		return (free_all(data, cubed, input), write(1, "tot\n", 4), 1);
+		return (free_all(data, cubed, input), write(1, "tit\n", 4), 1);
 	print_input(input);
 	print_map(input);
-	print_dist(data);
 	if (!init_image(input, cubed, data))
 		return (1);
 	free_all(data, cubed, input);

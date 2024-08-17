@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   wall_dist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:33:33 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:39:10 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+void    get_texX(t_data *data, t_ray ray, int x)
+{
+    
+
+    if (ray.side == 0)
+        data->texture->wall_x = data->posY + data->wallDistances[x] * ray.rayDirY;
+    else
+        data->texture->wall_x = data->posX + data->wallDistances[x] * ray.rayDirX;
+    data->texture->wall_x -= floor(data->texture->wall_x);
+    data->texX[x] = data->texture->wall_x * textureH;
+    if (ray.side == 0 && ray.rayDirX > 0)
+        data->texX[x] = textureH - data->texX[x] - 1;
+    if (ray.side == 1 && ray.rayDirY < 0)
+        data->texX[x] = textureH - data->texX[x] - 1;
+    
+}
 
 void castRays(t_data *data)
 {
@@ -29,8 +46,14 @@ void castRays(t_data *data)
         ray.mapX = (int)data->posX;
         ray.mapY = (int)data->posY;
 
-        ray.deltaDistX = fabs(1 / ray.rayDirX);
-       	ray.deltaDistY = fabs(1 / ray.rayDirY);
+        if (ray.rayDirX == 0)
+		    ray.deltaDistX = INT_MAX;
+        else
+            ray.deltaDistX = fabs(1 / ray.rayDirX);
+        if (ray.rayDirY == 0)
+            ray.deltaDistY = INT_MAX;
+        else
+            ray.deltaDistY = fabs(1 / ray.rayDirY);
 
 
 
@@ -78,6 +101,8 @@ void castRays(t_data *data)
 		else
 			data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
 
+        // printf("Ray %d: Distance to wall = %f\n", x, data->wallDistances[x]);
+    
         if (ray.side && ray.rayDirY > 0)
             data->hit_side[x] = 'w';
         else if(ray.side && ray.rayDirY < 0)
@@ -87,6 +112,7 @@ void castRays(t_data *data)
         else if (!ray.side && ray.rayDirX > 0)
             data->hit_side[x] = 's';
 
-		x++;
+        get_texX(data, ray, x);
+        x++;
     }
 }

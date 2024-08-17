@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:00:28 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:28:58 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ typedef struct s_ray
 	int side;
 }	t_ray;
 
-typedef struct s_bresenham
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	color;
-}				t_bresenham;
-
 typedef struct s_input
 {
 	char			**map;
@@ -66,11 +56,27 @@ typedef struct s_cubed
 	char		*title;
 }				t_cubed;
 
-typedef struct s_point
+typedef struct s_color
 {
-	int x;
-	int y;
-}	t_point;
+	int r;
+	int g;
+	int b;
+	int a;
+	int final;
+}	t_color;
+
+
+typedef struct s_texture
+{
+	mlx_texture_t *n;
+	mlx_texture_t *s;
+	mlx_texture_t *w;
+	mlx_texture_t *e;
+	double step;
+	double tex_pos;
+	int texY;
+	double wall_x;
+}	t_texture;
 
 typedef struct s_data
 {
@@ -83,8 +89,11 @@ typedef struct s_data
 	double dirY;
 	char **Map;
 	double *wallDistances;
+	int *texX;
 	char *hit_side;
 	t_cubed *cubed;
+	t_input *input;
+	t_texture *texture;
 }	t_data;
 
 #endif

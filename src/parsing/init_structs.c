@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 17:27:14 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:49:26 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	setPlane(data);
 	castRays(data);
 	draw_walls(cubed, data);
-	write(1, "tot\n", 4);
 	ft_hook(data);
 	if (!init_bg_img(cubed, data) || !init_walls_img(cubed, data)
 		|| !init_overlay_img(cubed, data))
@@ -46,6 +45,23 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 	return (cubed);
 }
 
+t_texture *init_texture(t_input *input)
+{
+	t_texture *texture;
+
+	texture = malloc(sizeof(t_texture));
+	if (!texture)
+		return (NULL);
+	texture->n = mlx_load_png(input->wall_n);
+	texture->s = mlx_load_png(input->wall_s);
+	texture->w = mlx_load_png(input->wall_w);
+	texture->e = mlx_load_png(input->wall_e);
+
+	if (!texture->n || !texture->s || !texture->w || !texture->e)
+		return (NULL);
+	return (texture);
+}
+
 t_data	*init_data(t_input *input, t_cubed *cubed)
 {
 	t_data	*data;
@@ -54,20 +70,33 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	if (!data)
 		return (NULL);
 	data->cubed = cubed;
+	data->input = input;
+	data->texture = init_texture(input);
 	data->Map = input->map;
 	data->posX = input->pos_x;
 	data->posY = input->pos_y;
 	data->fov = 90;
 	setDir(data, input);
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
-	if (!data->wallDistances)
+	if (!data->wallDistances || !data->texture)
 	{
+		free(data->texture);
 		free(data);
 		return (NULL);
 	}
 	data->hit_side = malloc(sizeof(char) * WIDTH);
 	if (!data->hit_side)
 	{
+		free(data->texture);
+		free(data->wallDistances);
+		free(data);
+		return (NULL);
+	}
+	data->texX = malloc(sizeof(int) * WIDTH);
+	if (!data->texX)
+	{
+		free(data->texture);
+		free(data->hit_side);
 		free(data->wallDistances);
 		free(data);
 		return (NULL);
