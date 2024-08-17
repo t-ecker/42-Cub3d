@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 01:54:20 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/17 14:07:34 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_input			*parse_file(char *filename);
 int				init_image(t_input *input, t_cubed *cubed, t_data *data);
 t_cubed			*init_cubed(t_input *input, char *filename);
 t_data			*init_data(t_input *input, t_cubed *cubed);
+unsigned int	parse_color(char *colors);
 
 //DRAWING
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
