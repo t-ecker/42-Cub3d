@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:20:03 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:15:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_texture *init_texture(t_input *input)
 	texture->s = mlx_load_png(input->wall_s);
 	texture->w = mlx_load_png(input->wall_w);
 	texture->e = mlx_load_png(input->wall_e);
+	texture->F = mlx_load_png("./textures/eagle.PNG");
+	texture->info1 = mlx_load_png("./textures/2.PNG");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
@@ -95,9 +97,19 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 		free(data);
 		return (NULL);
 	}
+	data->facing = malloc(sizeof(char) * WIDTH);
+	if (!data->facing)
+	{
+		free(data->hit_side);
+		free(data->texture);
+		free(data->wallDistances);
+		free(data);
+		return (NULL);
+	}
 	data->texX = malloc(sizeof(int) * WIDTH);
 	if (!data->texX)
 	{
+		free(data->facing);
 		free(data->texture);
 		free(data->hit_side);
 		free(data->wallDistances);

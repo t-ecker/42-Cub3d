@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 12:52:19 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 12:40:48 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	free_data(t_data *data)
 	free(data->wallDistances);
 	free(data->hit_side);
 	free(data->texture);
+	free(data->facing);
 	free(data->texX);
 	free(data);
 }

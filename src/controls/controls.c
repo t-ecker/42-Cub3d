@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:51:48 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:52:42 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ void	ft_movement_hook(void *param)
 		newX += data->dirX / 20;
 		newY += data->dirY / 20;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		newX -= data->dirX / 20;
 		newY -= data->dirY / 20;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		newX += data->planeX / 20;
 		newY += data->planeY / 20;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		newX -= data->planeX / 20;
 		newY -= data->planeY / 20;
 	}
+	else
+		return ;
 	collision(data, newX, newY);
 }
 
@@ -76,6 +78,17 @@ void	ft_camera_hook(void *param)
 	}
 }
 
+void	ft_gameplay_hook(void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_O) && data->facing[WIDTH / 2] == 'F')
+	{
+		draw_bg(data->cubed->victory, 0x39FF14FF);
+	 	// + block all other key presses somehow
+	}
+}
 void	ft_window_hook(void *param)
 {
 	t_data	*data;
@@ -90,4 +103,5 @@ void	ft_hook(t_data *data)
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_gameplay_hook, data);
 }

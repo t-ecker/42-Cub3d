@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 22:29:06 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:41:53 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int get_texture_color(mlx_texture_t *texture, int x, int y)
 	int index;
 	t_color color;
 
-    if (x < 0 || x >= textureW || y < 0 || y >= textureH)
+    if (x < 0 || x >= (int)texture->width || y < 0 || y >= (int)texture->height)
         return (0);
     index = (y * texture->width + x) * 4;    
     color.r = texture->pixels[index];
@@ -47,6 +47,8 @@ mlx_texture_t *get_texture(t_data *data, int x)
 		texture = data->texture->w;
     if (data->hit_side[x] == 'e')
 		texture = data->texture->e;
+	if (data->hit_side[x] == 'F')
+		texture = data->texture->F;
     return (texture);
 }
 
@@ -67,6 +69,10 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		mlx_texture_t *texture = get_texture(data, x);
         data->texture->step = 1.0 * textureH / height;
         data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+
+		if (x == WIDTH / 2)
+			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
+				draw_info(data);
 		
 		while(startY < endY)
 		{

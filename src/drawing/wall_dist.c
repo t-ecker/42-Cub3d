@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 17:39:10 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:57:06 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void castRays(t_data *data)
                 ray.mapY += ray.stepY;
                 ray.side = 1;
             }
-            if (data->Map[ray.mapY][ray.mapX] == '1')
+            if (data->Map[ray.mapY][ray.mapX] == '1' || data->Map[ray.mapY][ray.mapX] == 'F')
 				hit = 1;
         }
 
@@ -101,9 +101,15 @@ void castRays(t_data *data)
 		else
 			data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
 
+        if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'F')
+            data->facing[x] = 'F';
+        else if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'D')
+            data->facing[x] = 'D';
+
         // printf("Ray %d: Distance to wall = %f\n", x, data->wallDistances[x]);
-    
-        if (ray.side && ray.rayDirY > 0)
+        if (data->Map[ray.mapY][ray.mapX] == 'F')
+            data->hit_side[x] = 'F';
+        else if (ray.side && ray.rayDirY > 0)
             data->hit_side[x] = 'w';
         else if(ray.side && ray.rayDirY < 0)
             data->hit_side[x] = 'e';

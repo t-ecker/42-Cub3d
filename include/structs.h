@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 17:28:58 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:47:23 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_cubed
 	mlx_image_t	*bg;
 	mlx_image_t	*walls;
 	mlx_image_t	*overlay;
+	mlx_image_t	*info;
+	mlx_image_t	*victory;
 	char		*title;
 }				t_cubed;
 
@@ -72,6 +74,8 @@ typedef struct s_texture
 	mlx_texture_t *s;
 	mlx_texture_t *w;
 	mlx_texture_t *e;
+	mlx_texture_t *F;
+	mlx_texture_t *info1;
 	double step;
 	double tex_pos;
 	int texY;
@@ -91,6 +95,7 @@ typedef struct s_data
 	double *wallDistances;
 	int *texX;
 	char *hit_side;
+	char *facing;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;
