@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:51:48 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:02:42 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,33 @@ void	ft_movement_hook(void *param)
 	{
 		newX += data->dirX / 10;
 		newY += data->dirY / 10;
+		collision(data, newX, newY);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		newX += data->dirX / 20;
 		newY += data->dirY / 20;
+		collision(data, newX, newY);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		newX -= data->dirX / 20;
 		newY -= data->dirY / 20;
+		collision(data, newX, newY);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		newX += data->planeX / 20;
 		newY += data->planeY / 20;
+		collision(data, newX, newY);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		newX -= data->planeX / 20;
 		newY -= data->planeY / 20;
+		collision(data, newX, newY);
 	}
-	collision(data, newX, newY);
+
 }
 
 void	ft_camera_hook(void *param)
