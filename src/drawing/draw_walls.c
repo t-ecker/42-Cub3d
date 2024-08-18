@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:41:53 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 18:58:20 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ mlx_texture_t *get_texture(t_data *data, int x)
 {
 	mlx_texture_t *texture;
 
+	if (data->hit_side[x] == 'F')
+		texture = data->texture->F;
+	if (data->hit_side[x] == 'D')
+		texture = data->texture->D;
     if (data->hit_side[x] == 'n')
 		texture = data->texture->n;
     if (data->hit_side[x] == 's')
@@ -47,8 +51,6 @@ mlx_texture_t *get_texture(t_data *data, int x)
 		texture = data->texture->w;
     if (data->hit_side[x] == 'e')
 		texture = data->texture->e;
-	if (data->hit_side[x] == 'F')
-		texture = data->texture->F;
     return (texture);
 }
 
@@ -71,8 +73,12 @@ void	draw_walls(t_cubed *cubed, t_data *data)
         data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
 
 		if (x == WIDTH / 2)
+		{
 			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
-				draw_info(data);
+				draw_info(data, 0);
+			if (data->facing[x] == 'D' && data->wallDistances[x] < 1.0)
+				draw_info(data, 1);
+		}
 		
 		while(startY < endY)
 		{

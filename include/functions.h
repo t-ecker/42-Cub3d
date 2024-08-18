@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:51:09 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 18:57:39 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			draw_walls(t_cubed *cubed, t_data *data);
 void			setPlane(t_data *data);
 void			redraw(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
-void			draw_info(t_data *data);
+void			draw_info(t_data *data, int flag);
 void			draw_bg(mlx_image_t *img, int color);
 
 

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 12:40:48 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:13:28 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	delete_textures(t_data *data)
 	mlx_delete_texture(data->texture->s);
 	mlx_delete_texture(data->texture->w);
 	mlx_delete_texture(data->texture->e);
+	mlx_delete_texture(data->texture->F);
+	mlx_delete_texture(data->texture->D);
+	mlx_delete_texture(data->texture->infoF);
+	mlx_delete_texture(data->texture->infoD);
 }
 
 void	free_all(t_data *data, t_cubed *cubed, t_input *input)

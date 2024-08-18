@@ -22,11 +22,10 @@ void draw_img(mlx_image_t *img, mlx_texture_t *texture)
     }
 }
 
-void	draw_info(t_data *data)
+void	draw_info(t_data *data, int flag)
 {
-	// if (flag == 1)
-		draw_img(data->cubed->info, data->texture->info1);
-	// else if (flag == 2)
-	// 	draw_img(data->cubed->info, data->texture->O);
-	// else if (flag == )
+	if (flag == 0)
+		draw_img(data->cubed->info, data->texture->infoF);
+	else if (flag == 1)
+		draw_img(data->cubed->info, data->texture->infoD);
 }

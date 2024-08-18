@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:15:29 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:59:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ t_texture *init_texture(t_input *input)
 	texture->s = mlx_load_png(input->wall_s);
 	texture->w = mlx_load_png(input->wall_w);
 	texture->e = mlx_load_png(input->wall_e);
+	texture->D = mlx_load_png("./textures/CRATE_2C.PNG");
 	texture->F = mlx_load_png("./textures/eagle.PNG");
-	texture->info1 = mlx_load_png("./textures/2.PNG");
+	texture->infoD = mlx_load_png("./textures/1.PNG");
+	texture->infoF = mlx_load_png("./textures/2.PNG");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);

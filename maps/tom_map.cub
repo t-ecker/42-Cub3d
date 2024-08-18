@@ -1,17 +1,17 @@
-NO ./textures/bluestone.png
-SO ./textures/greystone.png
-WE ./textures/redbrick.png
-EA ./textures/wood.png
+NO ./textures/backroom_v1.png
+SO ./textures/backroom_h1.png
+WE ./textures/backroom_v2.png
+EA ./textures/backroom_h2.png
 
 C 135,206,250
 F 105,105,105
 
 1111111111
-10000000F1
-1000000001
-10000W0001
-1000001111
-1000001
+10000000011111
+10000000010001
+10000W000D0001
+100000111100F1
+1000001  11111
 1000001111
 1000000001
 1000000001

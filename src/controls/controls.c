@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:52:42 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:09:35 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ void	ft_gameplay_hook(void *param)
 	{
 		draw_bg(data->cubed->victory, 0x39FF14FF);
 	 	// + block all other key presses somehow
+	}
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D')
+	{
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = '0';
+		redraw(data);
 	}
 }
 void	ft_window_hook(void *param)

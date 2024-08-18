@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:38:29 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:03:55 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	collision(t_data *data, double newX, double newY)
 	canmoveX = 1;
 	canmoveY = 1;
 	buffer = 0.3;
-    if ((data->Map[(int)data->posY][(int)(newX + buffer)] == '1' && newX > data->posX) ||
-        (data->Map[(int)data->posY][(int)(newX - buffer)] == '1' && newX < data->posX))
+    if ((ft_strchr("1D", data->Map[(int)data->posY][(int)(newX + buffer)]) && newX > data->posX) ||
+        (ft_strchr("1D", data->Map[(int)data->posY][(int)(newX - buffer)]) && newX < data->posX))
         canmoveX = 0;
 
-    if ((data->Map[(int)(newY + buffer)][(int)data->posX] == '1' && newY > data->posY) ||
-        (data->Map[(int)(newY - buffer)][(int)data->posX] == '1' && newY < data->posY))
+    if ((ft_strchr("1D", data->Map[(int)(newY + buffer)][(int)data->posX]) && newY > data->posY) ||
+        (ft_strchr("1D", data->Map[(int)(newY - buffer)][(int)data->posX]) && newY < data->posY))
         canmoveY = 0;
 	if (canmoveX && canmoveY)
 	{

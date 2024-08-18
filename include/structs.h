@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:47:23 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:53:35 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ typedef struct s_texture
 	mlx_texture_t *w;
 	mlx_texture_t *e;
 	mlx_texture_t *F;
-	mlx_texture_t *info1;
+	mlx_texture_t *D;
+	mlx_texture_t *infoF;
+	mlx_texture_t *infoD;
 	double step;
 	double tex_pos;
 	int texY;
