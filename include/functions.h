@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:18:13 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:15:30 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ unsigned int	parse_color(char *colors);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw_walls(t_cubed *cubed, t_data *data);
+void			draw_overlay(t_data *data);
 void			setPlane(t_data *data);
-void			redraw(t_data *data);
+int				get_texture_color(mlx_texture_t *texture, int x, int y);
+void			redraw(void *param);
 
 //CONTROLS
 void			ft_window_hook(void *param);

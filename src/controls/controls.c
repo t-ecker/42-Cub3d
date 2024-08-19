@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 19:02:42 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:54:34 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,11 @@ void	ft_camera_hook(void *param)
 	{
 		data->dirX = cos(angle) * oldDirX - sin(angle) * oldDirY;
 		data->dirY = sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_LEFT))
 	{
 		data->dirX = cos(angle) * oldDirX + sin(angle) * oldDirY;
 		data->dirY = -sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 }
 

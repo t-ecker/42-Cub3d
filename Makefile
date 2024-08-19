@@ -6,7 +6,7 @@
 #    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/17 23:52:25 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/19 01:14:17 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/drawing/draw_bg.c\
 					src/drawing/wall_dist.c\
 					src/drawing/draw_walls.c\
+					src/drawing/draw_overlay.c\
 					src/utils/utils.c\
 					src/utils/freeing.c\
 					src/utils/debug.c\
