@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 19:09:35 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:19:09 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ void	ft_camera_hook(void *param)
 		redraw(data);
 	}
 }
+// void	print_mapp(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (data->Map[i])
+// 	{
+// 		printf("%s\n", data->Map[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// }
 
 void	ft_gameplay_hook(void *param)
 {
@@ -90,8 +102,15 @@ void	ft_gameplay_hook(void *param)
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D')
 	{
-		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = '0';
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'K';
 		redraw(data);
+		// print_mapp(data);
+	}
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_K) && data->facing[WIDTH / 2] == 'K')
+	{
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
+		redraw(data);
+		// print_mapp(data);
 	}
 }
 void	ft_window_hook(void *param)

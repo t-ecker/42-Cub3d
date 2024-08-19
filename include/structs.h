@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 16:53:35 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:56:02 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_texture
 	mlx_texture_t *D;
 	mlx_texture_t *infoF;
 	mlx_texture_t *infoD;
+	mlx_texture_t *infoDC;
 	double step;
 	double tex_pos;
 	int texY;
@@ -95,6 +96,7 @@ typedef struct s_data
 	double dirY;
 	char **Map;
 	double *wallDistances;
+	double *cdoor;
 	int *texX;
 	char *hit_side;
 	char *facing;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 16:59:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:05:33 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_texture *init_texture(t_input *input)
 	texture->F = mlx_load_png("./textures/eagle.PNG");
 	texture->infoD = mlx_load_png("./textures/1.PNG");
 	texture->infoF = mlx_load_png("./textures/2.PNG");
+	texture->infoDC = mlx_load_png("./textures/3.PNG");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
@@ -108,6 +109,7 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 		free(data);
 		return (NULL);
 	}
+	data->cdoor = malloc(sizeof(double) * WIDTH);
 	data->texX = malloc(sizeof(int) * WIDTH);
 	if (!data->texX)
 	{

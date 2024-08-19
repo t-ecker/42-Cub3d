@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 18:58:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:07:24 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		{
 			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
 				draw_info(data, 0);
-			if (data->facing[x] == 'D' && data->wallDistances[x] < 1.0)
+			if ((data->facing[x] == 'D' && data->wallDistances[x] < 1.0))
 				draw_info(data, 1);
+			if (data->facing[x] == 'K' && data->cdoor[x] < 1.0)
+				draw_info(data, 2);
 		}
 		
 		while(startY < endY)

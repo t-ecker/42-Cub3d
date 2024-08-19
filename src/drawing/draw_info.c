@@ -28,4 +28,6 @@ void	draw_info(t_data *data, int flag)
 		draw_img(data->cubed->info, data->texture->infoF);
 	else if (flag == 1)
 		draw_img(data->cubed->info, data->texture->infoD);
+	else if (flag == 2)
+		draw_img(data->cubed->info, data->texture->infoDC);
 }
