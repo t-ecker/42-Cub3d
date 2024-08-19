@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 06:06:50 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:29:28 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_cubed
 	mlx_image_t	*walls;
 	mlx_image_t	*overlay;
 	mlx_image_t	*hand;
+	mlx_image_t	*light;
 	char		*title;
 }				t_cubed;
 
@@ -66,7 +67,6 @@ typedef struct s_color
 	int final;
 }	t_color;
 
-
 typedef struct s_texture
 {
 	mlx_texture_t	*n;
@@ -76,6 +76,9 @@ typedef struct s_texture
 	mlx_texture_t	*shoot;
 	mlx_texture_t	*recoil;
 	mlx_texture_t	*hand;
+	mlx_texture_t	*flashlight;
+	mlx_texture_t	*light;
+	mlx_texture_t	*dark;
 	double step;
 	double tex_pos;
 	int texY;
@@ -95,6 +98,7 @@ typedef struct s_data
 	double *wallDistances;
 	int *texX;
 	char *hit_side;
+	int	weapon;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;

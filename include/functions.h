@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 06:58:32 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:52:17 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw_walls(t_cubed *cubed, t_data *data);
 void			draw_overlay(t_data *data);
+void			draw_hand(t_data *data);
+void			ft_dark_img(mlx_image_t *img);
 void			setPlane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			redraw(void *param);
@@ -49,6 +51,7 @@ void			ft_window_hook(struct mlx_key_data key, void *param);
 void			ft_movement_hook(void *param);
 void			ft_camera_hook(void *param);
 void			ft_shoot_hook(struct mlx_key_data key, void *param);
+void			ft_light_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);
 void			collision(t_data *data, double newX, double newY);
 
