@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 17:28:58 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 06:06:50 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_cubed
 	mlx_image_t	*bg;
 	mlx_image_t	*walls;
 	mlx_image_t	*overlay;
+	mlx_image_t	*hand;
 	char		*title;
 }				t_cubed;
 
@@ -68,10 +69,13 @@ typedef struct s_color
 
 typedef struct s_texture
 {
-	mlx_texture_t *n;
-	mlx_texture_t *s;
-	mlx_texture_t *w;
-	mlx_texture_t *e;
+	mlx_texture_t	*n;
+	mlx_texture_t	*s;
+	mlx_texture_t	*w;
+	mlx_texture_t	*e;
+	mlx_texture_t	*shoot;
+	mlx_texture_t	*recoil;
+	mlx_texture_t	*hand;
 	double step;
 	double tex_pos;
 	int texY;

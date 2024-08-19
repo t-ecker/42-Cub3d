@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 00:54:34 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 07:03:56 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_movement_hook(void *param)
 		newY -= data->planeY / 20;
 		collision(data, newX, newY);
 	}
-
 }
 
 void	ft_camera_hook(void *param)
@@ -79,18 +78,19 @@ void	ft_camera_hook(void *param)
 	}
 }
 
-void	ft_window_hook(void *param)
+void	ft_window_hook(struct mlx_key_data key, void *param)
 {
 	t_data	*data;
 
 	data = param;
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_ESCAPE))
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window(data->cubed->mlx);
+	ft_shoot_hook(key, param);
 }
 
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 }

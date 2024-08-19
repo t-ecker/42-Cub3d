@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 03:11:05 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 07:12:56 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,54 @@ void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int 
 	}
 }
 
-// void	shoot_hook(void *param)
-// {
-// 	t_data	*data;
-// 	mlx_texture_t	*shoot;
-// 	mlx_texture_t	*recoil;
-// 	mlx_texture_t	*hand;
-// 	mlx_image_t		*hand_img;
+void	ft_shoot_hook(struct mlx_key_data key, void *param)
+{
+	t_data	*data;
 
-// 	data = (t_data *)param;
-// 	shoot = mlx_load_png("./assets/pistol_shoot.png");
-// 	hand_img = mlx_texture_to_image(data->cubed->mlx, hand);
-// 	mlx_image_to_window(data->cubed->mlx, hand_img, (WIDTH - hand_img->width) - 200, HEIGHT - hand_img->height);
-// }
+	data = (t_data *)param;
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_REPEAT)
+	{
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->recoil);
+		mlx_resize_image(data->cubed->hand, 300, 300);
+		mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
+			(WIDTH - data->cubed->hand->width) - 200,
+			HEIGHT - data->cubed->hand->height);
+	}
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+	{
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->shoot);
+		mlx_resize_image(data->cubed->hand, 300, 300);
+		mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
+			(WIDTH - data->cubed->hand->width) - 200,
+			HEIGHT - data->cubed->hand->height);
+	}
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_RELEASE)
+	{
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->hand);
+		mlx_resize_image(data->cubed->hand, 300, 300);
+		mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
+			(WIDTH - data->cubed->hand->width) - 200,
+			HEIGHT - data->cubed->hand->height);
+	}
+}
 
 void	draw_overlay(t_data *data)
 {
 	mlx_texture_t	*crosshair;
-	mlx_texture_t	*hand;
-	mlx_image_t		*hand_img;
 
 	crosshair = mlx_load_png("./assets/crosshair_1.PNG");
 	draw_overlay_part(data->cubed->overlay, crosshair,
 		(WIDTH - crosshair->width) / 2, HEIGHT / 2);
-	hand = mlx_load_png("./assets/pistol_static.png");
-	hand_img = mlx_texture_to_image(data->cubed->mlx, hand);
-	mlx_resize_image(hand_img, 300, 300);
-	mlx_image_to_window(data->cubed->mlx, hand_img,
-		(WIDTH - hand_img->width) - 200, HEIGHT - hand_img->height);
-	// mlx_loop_hook(data->cubed->mlx, shoot_hook, data);
+	data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+			data->texture->hand);
+	mlx_resize_image(data->cubed->hand, 300, 300);
+	mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
+		(WIDTH - data->cubed->hand->height) - 200,
+		HEIGHT - data->cubed->hand->height);
 }

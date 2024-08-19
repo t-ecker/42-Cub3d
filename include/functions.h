@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 01:15:30 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 06:58:32 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			redraw(void *param);
 
 //CONTROLS
-void			ft_window_hook(void *param);
-void			movement_hook(t_data *data, mlx_t *mlx);
+void			ft_window_hook(struct mlx_key_data key, void *param);
+void			ft_movement_hook(void *param);
+void			ft_camera_hook(void *param);
+void			ft_shoot_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);
 void			collision(t_data *data, double newX, double newY);
 
