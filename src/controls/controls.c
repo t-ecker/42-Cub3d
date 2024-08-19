@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:31:54 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/19 23:51:53 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,18 @@ void	ft_gameplay_hook(void *param)
 	t_data	*data;
 
 	data = param;
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_O) && data->facing[WIDTH / 2] == 'F')
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_F) && data->facing[WIDTH / 2] == 'F')
 	{
 		draw_bg(data->cubed->victory, 0x39FF14FF);
 	 	// + block all other key presses somehow
 	}
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D')
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'D')
 	{
 		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'K';
 		redraw(data);
 		// print_mapp(data);
 	}
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_K) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K')
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_Y) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'K')
 	{
 		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
 		redraw(data);
