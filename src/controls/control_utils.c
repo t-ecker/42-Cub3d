@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 00:54:26 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:27:30 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	collision(t_data *data, double newX, double newY)
 
 	canmoveX = 1;
 	canmoveY = 1;
-	buffer = 0.1;
+	buffer = 0.3;
 	if ((newX > data->posX && data->Map[(int)data->posY][(int)(newX + buffer)] == '1') ||
 		(newX < data->posX && data->Map[(int)data->posY][(int)(newX - buffer)] == '1'))
 		canmoveX = 0;

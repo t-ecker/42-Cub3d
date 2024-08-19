@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 17:14:49 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:27:09 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,22 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 		mlx_close_window(data->cubed->mlx);
 	if (key.key == MLX_KEY_1 && key.action == MLX_PRESS)
 	{
-		ft_dark_img(data->cubed->light);
 		data->weapon = 1;
+		ft_dark_img(data->cubed->light);
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		draw_hand(data);
 	}
 	else if (key.key == MLX_KEY_2 && key.action == MLX_PRESS)
 	{
 		data->weapon = 2;
+		clear_image(data->cubed->light);
 		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
 		draw_hand(data);
 	}
 	if (data->weapon == 1)
-	{
-		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
-		draw_hand(data);
 		ft_light_hook(key, param);
-	}
 	else if (data->weapon == 2)
-	{
-		clear_image(data->cubed->light);
 		ft_shoot_hook(key, param);
-	}
 }
 
 void	ft_hook(t_data *data)

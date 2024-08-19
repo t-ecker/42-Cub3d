@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 16:55:04 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:23:12 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int 
 	}
 }
 
+void	draw_hand(t_data *data)
+{
+	if (data->weapon == 1)
+		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->flashlight);
+	else if (data->weapon == 2)
+		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->hand);
+	mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
+		(WIDTH - data->cubed->hand->height) - 200,
+		HEIGHT - data->cubed->hand->height);
+}
+
 void	draw_overlay(t_data *data)
 {
 	mlx_texture_t	*crosshair;
@@ -40,18 +53,5 @@ void	draw_overlay(t_data *data)
 	data->cubed->light = mlx_texture_to_image(data->cubed->mlx,
 			data->texture->dark);
 	mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);
-}
-
-void	draw_hand(t_data *data)
-{
-	if (data->weapon == 1)
-		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
-				data->texture->flashlight);
-	else if (data->weapon == 2)
-		data->cubed->hand = mlx_texture_to_image(data->cubed->mlx,
-				data->texture->hand);
-	mlx_resize_image(data->cubed->hand, 300, 300);
-	mlx_image_to_window(data->cubed->mlx, data->cubed->hand,
-		(WIDTH - data->cubed->hand->height) - 200,
-		HEIGHT - data->cubed->hand->height);
+	draw_hand(data);
 }
