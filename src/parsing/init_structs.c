@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 16:38:15 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:50:22 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_texture *init_texture(t_input *input)
 	texture->hand = mlx_load_png("./assets/pistol_static.png");
 	texture->light = mlx_load_png("./assets/light.png");
 	texture->dark = mlx_load_png("./assets/dark.png");
-	texture->flashlight = mlx_load_png("./assets/hadn.png");
+	texture->flashlight = mlx_load_png("./assets/flashlight.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
