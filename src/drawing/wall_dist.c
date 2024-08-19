@@ -6,7 +6,7 @@
 /*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:17:08 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/19 14:29:15 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void castRays(t_data *data)
             data->hit_side[x] = 'n';
         else if (!ray.side && ray.rayDirX > 0)
             data->hit_side[x] = 's';
-        else if (data->Map[ray.mapY][ray.mapX] == 'F')
+        if (data->Map[ray.mapY][ray.mapX] == 'F')
             data->hit_side[x] = 'F';
 
         if (data->Map[ray.mapY][ray.mapX] == 'D')

@@ -6,7 +6,7 @@
 /*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:07:24 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/19 14:28:07 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,9 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		x++;
 	}
 }
+
+
+/*
+texture of walls idea:
+create an array that show what side the k was hit. if (side k[x] == the two opposite directions player is facing) -> texture = door(direction)
+*/

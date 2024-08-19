@@ -6,7 +6,7 @@
 /*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:19:09 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/19 14:31:54 by tecker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_gameplay_hook(void *param)
 		redraw(data);
 		// print_mapp(data);
 	}
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_K) && data->facing[WIDTH / 2] == 'K')
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_K) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K')
 	{
 		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
 		redraw(data);
