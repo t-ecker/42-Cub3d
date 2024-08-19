@@ -1,10 +1,10 @@
-C 0,25,51
-F 0,0,30
+F 0,51,0
+C 0,0,0
 
-NO textures/bluestone.png
-SO textures/bluestone.png
-WE textures/bluestone.png
-EA textures/bluestone.png
+NO textures/HEDGE_1A.PNG
+SO textures/HEDGE_1A.PNG
+WE textures/HEDGE_1A.PNG
+EA textures/HEDGE_1A.PNG
 
 1111111111111111111
 10W1001001001000001
