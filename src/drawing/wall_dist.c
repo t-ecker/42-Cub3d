@@ -6,11 +6,24 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 00:50:18 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:44:12 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+void	print_mapp(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->Map[i])
+	{
+		printf("%s\n", data->Map[i]);
+		i++;
+	}
+	printf("\n");
+}
 
 void    get_texX(t_data *data, t_ray ray, int x)
 {
@@ -31,8 +44,8 @@ void    get_texX(t_data *data, t_ray ray, int x)
 
 void cast_one_ray(t_data *data, char *str, int x)
 {
-	t_ray ray;
-	int hit;
+    t_ray ray;
+    int hit;
 
     hit = 0;
     ray.cameraX = 2 * x / (double)WIDTH - 1;
@@ -51,8 +64,6 @@ void cast_one_ray(t_data *data, char *str, int x)
     else
         ray.deltaDistY = fabs(1 / ray.rayDirY);
 
-
-
     if (ray.rayDirX < 0)
     {
         ray.stepX = -1;
@@ -61,20 +72,20 @@ void cast_one_ray(t_data *data, char *str, int x)
     else
     {
         ray.stepX = 1;
-        ray.sideDistX = (ray.mapX + 1.0 - data->posX) * ray.deltaDistX;
+        ray.sideDistX = ((ray.mapX + 1.0 - data->posX)) * ray.deltaDistX;
     }
     if (ray.rayDirY < 0)
     {
         ray.stepY = -1;
-        ray.sideDistY = (data->posY - ray.mapY) * ray.deltaDistY;
+        ray.sideDistY = ((data->posY - ray.mapY)) * ray.deltaDistY;
     }
     else
     {
         ray.stepY = 1;
-        ray.sideDistY = (ray.mapY + 1.0 - data->posY) * ray.deltaDistY;
+        ray.sideDistY = ((ray.mapY + 1.0 - data->posY)) * ray.deltaDistY;
     }
 
-    while (hit == 0)
+    while (hit < 1)
     {
         if (ray.sideDistX < ray.sideDistY)
         {
@@ -89,25 +100,54 @@ void cast_one_ray(t_data *data, char *str, int x)
             ray.side = 1;
         }
 
-//did we hit something we want to see
-        if (ft_strchr(str, data->Map[ray.mapY][ray.mapX]))
-            hit = 1;
+        if (data->Map[ray.mapY][ray.mapX] == 'K')
+        {
+            hit++;
+            double posX;
+            double posY;
+            double newX;
+            double newY;
+            if (ray.side == 0)
+            {
+                posX = (ray.sideDistX - ray.deltaDistX) * ray.rayDirX + data->posX;
+                posY = (ray.sideDistX - ray.deltaDistX) * ray.rayDirY + data->posY;
+                newX = posX + ray.deltaDistX * 0.5 * ray.rayDirX;
+                newY = posY + ray.deltaDistX * 0.5 * ray.rayDirY;
+            }
+            else
+            {
+                posX = (ray.sideDistY - ray.deltaDistY) * ray.rayDirX + data->posX;
+                posY = (ray.sideDistY - ray.deltaDistY) * ray.rayDirY + data->posY;
+                newX = posX + ray.deltaDistY * 0.5 * ray.rayDirX;
+                newY = posY + ray.deltaDistY * 0.5 * ray.rayDirY;
+            }          
+            if (data->Map[(int)newY][(int)newX] == 'K')
+            {
+                data->ttu[x] = 'K';
+                if (ray.side == 0)
+                    data->wallDistances[x] = ray.sideDistX - 0.5 * ray.deltaDistX;
+                else
+                    data->wallDistances[x] = ray.sideDistY - 0.5 * ray.deltaDistY;
+            }
+            else
+            {
+                data->ttu[x] = '0';
+                if (ray.side)
+                    ray.side--;
+                else
+                    ray.side++;
+            }
+        }
+        
     }
-    
-//calc distance player -> wall
-    if (ray.side == 0)
-        data->wallDistances[x] = ray.sideDistX - ray.deltaDistX;
-    else
-        data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
-
-
-    if (data->Map[ray.mapY][ray.mapX] == 'F')
-        data->hit_side[x] = 'F';
-    if (data->Map[ray.mapY][ray.mapX] == 'D')
-        data->hit_side[x] = 'D';
-    if (data->Map[ray.mapY][ray.mapX] == 'K')
-        data->hit_side[x] = 'K';
-
+    if (ray.side && ray.rayDirY > 0)
+        data->hit_side[x] = 'w';
+    else if(ray.side && ray.rayDirY < 0)
+        data->hit_side[x] = 'e';
+    else if (!ray.side && ray.rayDirX < 0)
+        data->hit_side[x] = 'n';
+    else if (!ray.side && ray.rayDirX > 0)
+        data->hit_side[x] = 's';
     get_texX(data, ray, x);
 }
 
@@ -214,13 +254,13 @@ void castRays(t_data *data)
             data->hit_side[x] = 'n';
         else if (!ray.side && ray.rayDirX > 0)
             data->hit_side[x] = 's';
-        if (data->Map[ray.mapY][ray.mapX] == 'F')
-            data->hit_side[x] = 'F';
 
+        if (data->Map[ray.mapY][ray.mapX] == 'F')
+            data->ttu[x] = 'F';
         if (data->Map[ray.mapY][ray.mapX] == 'D')
-            data->hit_side[x] = 'D';
-        if (data->Map[ray.mapY][ray.mapX] == 'K')
-            data->hit_side[x] = 'K';
+            data->ttu[x] = 'D';
+        else
+            data->ttu[x] = '0';
 
         get_texX(data, ray, x);
         x++;

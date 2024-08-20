@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 00:42:31 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:47:30 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_data
 	double *cdoor;
 	int *texX;
 	char *hit_side;
+	char *ttu;
 	char *facing;
 	t_cubed *cubed;
 	t_input *input;

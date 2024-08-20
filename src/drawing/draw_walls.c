@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 14:34:08 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:47:24 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ mlx_texture_t *get_texture(t_data *data, int x)
 {
 	mlx_texture_t *texture;
 
-	if (data->hit_side[x] == 'K')
-		texture = data->texture->DO;
-	if (data->hit_side[x] == 'F')
-		texture = data->texture->F;
-	if (data->hit_side[x] == 'D')
-		texture = data->texture->D;
+	if (data->ttu[x] != '0')
+	{
+		if (data->ttu[x] == 'K')
+			texture = data->texture->DO;
+		if (data->ttu[x] == 'F')
+			texture = data->texture->F;
+		if (data->ttu[x] == 'D')
+			texture = data->texture->D;
+		return (texture);
+	}
     if (data->hit_side[x] == 'n')
 		texture = data->texture->n;
     if (data->hit_side[x] == 's')
@@ -69,21 +73,21 @@ void	draw_over(t_data *data, int x)
 
 	if (startY < 0)
 		startY = 0;
-	if (endY > HEIGHT)
-		endY = HEIGHT;
-;	
+	if (endY >= HEIGHT)
+		endY = HEIGHT - 1;
+	
 	mlx_texture_t *texture = get_texture(data, x);
-	data->texture->step = 1.0 * textureH / height;
+	data->texture->step = 1.0 * texture->height / height;
 	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
 	
 	while(startY < endY)
 	{
-		data->texture->texY = (int)data->texture->tex_pos % textureH;
+		data->texture->texY = (int)data->texture->tex_pos % texture->height;
 		data->texture->tex_pos += data->texture->step;
 
 		int color = get_texture_color(texture, data->texX[x], data->texture->texY);
 		if (color != 0x00000000)
-		my_put_pixel(data->cubed->walls, x, startY, color);
+			my_put_pixel(data->cubed->walls, x, startY, color);
 		startY++;
 	}
 }
@@ -103,8 +107,8 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		if (startY < 0)
 			startY = 0;
 		endY = height / 2 + HEIGHT / 2;
-		if (endY > HEIGHT)
-			endY = HEIGHT;
+		if (endY >= HEIGHT)
+			endY = HEIGHT - 1;
 		
 		mlx_texture_t *texture = get_texture(data, x);
         data->texture->step = 1.0 * texture->height / height;
@@ -126,7 +130,7 @@ void	draw_walls(t_cubed *cubed, t_data *data)
         	my_put_pixel(cubed->walls, x, startY, get_texture_color(texture, data->texX[x], data->texture->texY));
 			startY++;
 		}
-		if (data->cdoor[x] > 0.0 && data->Map[(int)data->posY][(int)data->posX] != 'K')
+		if (data->cdoor[x] > 0.0)
 		{
 			cast_one_ray(data, "K", x);
 			draw_over(data, x);

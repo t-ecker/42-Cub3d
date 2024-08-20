@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 00:44:41 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:48:03 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 		return (NULL);
 	}
 	data->cdoor = malloc(sizeof(double) * WIDTH);
+	data->ttu = malloc(sizeof(char) * WIDTH);
 	data->texX = malloc(sizeof(int) * WIDTH);
 	if (!data->texX)
 	{
