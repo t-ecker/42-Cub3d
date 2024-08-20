@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 15:18:43 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:52:12 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			remove_newline(char *line);
 int				rgb_to_rgba_hex(int r, int g, int b, int a);
 void			clear_image(mlx_image_t *image);
 char			*ft_str_char_rm(char *str, char c);
+void			pad_strings(char **arr);
 
 //DEBUG
 void			print_input(t_input *input);
