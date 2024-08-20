@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:09:20 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/20 00:42:58 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	delete_textures(t_data *data)
 	mlx_delete_texture(data->texture->e);
 	mlx_delete_texture(data->texture->F);
 	mlx_delete_texture(data->texture->D);
+	mlx_delete_texture(data->texture->DO);
 	mlx_delete_texture(data->texture->infoF);
 	mlx_delete_texture(data->texture->infoD);
 	mlx_delete_texture(data->texture->infoDC);

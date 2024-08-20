@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 14:28:07 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/20 14:34:08 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int get_texture_color(mlx_texture_t *texture, int x, int y)
 
     if (x < 0 || x >= (int)texture->width || y < 0 || y >= (int)texture->height)
         return (0);
+	
     index = (y * texture->width + x) * 4;    
     color.r = texture->pixels[index];
     color.g = texture->pixels[index + 1];
@@ -39,6 +40,8 @@ mlx_texture_t *get_texture(t_data *data, int x)
 {
 	mlx_texture_t *texture;
 
+	if (data->hit_side[x] == 'K')
+		texture = data->texture->DO;
 	if (data->hit_side[x] == 'F')
 		texture = data->texture->F;
 	if (data->hit_side[x] == 'D')
@@ -54,6 +57,37 @@ mlx_texture_t *get_texture(t_data *data, int x)
     return (texture);
 }
 
+void	draw_over(t_data *data, int x)
+{
+	int height;
+	int startY;
+	int endY;
+
+	height = HEIGHT / data->wallDistances[x];
+	startY = -height / 2 + HEIGHT / 2;
+	endY = height / 2 + HEIGHT / 2;
+
+	if (startY < 0)
+		startY = 0;
+	if (endY > HEIGHT)
+		endY = HEIGHT;
+;	
+	mlx_texture_t *texture = get_texture(data, x);
+	data->texture->step = 1.0 * textureH / height;
+	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+	
+	while(startY < endY)
+	{
+		data->texture->texY = (int)data->texture->tex_pos % textureH;
+		data->texture->tex_pos += data->texture->step;
+
+		int color = get_texture_color(texture, data->texX[x], data->texture->texY);
+		if (color != 0x00000000)
+		my_put_pixel(data->cubed->walls, x, startY, color);
+		startY++;
+	}
+}
+
 void	draw_walls(t_cubed *cubed, t_data *data)
 {
 	int x;
@@ -66,12 +100,15 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 	{
 		height = HEIGHT / data->wallDistances[x];
 		startY = -height / 2 + HEIGHT / 2;
+		if (startY < 0)
+			startY = 0;
 		endY = height / 2 + HEIGHT / 2;
+		if (endY > HEIGHT)
+			endY = HEIGHT;
 		
 		mlx_texture_t *texture = get_texture(data, x);
-        data->texture->step = 1.0 * textureH / height;
+        data->texture->step = 1.0 * texture->height / height;
         data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
-
 		if (x == WIDTH / 2)
 		{
 			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
@@ -84,17 +121,16 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		
 		while(startY < endY)
 		{
-			data->texture->texY = (int)data->texture->tex_pos % textureH;
+			data->texture->texY = (int)data->texture->tex_pos % texture->height;
 			data->texture->tex_pos += data->texture->step;
         	my_put_pixel(cubed->walls, x, startY, get_texture_color(texture, data->texX[x], data->texture->texY));
 			startY++;
 		}
+		if (data->cdoor[x] > 0.0 && data->Map[(int)data->posY][(int)data->posX] != 'K')
+		{
+			cast_one_ray(data, "K", x);
+			draw_over(data, x);
+		}
 		x++;
 	}
 }
-
-
-/*
-texture of walls idea:
-create an array that show what side the k was hit. if (side k[x] == the two opposite directions player is facing) -> texture = door(direction)
-*/

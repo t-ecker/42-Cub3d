@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tecker <tecker@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 13:56:02 by tecker           ###   ########.fr       */
+/*   Updated: 2024/08/20 00:42:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_texture
 	mlx_texture_t *e;
 	mlx_texture_t *F;
 	mlx_texture_t *D;
+	mlx_texture_t *DO;
 	mlx_texture_t *infoF;
 	mlx_texture_t *infoD;
 	mlx_texture_t *infoDC;

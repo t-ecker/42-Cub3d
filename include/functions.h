@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 18:57:39 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:50:42 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ void			print_dist(t_data *data);
 
 //wallDist
 void			castRays(t_data *data);
+void			cast_one_ray(t_data *data, char *str, int x);
+
 
 #endif
