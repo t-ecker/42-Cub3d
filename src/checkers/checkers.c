@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:13:08 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:33:02 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int	check_params(t_input *input)
 		|| !input->wall_s || !input->wall_w
 		|| input->ceiling == -1
 		|| input->floor == -1)
+		return (0);
+	if (!(ft_strstr(input->wall_e, ".png") || ft_strstr(input->wall_e, ".PNG")))
+		return (0);
+	if (!(ft_strstr(input->wall_w, ".png") || ft_strstr(input->wall_w, ".PNG")))
+		return (0);
+	if (!(ft_strstr(input->wall_s, ".png") || ft_strstr(input->wall_s, ".PNG")))
+		return (0);
+	if (!(ft_strstr(input->wall_n, ".png") || ft_strstr(input->wall_n, ".PNG")))
 		return (0);
 	return (1);
 }
