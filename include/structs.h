@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 16:29:28 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:28:09 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_data
 	int *texX;
 	char *hit_side;
 	int	weapon;
+	int	toggle_light;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;
