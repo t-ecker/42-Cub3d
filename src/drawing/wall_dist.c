@@ -3,31 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   wall_dist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 10:11:09 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/22 01:10:04 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	print_mapp(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->Map[i])
-	{
-		printf("%s\n", data->Map[i]);
-		i++;
-	}
-	printf("\n");
-}
-
 void    get_texX(t_data *data, t_ray ray, int x)
 {
-    
+
 
     if (ray.side == 0)
         data->texture->wall_x = data->posY + data->wallDistances[x] * ray.rayDirY;
@@ -39,7 +26,7 @@ void    get_texX(t_data *data, t_ray ray, int x)
         data->texX[x] = textureH - data->texX[x] - 1;
     if (ray.side == 1 && ray.rayDirY < 0)
         data->texX[x] = textureH - data->texX[x] - 1;
-    
+
 }
 
 void cast_one_ray(t_data *data, char *str, int x)
@@ -127,7 +114,7 @@ void cast_one_ray(t_data *data, char *str, int x)
             if (newY >= 10)
                 newY = 10 - 1;
             if (newX >= 14) newX = 14 - 1;
-            
+
             if (ft_strchr(str, data->Map[(int)newY][(int)newX]))
             {
                 if (data->Map[(int)newY][(int)newX] == 'K')
@@ -150,7 +137,7 @@ void cast_one_ray(t_data *data, char *str, int x)
                     ray.side++;
             }
         }
-        
+
     }
     if (ray.side && ray.rayDirY > 0)
         data->hit_side[x] = 'w';
@@ -235,7 +222,7 @@ void castRays(t_data *data)
                 if (ray.side == 0)
                     data->cdoor[x] = ray.sideDistX - ray.deltaDistX;
                 else
-                    data->cdoor[x] = ray.sideDistY - ray.deltaDistY;   
+                    data->cdoor[x] = ray.sideDistY - ray.deltaDistY;
 
                 if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'K')
                     data->facing[x] = 'K';
@@ -246,7 +233,7 @@ void castRays(t_data *data)
             if (ft_strchr("1F", data->Map[ray.mapY][ray.mapX]))
 				hit = 1;
         }
-        
+
 //calc distance player -> wall
 		if (ray.side == 0)
 			data->wallDistances[x] = ray.sideDistX - ray.deltaDistX;
