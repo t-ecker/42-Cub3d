@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 19:02:42 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:27:09 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_movement_hook(void *param)
 		newY -= data->planeY / 20;
 		collision(data, newX, newY);
 	}
-
 }
 
 void	ft_camera_hook(void *param)
@@ -71,28 +70,44 @@ void	ft_camera_hook(void *param)
 	{
 		data->dirX = cos(angle) * oldDirX - sin(angle) * oldDirY;
 		data->dirY = sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_LEFT))
 	{
 		data->dirX = cos(angle) * oldDirX + sin(angle) * oldDirY;
 		data->dirY = -sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 }
 
-void	ft_window_hook(void *param)
+void	ft_window_hook(struct mlx_key_data key, void *param)
 {
 	t_data	*data;
 
 	data = param;
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_ESCAPE))
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window(data->cubed->mlx);
+	if (key.key == MLX_KEY_1 && key.action == MLX_PRESS)
+	{
+		data->weapon = 1;
+		ft_dark_img(data->cubed->light);
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		draw_hand(data);
+	}
+	else if (key.key == MLX_KEY_2 && key.action == MLX_PRESS)
+	{
+		data->weapon = 2;
+		clear_image(data->cubed->light);
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		draw_hand(data);
+	}
+	if (data->weapon == 1)
+		ft_light_hook(key, param);
+	else if (data->weapon == 2)
+		ft_shoot_hook(key, param);
 }
 
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 }

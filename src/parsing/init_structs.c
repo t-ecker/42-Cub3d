@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:20:03 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:28:25 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ t_texture *init_texture(t_input *input)
 	texture->s = mlx_load_png(input->wall_s);
 	texture->w = mlx_load_png(input->wall_w);
 	texture->e = mlx_load_png(input->wall_e);
+	texture->shoot = mlx_load_png("./assets/pistol_shoot.png");
+	texture->recoil = mlx_load_png("./assets/pistol_recoil.png");
+	texture->hand = mlx_load_png("./assets/pistol_static.png");
+	texture->light = mlx_load_png("./assets/light.png");
+	texture->dark = mlx_load_png("./assets/dark.png");
+	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
@@ -79,6 +85,8 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->posX = input->pos_x;
 	data->posY = input->pos_y;
 	data->fov = 90;
+	data->weapon = 1;
+	data->toggle_light = 0;
 	setDir(data, input);
 	data->wallDistances = malloc(sizeof(double) * WIDTH);
 	if (!data->wallDistances || !data->texture)

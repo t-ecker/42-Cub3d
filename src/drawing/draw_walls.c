@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 22:29:06 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:49:30 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+void	redraw(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	setPlane(data);
+	castRays(data);
+	clear_image(data->cubed->walls);
+	draw_walls(data->cubed, data);
+}
 
 void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
 {
@@ -25,7 +36,7 @@ int get_texture_color(mlx_texture_t *texture, int x, int y)
 
     if (x < 0 || x >= textureW || y < 0 || y >= textureH)
         return (0);
-    index = (y * texture->width + x) * 4;    
+    index = (y * texture->width + x) * 4;
     color.r = texture->pixels[index];
     color.g = texture->pixels[index + 1];
     color.b = texture->pixels[index + 2];
@@ -63,11 +74,11 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		height = HEIGHT / data->wallDistances[x];
 		startY = -height / 2 + HEIGHT / 2;
 		endY = height / 2 + HEIGHT / 2;
-		
+
 		mlx_texture_t *texture = get_texture(data, x);
         data->texture->step = 1.0 * textureH / height;
         data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
-		
+
 		while(startY < endY)
 		{
 			data->texture->texY = (int)data->texture->tex_pos % textureH;
