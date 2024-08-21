@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 16:50:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:36:34 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ int	check_params(t_input *input)
 		|| input->ceiling == -1
 		|| input->floor == -1)
 		return (0);
+	if (!(ft_strstr(input->wall_e, ".png") || ft_strstr(input->wall_e, ".PNG")))
+		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
+	if (!(ft_strstr(input->wall_w, ".png") || ft_strstr(input->wall_w, ".PNG")))
+		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
+	if (!(ft_strstr(input->wall_s, ".png") || ft_strstr(input->wall_s, ".PNG")))
+		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
+	if (!(ft_strstr(input->wall_n, ".png") || ft_strstr(input->wall_n, ".PNG")))
+		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
 	return (1);
 }
 

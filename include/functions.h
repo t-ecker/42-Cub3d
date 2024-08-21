@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 00:50:42 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:52:12 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@ unsigned int	parse_color(char *colors);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw_walls(t_cubed *cubed, t_data *data);
+void			draw_overlay(t_data *data);
+void			draw_hand(t_data *data);
+void			ft_dark_img(mlx_image_t *img);
 void			setPlane(t_data *data);
-void			redraw(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			draw_info(t_data *data, int flag);
 void			draw_bg(mlx_image_t *img, int color);
-
-
-
-
+void			redraw(void *param);
 
 //CONTROLS
-void			ft_window_hook(void *param);
-void			movement_hook(t_data *data, mlx_t *mlx);
+void			ft_window_hook(struct mlx_key_data key, void *param);
+void			ft_movement_hook(void *param);
+void			ft_camera_hook(void *param);
+void			ft_shoot_hook(struct mlx_key_data key, void *param);
+void			ft_light_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);
 void			collision(t_data *data, double newX, double newY);
 
@@ -66,6 +68,8 @@ void			free_all(t_data *data, t_cubed *cubed, t_input *input);
 void			remove_newline(char *line);
 int				rgb_to_rgba_hex(int r, int g, int b, int a);
 void			clear_image(mlx_image_t *image);
+char			*ft_str_char_rm(char *str, char c);
+void			pad_strings(char **arr);
 
 //DEBUG
 void			print_input(t_input *input);

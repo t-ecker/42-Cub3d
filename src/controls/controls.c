@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 23:51:53 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:27:09 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,32 @@ void	ft_movement_hook(void *param)
 	{
 		newX += data->dirX / 10;
 		newY += data->dirY / 10;
+		collision(data, newX, newY);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		newX += data->dirX / 20;
 		newY += data->dirY / 20;
+		collision(data, newX, newY);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		newX -= data->dirX / 20;
 		newY -= data->dirY / 20;
+		collision(data, newX, newY);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		newX += data->planeX / 20;
 		newY += data->planeY / 20;
+		collision(data, newX, newY);
 	}
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		newX -= data->planeX / 20;
 		newY -= data->planeY / 20;
+		collision(data, newX, newY);
 	}
-	else
-		return ;
-	collision(data, newX, newY);
 }
 
 void	ft_camera_hook(void *param)
@@ -68,27 +70,13 @@ void	ft_camera_hook(void *param)
 	{
 		data->dirX = cos(angle) * oldDirX - sin(angle) * oldDirY;
 		data->dirY = sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_LEFT))
 	{
 		data->dirX = cos(angle) * oldDirX + sin(angle) * oldDirY;
 		data->dirY = -sin(angle) * oldDirX + cos(angle) * oldDirY;
-		redraw(data);
 	}
 }
-// void	print_mapp(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (data->Map[i])
-// 	{
-// 		printf("%s\n", data->Map[i]);
-// 		i++;
-// 	}
-// 	printf("\n");
-// }
 
 void	ft_gameplay_hook(void *param)
 {
@@ -103,29 +91,46 @@ void	ft_gameplay_hook(void *param)
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'D')
 	{
 		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'K';
-		redraw(data);
 		// print_mapp(data);
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_Y) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'K')
 	{
 		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
-		redraw(data);
 		// print_mapp(data);
 	}
 }
-void	ft_window_hook(void *param)
+
+void	ft_window_hook(struct mlx_key_data key, void *param)
 {
 	t_data	*data;
 
 	data = param;
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_ESCAPE))
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window(data->cubed->mlx);
+	if (key.key == MLX_KEY_1 && key.action == MLX_PRESS)
+	{
+		data->weapon = 1;
+		ft_dark_img(data->cubed->light);
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		draw_hand(data);
+	}
+	else if (key.key == MLX_KEY_2 && key.action == MLX_PRESS)
+	{
+		data->weapon = 2;
+		clear_image(data->cubed->light);
+		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
+		draw_hand(data);
+	}
+	if (data->weapon == 1)
+		ft_light_hook(key, param);
+	else if (data->weapon == 2)
+		ft_shoot_hook(key, param);
 }
 
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_gameplay_hook, data);
+	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 }

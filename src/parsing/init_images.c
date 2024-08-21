@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 14:48:30 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/19 02:32:10 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,21 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	setPlane(data);
 	castRays(data);
-	draw_walls(cubed, data);
 	ft_hook(data);
 	if (!init_bg_img(cubed, input, data))
 		return (0);
 	ceiling_floor(cubed, input);
 	if (!init_walls_img(cubed, input, data))
 		return (0);
+	draw_walls(cubed, data);
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
 	if (!init_info_img(cubed, input, data))
 		return (0);
 	if (!init_victory_img(cubed, input, data))
 		return (0);
+	draw_overlay(data);
+	mlx_loop_hook(cubed->mlx, redraw, data);
 	mlx_loop(cubed->mlx);
 	mlx_terminate(cubed->mlx);
 	return (1);

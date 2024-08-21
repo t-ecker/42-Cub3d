@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:28:35 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:26:37 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,47 @@ void	clear_image(mlx_image_t *image)
 
 	y = 0;
 	transparent_color = 0x00000000;
-    while(y < image->height)
-    {
+	while (y < image->height)
+	{
 		x = 0;
-        while (x < image->width)
-        {
-            mlx_put_pixel(image, x, y, transparent_color);
-        	x++;
+		while (x < image->width)
+		{
+			mlx_put_pixel(image, x, y, transparent_color);
+			x++;
 		}
 		y++;
-    }
+	}
+}
+
+char	*ft_str_char_rm(char *str, char c)
+{
+	int		i;
+	int		j;
+	int		c_count;
+	char	*edited;
+
+	if (!str)
+		return (NULL);
+	c_count = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == c)
+			c_count++;
+	}
+	edited = malloc(ft_strlen(str) - c_count + 1);
+	if (!edited)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (str[++i])
+	{
+		if (str[i] != c)
+		{
+			edited[j] = str[i];
+			j++;
+		}
+	}
+	edited[j] = '\0';
+	return (edited);
 }

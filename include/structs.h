@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/20 17:47:30 by tomecker         ###   ########.fr       */
@@ -55,6 +55,8 @@ typedef struct s_cubed
 	mlx_image_t	*overlay;
 	mlx_image_t	*info;
 	mlx_image_t	*victory;
+	mlx_image_t	*hand;
+	mlx_image_t	*light;
 	char		*title;
 }				t_cubed;
 
@@ -67,19 +69,24 @@ typedef struct s_color
 	int final;
 }	t_color;
 
-
 typedef struct s_texture
 {
 	mlx_texture_t *n;
 	mlx_texture_t *s;
 	mlx_texture_t *w;
 	mlx_texture_t *e;
-	mlx_texture_t *F;
+  mlx_texture_t *F;
 	mlx_texture_t *D;
 	mlx_texture_t *DO;
 	mlx_texture_t *infoF;
 	mlx_texture_t *infoD;
 	mlx_texture_t *infoDC;
+	mlx_texture_t	*shoot;
+	mlx_texture_t	*recoil;
+	mlx_texture_t	*hand;
+	mlx_texture_t	*flashlight;
+	mlx_texture_t	*light;
+	mlx_texture_t	*dark;
 	double step;
 	double tex_pos;
 	int texY;
@@ -102,6 +109,8 @@ typedef struct s_data
 	char *hit_side;
 	char *ttu;
 	char *facing;
+	int	weapon;
+	int	toggle_light;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;

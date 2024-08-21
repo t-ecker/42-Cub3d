@@ -6,7 +6,7 @@
 #    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/18 14:12:47 by tomecker         ###   ########.fr        #
+#    Updated: 2024/08/20 18:57:10 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,16 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/parsing/init_images.c\
 					src/parsing/parsing_utils.c\
 					src/controls/controls.c\
+					src/controls/controls_2.c\
 					src/controls/control_utils.c\
 					src/drawing/draw_bg.c\
 					src/drawing/wall_dist.c\
 					src/drawing/draw_walls.c\
 					src/drawing/draw_info.c\
+					src/drawing/draw_overlay.c\
+					src/drawing/draw_light.c\
 					src/utils/utils.c\
+					src/utils/utils_2.c\
 					src/utils/freeing.c\
 					src/utils/debug.c\
 					src/main.c
@@ -135,7 +139,7 @@ CUBED_GREEN:
 	@echo "    \|_______|\|_______|\|_______|\|_______|\|_______|$(DEF_COLOR)\n"
 
 loading:
-	@for i in {1..42}; do \
+	@for i in {1..55}; do \
 		printf '%s' "█"; \
 		sleep 0.01; \
 	done

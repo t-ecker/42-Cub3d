@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overlay.c                                          :+:      :+:    :+:   */
+/*   draw_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/17 17:30:49 by dolifero         ###   ########.fr       */
+/*   Created: 2024/08/19 16:22:38 by dolifero          #+#    #+#             */
+/*   Updated: 2024/08/19 16:56:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	draw_overlay(t_data *data)
+void	ft_dark_img(mlx_image_t *img)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*overlay;
+	int	i;
+	int	j;
 
-	overlay = data->cubed->overlay;
-	mlx = data->cubed->mlx;
-	 
-
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			my_put_pixel(img, j, i, 0x000000FF);
+			j++;
+		}
+		i++;
+	}
 }

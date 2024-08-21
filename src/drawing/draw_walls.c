@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/21 10:11:49 by tomecker         ###   ########.fr       */
@@ -11,6 +11,18 @@
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+void	redraw(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	setPlane(data);
+	castRays(data);
+	clear_image(data->cubed->walls);
+  clear_image(data->cubed->info);
+	draw_walls(data->cubed, data);
+}
 
 void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
 {
@@ -25,8 +37,7 @@ int get_texture_color(mlx_texture_t *texture, int x, int y)
 
     if (x < 0 || x >= (int)texture->width || y < 0 || y >= (int)texture->height)
         return (0);
-	
-    index = (y * texture->width + x) * 4;    
+    index = (y * texture->width + x) * 4;
     color.r = texture->pixels[index];
     color.g = texture->pixels[index + 1];
     color.b = texture->pixels[index + 2];
@@ -72,12 +83,10 @@ void	draw_over(t_data *data, int x)
 	height = HEIGHT / data->wallDistances[x];
 	startY = -height / 2 + HEIGHT / 2;
 	endY = height / 2 + HEIGHT / 2;
-
 	if (startY < 0)
 		startY = 0;
 	if (endY >= HEIGHT)
 		endY = HEIGHT - 1;
-	
 	mlx_texture_t *texture = get_texture(data, x);
 	data->texture->step = 1.0 * texture->height / height;
 	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
@@ -111,7 +120,6 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		endY = height / 2 + HEIGHT / 2;
 		if (endY >= HEIGHT)
 			endY = HEIGHT - 1;
-		
 		mlx_texture_t *texture = get_texture(data, x);
         data->texture->step = 1.0 * texture->height / height;
         data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
@@ -124,7 +132,6 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 			if (data->facing[x] == 'K' && data->cdoor[x] < 1.0)
 				draw_info(data, 2);
 		}
-		
 		while(startY < endY)
 		{
 			data->texture->texY = (int)data->texture->tex_pos % texture->height;

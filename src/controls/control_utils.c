@@ -12,15 +12,6 @@
 
 #include "../../include/cubed.h"
 
-void redraw(t_data *data)
-{
-	setPlane(data);
-	castRays(data);
-	clear_image(data->cubed->walls);
-	clear_image(data->cubed->info);
-	draw_walls(data->cubed, data);
-}
-
 void	collision(t_data *data, double newX, double newY)
 {
 	float	buffer;
@@ -30,13 +21,13 @@ void	collision(t_data *data, double newX, double newY)
 	canmoveX = 1;
 	canmoveY = 1;
 	buffer = 0.3;
-    if ((ft_strchr("1D", data->Map[(int)data->posY][(int)(newX + buffer)]) && newX > data->posX) ||
+  if ((ft_strchr("1D", data->Map[(int)data->posY][(int)(newX + buffer)]) && newX > data->posX) ||
         (ft_strchr("1D", data->Map[(int)data->posY][(int)(newX - buffer)]) && newX < data->posX))
-        canmoveX = 0;
+     canmoveX = 0;
 
-    if ((ft_strchr("1D", data->Map[(int)(newY + buffer)][(int)data->posX]) && newY > data->posY) ||
+  if ((ft_strchr("1D", data->Map[(int)(newY + buffer)][(int)data->posX]) && newY > data->posY) ||
         (ft_strchr("1D", data->Map[(int)(newY - buffer)][(int)data->posX]) && newY < data->posY))
-        canmoveY = 0;
+     canmoveY = 0;
 	if (canmoveX && canmoveY)
 	{
 		data->posX = newX;
@@ -46,5 +37,5 @@ void	collision(t_data *data, double newX, double newY)
 		data->posX = newX;
 	else if (canmoveY)
 		data->posY = newY;
-	redraw(data);
+
 }
