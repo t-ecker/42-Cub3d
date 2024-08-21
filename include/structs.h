@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 23:39:28 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 00:33:01 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cubed
 	mlx_image_t	*info;
 	mlx_image_t	*victory;
 	mlx_image_t	*hand;
+	mlx_image_t	*minimap;
 	mlx_image_t	*light;
 	char		*title;
 }				t_cubed;

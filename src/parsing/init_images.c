@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 13:50:33 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 00:42:55 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
 	draw_overlay(data);
+	if (!ft_minimap(data))
+		return (0);
 	if (!init_info_img(cubed, input, data))
 		return (0);
 	if (!init_victory_img(cubed, input, data))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
+#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/08/20 18:57:10 by dolifero         ###   ########.fr        #
+#    Updated: 2024/08/22 00:44:00 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/drawing/draw_walls.c\
 					src/drawing/draw_info.c\
 					src/drawing/draw_overlay.c\
+					src/drawing/draw_minimap.c\
 					src/drawing/draw_light.c\
 					src/utils/utils.c\
 					src/utils/utils_2.c\
