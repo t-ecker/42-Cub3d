@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/20 17:36:34 by dolifero         ###   ########.fr       */
@@ -16,7 +16,7 @@ int	ft_isappr(char c)
 {
 	return ((c >= '0' && c <= '9') || c == 'N'
 		|| c == 'W' || c == 'S' || c == 'E'
-		|| c == ' ');
+		|| c == ' ' || c == 'F' || c == 'D');
 }
 
 int	check_args(int argc, char **argv)

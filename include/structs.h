@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 15:28:09 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:47:30 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_cubed
 	mlx_image_t	*bg;
 	mlx_image_t	*walls;
 	mlx_image_t	*overlay;
+	mlx_image_t	*info;
+	mlx_image_t	*victory;
 	mlx_image_t	*hand;
 	mlx_image_t	*light;
 	char		*title;
@@ -69,10 +71,16 @@ typedef struct s_color
 
 typedef struct s_texture
 {
-	mlx_texture_t	*n;
-	mlx_texture_t	*s;
-	mlx_texture_t	*w;
-	mlx_texture_t	*e;
+	mlx_texture_t *n;
+	mlx_texture_t *s;
+	mlx_texture_t *w;
+	mlx_texture_t *e;
+  mlx_texture_t *F;
+	mlx_texture_t *D;
+	mlx_texture_t *DO;
+	mlx_texture_t *infoF;
+	mlx_texture_t *infoD;
+	mlx_texture_t *infoDC;
 	mlx_texture_t	*shoot;
 	mlx_texture_t	*recoil;
 	mlx_texture_t	*hand;
@@ -96,8 +104,11 @@ typedef struct s_data
 	double dirY;
 	char **Map;
 	double *wallDistances;
+	double *cdoor;
 	int *texX;
 	char *hit_side;
+	char *ttu;
+	char *facing;
 	int	weapon;
 	int	toggle_light;
 	t_cubed *cubed;

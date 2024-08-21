@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 01:27:30 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:03:55 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,21 @@ void	collision(t_data *data, double newX, double newY)
 	canmoveX = 1;
 	canmoveY = 1;
 	buffer = 0.3;
-	if ((newX > data->posX && data->Map[(int)data->posY][(int)(newX + buffer)] == '1') ||
-		(newX < data->posX && data->Map[(int)data->posY][(int)(newX - buffer)] == '1'))
-		canmoveX = 0;
-	if ((newY > data->posY && data->Map[(int)(newY + buffer)][(int)data->posX] == '1') ||
-		(newY < data->posY && data->Map[(int)(newY - buffer)][(int)data->posX] == '1'))
-		canmoveY = 0;
-	if (canmoveX)
+  if ((ft_strchr("1D", data->Map[(int)data->posY][(int)(newX + buffer)]) && newX > data->posX) ||
+        (ft_strchr("1D", data->Map[(int)data->posY][(int)(newX - buffer)]) && newX < data->posX))
+     canmoveX = 0;
+
+  if ((ft_strchr("1D", data->Map[(int)(newY + buffer)][(int)data->posX]) && newY > data->posY) ||
+        (ft_strchr("1D", data->Map[(int)(newY - buffer)][(int)data->posX]) && newY < data->posY))
+     canmoveY = 0;
+	if (canmoveX && canmoveY)
 	{
 		data->posX = newX;
-	}
-	else if (canmoveX && data->Map[(int)(newY)][(int)(data->posX)] != '1')
-	{
-		data->posY += (newY - data->posY) * 0.5;
-	}
-	if (canmoveY)
-	{
 		data->posY = newY;
 	}
-	else if (canmoveY && data->Map[(int)(data->posY)][(int)(newX)] != '1')
-	{
-		data->posX += (newX - data->posX) * 0.5;
-	}
-	// if (canmoveX || canmoveY)
-	// 	redraw(data);
+	else if (canmoveX)
+		data->posX = newX;
+	else if (canmoveY)
+		data->posY = newY;
+
 }

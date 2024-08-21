@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/20 01:27:09 by dolifero         ###   ########.fr       */
@@ -35,19 +35,19 @@ void	ft_movement_hook(void *param)
 		newY += data->dirY / 20;
 		collision(data, newX, newY);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	else if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		newX -= data->dirX / 20;
 		newY -= data->dirY / 20;
 		collision(data, newX, newY);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	else if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		newX += data->planeX / 20;
 		newY += data->planeY / 20;
 		collision(data, newX, newY);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	else if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		newX -= data->planeX / 20;
 		newY -= data->planeY / 20;
@@ -75,6 +75,28 @@ void	ft_camera_hook(void *param)
 	{
 		data->dirX = cos(angle) * oldDirX + sin(angle) * oldDirY;
 		data->dirY = -sin(angle) * oldDirX + cos(angle) * oldDirY;
+	}
+}
+
+void	ft_gameplay_hook(void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_F) && data->facing[WIDTH / 2] == 'F')
+	{
+		draw_bg(data->cubed->victory, 0x39FF14FF);
+	 	// + block all other key presses somehow
+	}
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'D')
+	{
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'K';
+		// print_mapp(data);
+	}
+	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_Y) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'K')
+	{
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
+		// print_mapp(data);
 	}
 }
 
@@ -109,5 +131,6 @@ void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_gameplay_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 }

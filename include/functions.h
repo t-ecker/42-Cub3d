@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/20 18:52:12 by dolifero         ###   ########.fr       */
@@ -44,6 +44,8 @@ void			draw_hand(t_data *data);
 void			ft_dark_img(mlx_image_t *img);
 void			setPlane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
+void			draw_info(t_data *data, int flag);
+void			draw_bg(mlx_image_t *img, int color);
 void			redraw(void *param);
 
 //CONTROLS
@@ -76,5 +78,7 @@ void			print_dist(t_data *data);
 
 //wallDist
 void			castRays(t_data *data);
+void			cast_one_ray(t_data *data, char *str, int x);
+
 
 #endif
