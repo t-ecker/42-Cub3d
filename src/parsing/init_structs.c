@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 23:48:03 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:56:27 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,17 @@ t_texture *init_texture(t_input *input)
 	texture->e = mlx_load_png(input->wall_e);
 	texture->D = mlx_load_png("./textures/CRATE_2C.PNG");
 	texture->DO = mlx_load_png("./textures/CRATE_2M_OPEN.png");
-	texture->F = mlx_load_png("./textures/eagle.PNG");
-	texture->infoD = mlx_load_png("./textures/1.PNG");
-	texture->infoF = mlx_load_png("./textures/2.PNG");
-	texture->infoDC = mlx_load_png("./textures/3.PNG");
+	texture->F = mlx_load_png("./textures/CONSOLE_1B.PNG");
+	texture->infoD = mlx_load_png("./assets/1.PNG");
+	texture->infoDC = mlx_load_png("./assets/2.PNG");
+	texture->infoF = mlx_load_png("./assets/3.PNG");
 	texture->shoot = mlx_load_png("./assets/pistol_shoot.png");
 	texture->recoil = mlx_load_png("./assets/pistol_recoil.png");
 	texture->hand = mlx_load_png("./assets/pistol_static.png");
 	texture->light = mlx_load_png("./assets/light.png");
 	texture->dark = mlx_load_png("./assets/dark.png");
+	texture->victory = mlx_load_png("./assets/victory.png");
+	texture->death = mlx_load_png("./assets/death.png");
 	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);

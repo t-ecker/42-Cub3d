@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 13:48:07 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:26:36 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			pad_strings(char **arr);
 void			print_input(t_input *input);
 void			print_map(t_input *input);
 void			print_dist(t_data *data);
+void			print_mapp(t_data *data);
 
 //wallDist
 void			castRays(t_data *data);

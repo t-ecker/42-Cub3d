@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 17:47:30 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:56:51 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_texture
 	mlx_texture_t	*flashlight;
 	mlx_texture_t	*light;
 	mlx_texture_t	*dark;
+	mlx_texture_t	*victory;
+	mlx_texture_t	*death;
 	double step;
 	double tex_pos;
 	int texY;

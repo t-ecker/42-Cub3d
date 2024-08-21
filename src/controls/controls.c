@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 13:44:07 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:57:35 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_movement_hook(void *param)
 	mlx = data->cubed->mlx;
 	newX = data->posX;
 	newY = data->posY;
-	if (mlx_is_key_down(mlx, MLX_KEY_W) && mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_W) && mlx_is_key_down(mlx,
+			MLX_KEY_LEFT_SHIFT))
 	{
 		newX += data->dirX / 10;
 		newY += data->dirY / 10;
@@ -78,25 +79,34 @@ void	ft_camera_hook(void *param)
 	}
 }
 
-void	ft_gameplay_hook(void *param)
+void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 {
 	t_data	*data;
 
 	data = param;
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_F) && data->facing[WIDTH / 2] == 'F')
+	if (key.key == MLX_KEY_E && key.action == MLX_PRESS
+		&& ((data->facing[WIDTH / 2] == 'D'
+				&& data->Map[(int)(data->posY
+					+ data->dirY)][(int)(data->posX + data->dirX)] == 'D')
+			|| (data->facing[WIDTH / 2] == 'K'
+				&& data->Map[(int)data->posY][(int)data->posX] != 'K'
+				&& data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+					+ data->dirX)] == 'K')))
 	{
-		draw_bg(data->cubed->victory, 0x39FF14FF);
-	 	// + block all other key presses somehow
+		if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+				+ data->dirX)] == 'D')
+			data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+					+ data->dirX)] = 'K';
+		else if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+				+ data->dirX)] == 'K')
+			data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+					+ data->dirX)] = 'D';
 	}
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_U) && data->facing[WIDTH / 2] == 'D' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'D')
+	if (key.key == MLX_KEY_F && key.action == MLX_PRESS
+		&& data->facing[WIDTH / 2] == 'F')
 	{
-		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'K';
-		// print_mapp(data);
-	}
-	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_Y) && data->facing[WIDTH / 2] == 'K' && data->Map[(int)data->posY][(int)data->posX] != 'K' && data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] == 'K')
-	{
-		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX + data->dirX)] = 'D';
-		// print_mapp(data);
+		clear_image(data->cubed->hand);
+		draw_overlay_part(data->cubed->victory, data->texture->victory, 0, 0);
 	}
 }
 
@@ -125,12 +135,12 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 		ft_light_hook(key, param);
 	else if (data->weapon == 2)
 		ft_shoot_hook(key, param);
+	ft_gameplay_hook(key, param);
 }
 
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_gameplay_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 }
