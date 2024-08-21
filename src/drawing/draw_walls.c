@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 23:47:24 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:11:49 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	draw_over(t_data *data, int x)
 	int startY;
 	int endY;
 
+	if (data->wallDistances[x] == 0.0)
+		return ;
 	height = HEIGHT / data->wallDistances[x];
 	startY = -height / 2 + HEIGHT / 2;
 	endY = height / 2 + HEIGHT / 2;
@@ -117,7 +119,7 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		{
 			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
 				draw_info(data, 0);
-			if ((data->facing[x] == 'D' && data->wallDistances[x] < 1.0))
+			if ((data->facing[x] == 'D' && data->cdoor[x] < 1.0))
 				draw_info(data, 1);
 			if (data->facing[x] == 'K' && data->cdoor[x] < 1.0)
 				draw_info(data, 2);
@@ -132,7 +134,7 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		}
 		if (data->cdoor[x] > 0.0)
 		{
-			cast_one_ray(data, "K", x);
+			cast_one_ray(data, "KD", x);
 			draw_over(data, x);
 		}
 		x++;

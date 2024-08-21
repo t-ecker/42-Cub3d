@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 23:44:12 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:11:09 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void cast_one_ray(t_data *data, char *str, int x)
             ray.side = 1;
         }
 
-        if (data->Map[ray.mapY][ray.mapX] == 'K')
+        if (ft_strchr(str, data->Map[ray.mapY][ray.mapX]))
         {
             hit++;
             double posX;
@@ -120,12 +120,24 @@ void cast_one_ray(t_data *data, char *str, int x)
                 posY = (ray.sideDistY - ray.deltaDistY) * ray.rayDirY + data->posY;
                 newX = posX + ray.deltaDistY * 0.5 * ray.rayDirX;
                 newY = posY + ray.deltaDistY * 0.5 * ray.rayDirY;
-            }          
-            if (data->Map[(int)newY][(int)newX] == 'K')
+            }
+            if (newY < 0)
+                newY = 0;
+            if (newX < 0) newX = 0;
+            if (newY >= 10)
+                newY = 10 - 1;
+            if (newX >= 14) newX = 14 - 1;
+            
+            if (ft_strchr(str, data->Map[(int)newY][(int)newX]))
             {
-                data->ttu[x] = 'K';
+                if (data->Map[(int)newY][(int)newX] == 'K')
+                    data->ttu[x] = 'K';
+                else
+                    data->ttu[x] = 'D';
                 if (ray.side == 0)
                     data->wallDistances[x] = ray.sideDistX - 0.5 * ray.deltaDistX;
+                else if(data->Map[(int)newY][(int)newX] == 'K' && newX == data->posX && newY == data->posY)
+                    data->wallDistances[x] = 0;
                 else
                     data->wallDistances[x] = ray.sideDistY - 0.5 * ray.deltaDistY;
             }
@@ -160,6 +172,7 @@ void castRays(t_data *data)
 	x = 0;
     while (x < WIDTH)
 	{
+        data->facing[x] = '0';
         data->cdoor[x] = 0.0;
 		hit = 0;
         ray.cameraX = 2 * x / (double)WIDTH - 1;
@@ -217,15 +230,20 @@ void castRays(t_data *data)
             }
 
 //is the ray hitting something we dont want to see?
-            if (data->Map[ray.mapY][ray.mapX] == 'K')
+            if (ft_strchr("KD", data->Map[ray.mapY][ray.mapX]))
             {
                 if (ray.side == 0)
                     data->cdoor[x] = ray.sideDistX - ray.deltaDistX;
                 else
                     data->cdoor[x] = ray.sideDistY - ray.deltaDistY;   
+
+                if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'K')
+                    data->facing[x] = 'K';
+                else if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'D')
+                    data->facing[x] = 'D';
             }
 //did we hit something we want to see
-            if (ft_strchr("1DF", data->Map[ray.mapY][ray.mapX]))
+            if (ft_strchr("1F", data->Map[ray.mapY][ray.mapX]))
 				hit = 1;
         }
         
@@ -236,13 +254,9 @@ void castRays(t_data *data)
 			data->wallDistances[x] = ray.sideDistY - ray.deltaDistY;
 
 //object player is facing (waht is the middle array hitting)
-        if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->cdoor[x] > 0.0)
-            data->facing[x] = 'K';
-        else if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'F')
+        if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'F' && data->facing[x] == '0')
             data->facing[x] = 'F';
-        else if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY && data->Map[ray.mapY][ray.mapX] == 'D')
-            data->facing[x] = 'D';
-        else
+        else if (data->facing[x] == '0')
             data->facing[x] = 'W';
 
 //what side are we hitting?
@@ -257,8 +271,6 @@ void castRays(t_data *data)
 
         if (data->Map[ray.mapY][ray.mapX] == 'F')
             data->ttu[x] = 'F';
-        if (data->Map[ray.mapY][ray.mapX] == 'D')
-            data->ttu[x] = 'D';
         else
             data->ttu[x] = '0';
 
