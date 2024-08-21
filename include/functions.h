@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 18:52:12 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:48:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			setPlane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			draw_info(t_data *data, int flag);
 void			draw_bg(mlx_image_t *img, int color);
+void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y);
 void			redraw(void *param);
 
 //CONTROLS

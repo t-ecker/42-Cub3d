@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/19 02:32:10 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:50:33 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	draw_walls(cubed, data);
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
+	draw_overlay(data);
 	if (!init_info_img(cubed, input, data))
 		return (0);
 	if (!init_victory_img(cubed, input, data))
 		return (0);
-	draw_overlay(data);
 	mlx_loop_hook(cubed->mlx, redraw, data);
 	mlx_loop(cubed->mlx);
 	mlx_terminate(cubed->mlx);

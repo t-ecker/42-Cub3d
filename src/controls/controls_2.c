@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:50:36 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 15:36:05 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:49:19 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void	ft_light_hook(struct mlx_key_data key, void *param)
 	}
 	if (data->toggle_light)
 	{
-		mlx_delete_image(data->cubed->mlx, data->cubed->light);
-		data->cubed->light = mlx_texture_to_image(data->cubed->mlx,
-				data->texture->light);
-		mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);
+		// mlx_delete_image(data->cubed->mlx, data->cubed->light);
+		// data->cubed->light = mlx_texture_to_image(data->cubed->mlx,
+		// 		data->texture->light);
+		// mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);
+		draw_overlay_part(data->cubed->light, data->texture->light, 0, 0);
 	}
 	else if (!data->toggle_light)
 		ft_dark_img(data->cubed->light);
