@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 04:22:07 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:17:38 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_draw_minimap(t_data *data)
 		x = 0;
 		while (j < data->input->map_width)
 		{
-			if (data->Map[i][j] == '1' || data->Map[i][j] == ' ')
+			if (data->Map[i][j] == '1')
 				ft_draw_minimap_cube(x, y, 0x444444FF, data->cubed->minimap);
 			else if (data->Map[i][j] == '0' || data->Map[i][j] == 'W' || data->Map[i][j] == 'S' || data->Map[i][j] == 'N' || data->Map[i][j] == 'E')
 				ft_draw_minimap_cube(x, y, 0x00000000, data->cubed->minimap);
