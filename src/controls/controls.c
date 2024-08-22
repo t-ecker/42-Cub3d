@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 23:36:56 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 04:31:20 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_camera_hook(void *param)
 	double	oldDirX;
 	double	oldDirY;
 
-	angle = 3 * (M_PI / 180);
+	angle = 4 * (M_PI / 180);
 	data = param;
 	oldDirX = data->dirX;
 	oldDirY = data->dirY;
