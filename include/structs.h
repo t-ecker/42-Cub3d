@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 14:56:51 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:55:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct s_cubed
 	char		*title;
 }				t_cubed;
 
+typedef struct s_hit
+{
+    double distance;
+    char type;
+	int texX;
+	mlx_texture_t *tex;
+} t_hit;
+
 typedef struct s_color
 {
 	int r;
@@ -105,17 +113,14 @@ typedef struct s_data
 	double dirX;
 	double dirY;
 	char **Map;
-	double *wallDistances;
-	double *cdoor;
-	int *texX;
-	char *hit_side;
-	char *ttu;
+	int *hit_count;
 	char *facing;
 	int	weapon;
 	int	toggle_light;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;
+	t_hit **hit;
 }	t_data;
 
 #endif

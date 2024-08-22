@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 14:26:36 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:45:03 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void			draw_hand(t_data *data);
 void			ft_dark_img(mlx_image_t *img);
 void			setPlane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
-void			draw_info(t_data *data, int flag);
+void			draw_info(t_data *data, char flag);
 void			draw_bg(mlx_image_t *img, int color);
 void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y);
 void			redraw(void *param);

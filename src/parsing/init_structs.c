@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 14:56:27 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:47:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,41 +96,28 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->weapon = 1;
 	data->toggle_light = 0;
 	setDir(data, input);
-	data->wallDistances = malloc(sizeof(double) * WIDTH);
-	if (!data->wallDistances || !data->texture)
-	{
-		free(data->texture);
-		free(data);
-		return (NULL);
-	}
-	data->hit_side = malloc(sizeof(char) * WIDTH);
-	if (!data->hit_side)
-	{
-		free(data->texture);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
-	}
 	data->facing = malloc(sizeof(char) * WIDTH);
-	if (!data->facing)
+	data->hit = malloc(sizeof(t_hit *) * WIDTH);
+	data->hit_count = malloc(sizeof(int) * WIDTH);
+	int x = 0;
+	while (x < WIDTH)
 	{
-		free(data->hit_side);
-		free(data->texture);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
+		data->hit[x] = malloc(sizeof(t_hit) * 10);
+		if (!data->hit[x])
+        {
+            int j = 0;
+            while (j < x)
+            {
+                free(data->hit[j]);
+                j++;
+            }
+            free(data->hit);
+            free(data->hit_count);
+            return (NULL);
+        }
+		data->hit_count[x] = 0;
+		x++;
 	}
-	data->cdoor = malloc(sizeof(double) * WIDTH);
-	data->ttu = malloc(sizeof(char) * WIDTH);
-	data->texX = malloc(sizeof(int) * WIDTH);
-	if (!data->texX)
-	{
-		free(data->facing);
-		free(data->texture);
-		free(data->hit_side);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
-	}
+	
 	return (data);
 }
