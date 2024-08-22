@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 14:56:27 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 04:22:28 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_texture *init_texture(t_input *input)
 	texture->victory = mlx_load_png("./assets/victory.png");
 	texture->death = mlx_load_png("./assets/death.png");
 	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
+	texture->pos = mlx_load_png("./assets/playerpos.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);

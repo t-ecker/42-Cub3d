@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 01:06:06 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/22 04:22:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ void	ft_draw_minimap(t_data *data)
 	}
 }
 
+void	minimap_player_pos(void *param)
+{
+	t_data	*data;
+	int		pos_x;
+	int		pos_y;
+
+	data = (t_data *)param;
+	pos_x = data->posX * 10 - 2;
+	pos_y = data->posY * 10 - 2;
+	mlx_delete_image(data->cubed->mlx, data->cubed->pos);
+	data->cubed->pos = mlx_texture_to_image(data->cubed->mlx, data->texture->pos);
+	mlx_image_to_window(data->cubed->mlx, data->cubed->pos, 25 + pos_x,
+		HEIGHT - (data->input->map_height * 10) - 25 + pos_y);
+}
+
 int	ft_minimap(t_data *data)
 {
 	int	width;
@@ -83,5 +98,7 @@ int	ft_minimap(t_data *data)
 		return (0);
 	}
 	ft_draw_minimap(data);
+	data->cubed->pos = mlx_new_image(data->cubed->mlx, 5, 5);
+	mlx_loop_hook(data->cubed->mlx, minimap_player_pos, data);
 	return (1);
 }
