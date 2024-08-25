@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:50:36 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 23:35:49 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/25 01:46:41 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,20 @@ void	ft_shoot_hook(struct mlx_key_data key, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (key.key == MLX_KEY_SPACE && key.action == MLX_REPEAT)
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
 	{
 		clear_image(data->cubed->hand);
-		draw_overlay_part(data->cubed->hand, data->texture->recoil,
-			0, 0);
+		draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
 	}
-	else if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+	else if (key.key == MLX_KEY_SPACE && key.action == MLX_REPEAT)
 	{
 		clear_image(data->cubed->hand);
-		draw_overlay_part(data->cubed->hand, data->texture->shoot,
-			0, 0);
+		draw_overlay_part(data->cubed->hand, data->texture->recoil, 0, 0);
 	}
 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_RELEASE)
 	{
 		clear_image(data->cubed->hand);
-		draw_overlay_part(data->cubed->hand, data->texture->hand,
-			0, 0);
+		draw_overlay_part(data->cubed->hand, data->texture->hand, 0, 0);
 	}
 }
 
@@ -59,3 +56,4 @@ void	ft_light_hook(struct mlx_key_data key, void *param)
 	draw_overlay_part(data->cubed->hand, data->texture->flashlight,
 		0, 0);
 }
+

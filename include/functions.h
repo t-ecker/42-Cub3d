@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 01:10:20 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/25 02:40:19 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, in
 int				ft_minimap(t_data *data);
 void			redraw(void *param);
 
+//ANIMATIONS
+void			gunshot_anim(t_data *data);
+
 //CONTROLS
 void			ft_window_hook(struct mlx_key_data key, void *param);
 void			ft_movement_hook(void *param);
 void			ft_camera_hook(void *param);
+void			center_mouse(void *param);
+void			ft_cursor_camera_hook(void *param);
 void			ft_shoot_hook(struct mlx_key_data key, void *param);
 void			ft_light_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);

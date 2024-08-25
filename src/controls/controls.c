@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 04:31:20 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/25 02:40:54 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_cursor_camera_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, center_mouse, data);
 }

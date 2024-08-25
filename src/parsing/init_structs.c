@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 04:27:41 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/25 02:12:55 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ t_cubed	*init_cubed(t_input *input, char *filename)
 	if (!cubed)
 		return (NULL);
 	cubed->title = ft_strjoin("cub3d - ", filename);
+	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	cubed->mlx = mlx_init(WIDTH, HEIGHT, cubed->title, 1);
+	mlx_set_cursor_mode(cubed->mlx, MLX_MOUSE_DISABLED);
 	if (!cubed->mlx)
 		return (ft_putendl_fd("Window initialization fail.", 2),
 			free_input(input), NULL);
