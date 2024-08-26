@@ -6,24 +6,22 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/25 02:41:37 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/26 22:07:18 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void get_angle(double *angle, int cursorx)
+double	get_angle(int cursorx)
 {
-	if (cursorx > WIDTH / 2 + 100)
-		*angle = 6 * (M_PI / 180);
-	else if (cursorx < WIDTH / 2 - 100)
-		*angle = 6 * (M_PI / 180);
-	else if (cursorx > WIDTH / 2 + 50)
-		*angle = 5 * (M_PI / 180);
-	else if (cursorx < WIDTH / 2 - 50)
-		*angle = 5 * (M_PI / 180);
-	else
-		*angle = 4 * (M_PI / 180);
+	double	sensitivity;
+	int		screen_center_x;
+	double	angle;
+
+	screen_center_x = WIDTH / 2;
+	sensitivity = 0.0020;
+	angle = (cursorx - screen_center_x) * sensitivity;
+	return (angle);
 }
 
 void	center_mouse(void *param)
@@ -38,22 +36,21 @@ void	center_mouse(void *param)
 	mlx_set_mouse_pos(data->cubed->mlx, screen_center_x, screen_center_y);
 }
 
-void ft_cursor_camera_hook(void *param)
+void	ft_cursor_camera_hook(void *param)
 {
-	int cursorx, cursory;
-	int screen_center_x = WIDTH / 2;
-	// int screen_center_y = HEIGHT / 2;
-	double sensitivity = 0.0005;  // Adjust this to control rotation speed
-	double angle;
-	double oldDirX;
-	double oldDirY;
-	t_data *data;
+	int		cursorx;
+	int		cursory;
+	double	old_dir_x;
+	double	old_dir_y;
+	t_data	*data;
 
 	data = param;
 	mlx_get_mouse_pos(data->cubed->mlx, &cursorx, &cursory);
-	angle = (cursorx - screen_center_x) * sensitivity;
-	oldDirX = data->dirX;
-	oldDirY = data->dirY;
-	data->dirX = cos(angle) * oldDirX - sin(angle) * oldDirY;
-	data->dirY = sin(angle) * oldDirX + cos(angle) * oldDirY;
+	old_dir_x = data->dirX;
+	old_dir_y = data->dirY;
+	data->dirX = cos(get_angle(cursorx)) * old_dir_x
+		- sin(get_angle(cursorx)) * old_dir_y;
+	data->dirY = sin(get_angle(cursorx)) * old_dir_x
+		+ cos(get_angle(cursorx)) * old_dir_y;
+	center_mouse(param);
 }
