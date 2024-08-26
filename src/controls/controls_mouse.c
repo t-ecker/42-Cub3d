@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/26 22:07:18 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/26 22:19:54 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,30 @@ void	ft_cursor_camera_hook(void *param)
 	data->dirY = sin(get_angle(cursorx)) * old_dir_x
 		+ cos(get_angle(cursorx)) * old_dir_y;
 	center_mouse(param);
+}
+
+void	ft_mouse_shoot_hook(mouse_key_t button, action_t action,
+	modifier_key_t mods, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (data->weapon == 2)
+	{
+		if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+		{
+			clear_image(data->cubed->hand);
+			draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
+		}
+		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_REPEAT)
+		{
+			clear_image(data->cubed->hand);
+			draw_overlay_part(data->cubed->hand, data->texture->recoil, 0, 0);
+		}
+		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE && !mods)
+		{
+			clear_image(data->cubed->hand);
+			draw_overlay_part(data->cubed->hand, data->texture->hand, 0, 0);
+		}
+	}
 }
