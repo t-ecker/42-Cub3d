@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 19:47:29 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:06:50 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,26 @@ t_texture *init_texture(t_input *input)
 	texture->victory = mlx_load_png("./assets/victory.png");
 	texture->death = mlx_load_png("./assets/death.png");
 	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
+	texture->monster = mlx_load_png("./textures/monster.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
+}
+
+void	init_sprites(t_data *data)
+{
+	// int i;
+
+	// i = 0;
+	// while (i < data->sprite_count)
+	data->sprites[0].status = 'A';
+
+	data->sprites[0].x = 2.5;
+	data->sprites[0].y = 2.5;
+	data->sprites[0].tex = data->texture->monster;
+
+	// data->sprites[1].x = 2.5;
+	// data->sprites[1].y = 2.5;
 }
 
 t_data	*init_data(t_input *input, t_cubed *cubed)
@@ -95,8 +112,10 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->fov = 90;
 	data->weapon = 1;
 	data->toggle_light = 0;
+	data->sprite_count = 1;
 	setDir(data, input);
 	data->facing = malloc(sizeof(char) * WIDTH);
+	data->sprites = malloc(sizeof(t_sprite) * data->sprite_count);
 	data->hit = malloc(sizeof(t_hit *) * WIDTH);
 	data->hit_count = malloc(sizeof(int) * WIDTH);
 	int x = 0;
@@ -118,6 +137,8 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 		data->hit_count[x] = 0;
 		x++;
 	}
-	
+	init_sprites(data);
 	return (data);
 }
+
+

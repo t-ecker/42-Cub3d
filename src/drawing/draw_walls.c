@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 12:55:54 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:31:24 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	redraw(void *param)
 	castRays(data);
 	clear_image(data->cubed->walls);
   	clear_image(data->cubed->info);
-	draw_walls(data->cubed, data);
+	draw(data);
 }
 
 void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
@@ -73,16 +73,54 @@ int is_pixel_transp(mlx_image_t* image, int x, int y)
     return (0);
 }
 
-void	draw_walls(t_cubed *cubed, t_data *data)
+void draw_sprites(t_data *data, int x, int hit_c)
 {
-	int x;
+	(void)data;
+	(void)x;
+	(void)hit_c;
+    //coming
+}
+
+void	draw_walls(t_data *data, int x, int hit_c)
+{
 	int height;
 	int startY;
 	int endY;
+	int color;
+
+	height = HEIGHT / data->hit[x][hit_c].distance;
+			
+	startY = -height / 2 + HEIGHT / 2;
+	if (startY < 0)
+		startY = 0;
+	endY = height / 2 + HEIGHT / 2;
+	if (endY >= HEIGHT)
+		endY = HEIGHT - 1;
+		
+	data->texture->step = 1.0 * data->hit[x][hit_c].tex->height / height;
+	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+	while(startY < endY)
+	{
+		data->texture->texY = (int)data->texture->tex_pos % data->hit[x][hit_c].tex->height;
+		data->texture->tex_pos += data->texture->step;
+		if (is_pixel_transp(data->cubed->walls, x, startY))
+		{
+			color = get_texture_color(data->hit[x][hit_c].tex, data->hit[x][hit_c].texX, data->texture->texY);
+			// if (data->hit[x][hit_c].distance > 3.5)
+			// 	color = 0x000000FF;
+			if (color != 0x00000000)
+				my_put_pixel(data->cubed->walls, x, startY, color);	
+		}
+		startY++;
+	}
+}
+
+void	draw(t_data *data)
+{
+	int x;
 	int hit_c;
 
 	x = 0;
-	height = 0;
 	while (x < WIDTH)
 	{
 		hit_c = 0;
@@ -90,30 +128,11 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 		{
 			if (data->hit[x][hit_c].distance > 0)
 			{
-				height = HEIGHT / data->hit[x][hit_c].distance;
-				startY = -height / 2 + HEIGHT / 2;
-				if (startY < 0)
-					startY = 0;
-				endY = height / 2 + HEIGHT / 2;
-				if (endY >= HEIGHT)
-					endY = HEIGHT - 1;
-					
-				mlx_texture_t *texture = data->hit[x][hit_c].tex;
-				data->texture->step = 1.0 * texture->height / height;
-				data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+				if (data->hit[x][hit_c].type == 'S')
+					draw_sprites(data, x, hit_c);
+				else
+					draw_walls(data, x, hit_c);
 				
-				while(startY < endY)
-				{
-					if (is_pixel_transp(data->cubed->walls, x, startY))
-					{
-						data->texture->texY = (int)data->texture->tex_pos % texture->height;
-						data->texture->tex_pos += data->texture->step;
-						int color = get_texture_color(texture, data->hit[x][hit_c].texX, data->texture->texY);
-						if (color != 0x00000000)
-							my_put_pixel(cubed->walls, x, startY, color);	
-					}
-					startY++;
-				}
 			}
 			hit_c++;
 		}
@@ -125,6 +144,15 @@ void	draw_walls(t_cubed *cubed, t_data *data)
 				draw_info(data, 'D');
 			if (data->facing[x] == 'K' && data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
 				draw_info(data, 'K');
+			// printf("%c\n", data->facing[x]);
+			// printf("hc :%i\n", data->hit_count[x]);
+			// printf("dist W: %f\n", data->hit[x][data->hit_count[x]].distance);
+			// printf("dist D: %f\n", data->hit[x][0].distance);
+			// printf("type :%c\n", data->hit[x][0].type);
+			// printf("type :%c\n", data->hit[x][0].type);
+			// printf("x N:%i\n", data->hit[x][0].texX);
+			// printf("x W:%i\n", data->hit[x][data->hit_count[x]].texX);		
+			// printf("type W:%c\n", data->hit[x][data->hit_count[x]].type);
 		}
 		x++;
 	}

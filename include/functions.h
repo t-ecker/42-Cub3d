@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 12:45:03 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:31:11 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ unsigned int	parse_color(char *colors);
 //DRAWING
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 void			ceiling_floor(t_cubed *cubed, t_input *input);
-void			draw_walls(t_cubed *cubed, t_data *data);
+void			draw(t_data *data);
 void			draw_overlay(t_data *data);
 void			draw_hand(t_data *data);
 void			ft_dark_img(mlx_image_t *img);

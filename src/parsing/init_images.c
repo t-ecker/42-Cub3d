@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 13:50:33 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:31:44 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	ceiling_floor(cubed, input);
 	if (!init_walls_img(cubed, input, data))
 		return (0);
-	draw_walls(cubed, data);
+	draw(data);
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
 	draw_overlay(data);
