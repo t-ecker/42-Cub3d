@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/26 21:31:44 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:52:06 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	ft_hook(data);
 	if (!init_bg_img(cubed, input, data))
 		return (0);
-	ceiling_floor(cubed, input);
+	draw_bg(data, input);
 	if (!init_walls_img(cubed, input, data))
 		return (0);
 	draw(data);

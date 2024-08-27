@@ -3,8 +3,8 @@ SO ./textures/backroom_h1.png
 WE ./textures/backroom_v2.png
 EA ./textures/backroom_h2.png
 
-C 000,000,000
-F 105,105,105
+C 137, 207, 240
+F 137, 207, 240
 
 1111111111
 10010000011111

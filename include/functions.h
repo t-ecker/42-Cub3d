@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/26 21:31:11 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:51:01 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int				init_bg_img(t_cubed *cubed, t_input *input, t_data *data);
 unsigned int	parse_color(char *colors);
 
 //DRAWING
+int				add_fog(int color, int fog, double fog_factor, double distance);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
-void			ceiling_floor(t_cubed *cubed, t_input *input);
 void			draw(t_data *data);
 void			draw_overlay(t_data *data);
 void			draw_hand(t_data *data);
@@ -45,7 +45,7 @@ void			ft_dark_img(mlx_image_t *img);
 void			setPlane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			draw_info(t_data *data, char flag);
-void			draw_bg(mlx_image_t *img, int color);
+void			draw_bg(t_data *data, t_input *input);
 void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y);
 void			redraw(void *param);
 

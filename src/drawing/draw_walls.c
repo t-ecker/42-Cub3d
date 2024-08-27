@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 19:04:18 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:55:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ int is_pixel_transp(mlx_image_t* image, int x, int y)
     return (0);
 }
 
-int	add_fog(double distance, int color, int fog)
+int	add_fog(int color, int fog, double fog_factor, double distance)
 {
 	t_color after;
-	double fog_factor;
 	
 	if (fog == 2)
 		return (color);
-	fog_factor = (distance - 1) / (3.5 - 1);
+	if (fog_factor == INT_MAX)
+		fog_factor = (distance - 1) / (3.5 - 1);
     if (fog_factor < 0) fog_factor = 0;
     if (fog_factor > 1) fog_factor = 1;
 
@@ -130,7 +130,7 @@ void draw_sprites(t_data *data, int x, int hit_c)
 			{
 				int color = get_texture_color(data->sprites[data->hit[x][hit_c].sprite_t].tex, texX, data->texture->texY);
 				if (color != 0x00000000)
-					my_put_pixel(data->cubed->walls, x, startY, add_fog(transformY, color, data->weapon));
+					my_put_pixel(data->cubed->walls, x, startY, add_fog(color, data->weapon, INT_MAX, transformY));
 			}
 		}
 		startY++;
@@ -165,7 +165,7 @@ void	draw_walls(t_data *data, int x, int hit_c)
 		{
 			color = get_texture_color(data->hit[x][hit_c].tex, data->hit[x][hit_c].texX, data->texture->texY);
 			if (color != 0x00000000)
-				my_put_pixel(data->cubed->walls, x, startY, add_fog(data->hit[x][hit_c].distance, color, data->weapon));	
+				my_put_pixel(data->cubed->walls, x, startY, add_fog(color, data->weapon, INT_MAX, data->hit[x][hit_c].distance));	
 		}
 		startY++;
 	}

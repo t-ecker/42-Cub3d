@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 14:57:35 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:53:55 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	{
 		data->weapon = 1;
 		ft_dark_img(data->cubed->light);
+		clear_image(data->cubed->bg);
+		draw_bg(data, data->input);
 		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
 		draw_hand(data);
 	}
@@ -128,6 +130,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	{
 		data->weapon = 2;
 		clear_image(data->cubed->light);
+		clear_image(data->cubed->bg);
+		draw_bg(data, data->input);
 		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
 		draw_hand(data);
 	}
