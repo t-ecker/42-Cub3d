@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_dist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 13:53:07 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:31:01 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,15 @@ void castRays(t_data *data)
                 data->hit[x][hit_c].tex = data->texture->s;
             data->hit[x][hit_c].type = 'W';
         }
-        if (ray.rayDirX == data->dirX && ray.rayDirY == data->dirY)
+        int i = 0;
+        if (x == WIDTH / 2)
+        {
             data->facing[x] = data->hit[x][0].type;
+            while (data->hit[x][i].type == 'K')
+                i++;
+            if (data->hit[x][i].type == 'S')
+                data->facing[x] = 'S';
+        }
 
         get_texX(data, ray, x, hit_c);
         data->hit_count[x] = hit_c;
