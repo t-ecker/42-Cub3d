@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/28 13:32:13 by dolifero         ###   ########.fr       */
@@ -121,6 +121,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	{
 		data->weapon = 1;
 		ft_dark_img(data->cubed->light);
+		clear_image(data->cubed->bg);
+		draw_bg(data, data->input);
 		clear_image(data->cubed->hand);
 		draw_overlay_part(data->cubed->hand, data->texture->hand,
 			0, 0);
@@ -129,6 +131,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	{
 		data->weapon = 2;
 		clear_image(data->cubed->light);
+		clear_image(data->cubed->bg);
+		draw_bg(data, data->input);
 		clear_image(data->cubed->hand);
 		draw_overlay_part(data->cubed->hand, data->texture->hand,
 			0, 0);

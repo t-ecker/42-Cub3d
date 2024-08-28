@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 00:42:55 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:52:06 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init_overlay_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
+  draw_overlay(data);
 	return (1);
 }
 
@@ -53,7 +54,7 @@ int	init_info_img(t_cubed *cubed, t_input *input, t_data *data)
 
 int	init_walls_img(t_cubed *cubed, t_input *input, t_data *data)
 {
-	// cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
+	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	if (!cubed->walls
 		|| (mlx_image_to_window(cubed->mlx, cubed->walls, 0, 0) < 0))
 	{
@@ -61,12 +62,13 @@ int	init_walls_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
+  draw(data);
 	return (1);
 }
 
 int	init_bg_img(t_cubed *cubed, t_input *input, t_data *data)
 {
-	// cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
+	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	if (!cubed->bg
 		|| (mlx_image_to_window(cubed->mlx, cubed->bg, 0, 0) < 0))
 	{
@@ -74,25 +76,21 @@ int	init_bg_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
+  draw_bg(data, input);
 	return (1);
 }
 
 int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
-	cubed->bg = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
-	cubed->walls = mlx_new_image(cubed->mlx, WIDTH, HEIGHT);
 	setPlane(data);
 	castRays(data);
 	ft_hook(data);
 	if (!init_bg_img(cubed, input, data))
 		return (0);
-	ceiling_floor(cubed, input);
 	if (!init_walls_img(cubed, input, data))
 		return (0);
-	draw_walls(cubed, data);
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
-	draw_overlay(data);
 	if (!ft_minimap(data))
 		return (0);
 	if (!init_info_img(cubed, input, data))

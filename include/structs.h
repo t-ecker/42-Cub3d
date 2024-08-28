@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/22 04:19:02 by dolifero         ###   ########.fr       */
@@ -63,6 +63,23 @@ typedef struct s_cubed
 	char		*title;
 }				t_cubed;
 
+typedef struct s_sprite
+{
+	double x;
+	double y;
+	char status;
+	mlx_texture_t *tex;
+}	t_sprite;
+
+typedef struct s_hit
+{
+    double distance;
+    char type;
+	int texX;
+	mlx_texture_t *tex;
+	int sprite_t;
+} t_hit;
+
 typedef struct s_color
 {
 	int r;
@@ -92,6 +109,7 @@ typedef struct s_texture
 	mlx_texture_t	*dark;
 	mlx_texture_t	*victory;
 	mlx_texture_t	*death;
+	mlx_texture_t	*monster;
 	mlx_texture_t	*pos;
 	double step;
 	double tex_pos;
@@ -109,17 +127,16 @@ typedef struct s_data
 	double dirX;
 	double dirY;
 	char **Map;
-	double *wallDistances;
-	double *cdoor;
-	int *texX;
-	char *hit_side;
-	char *ttu;
+	int *hit_count;
+	int sprite_count;
 	char *facing;
 	int	weapon;
 	int	toggle_light;
 	t_cubed *cubed;
 	t_input *input;
 	t_texture *texture;
+	t_hit **hit;
+	t_sprite *sprites;
 }	t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 15:01:11 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:52:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,26 @@ void	free_cubed(t_cubed *cubed)
 	free(cubed);
 }
 
+void	free_hits(t_data *data)
+{
+	int x;
+	
+	x = 0;
+	while (x < WIDTH)
+	{
+		free(data->hit[x]);
+		x++;
+	}
+	free(data->hit);
+	free(data->hit_count);
+}
+
 void	free_data(t_data *data)
 {
-	free(data->wallDistances);
-	free(data->hit_side);
+	free(data->sprites);
 	free(data->texture);
 	free(data->facing);
-	free(data->cdoor);
-	free(data->texX);
-	free(data->ttu);
+	free_hits(data);
 	free(data);
 }
 
@@ -74,6 +85,16 @@ void	delete_textures(t_data *data)
 	mlx_delete_texture(data->texture->infoF);
 	mlx_delete_texture(data->texture->infoD);
 	mlx_delete_texture(data->texture->infoDC);
+	mlx_delete_texture(data->texture->victory);
+	mlx_delete_texture(data->texture->shoot);
+	mlx_delete_texture(data->texture->hand);
+	mlx_delete_texture(data->texture->light);
+	mlx_delete_texture(data->texture->dark);
+	mlx_delete_texture(data->texture->victory);
+	mlx_delete_texture(data->texture->death);
+	mlx_delete_texture(data->texture->recoil);
+	mlx_delete_texture(data->texture->flashlight);
+	mlx_delete_texture(data->texture->monster);
 }
 
 void	free_all(t_data *data, t_cubed *cubed, t_input *input)

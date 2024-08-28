@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/25 02:12:55 by dolifero         ###   ########.fr       */
@@ -76,10 +76,27 @@ t_texture *init_texture(t_input *input)
 	texture->victory = mlx_load_png("./assets/victory.png");
 	texture->death = mlx_load_png("./assets/death.png");
 	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
+	texture->monster = mlx_load_png("./textures/monster.png");
 	texture->pos = mlx_load_png("./assets/player_dot.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
 	return (texture);
+}
+
+void	init_sprites(t_data *data)
+{
+	// int i;
+
+	// i = 0;
+	// while (i < data->sprite_count)
+	data->sprites[0].status = 'A';
+
+	data->sprites[0].x = 2.5;
+	data->sprites[0].y = 2.5;
+	data->sprites[0].tex = data->texture->monster;
+
+	// data->sprites[1].x = 2.5;
+	// data->sprites[1].y = 2.5;
 }
 
 t_data	*init_data(t_input *input, t_cubed *cubed)
@@ -98,42 +115,33 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->fov = 90;
 	data->weapon = 1;
 	data->toggle_light = 0;
+	data->sprite_count = 1;
 	setDir(data, input);
-	data->wallDistances = malloc(sizeof(double) * WIDTH);
-	if (!data->wallDistances || !data->texture)
-	{
-		free(data->texture);
-		free(data);
-		return (NULL);
-	}
-	data->hit_side = malloc(sizeof(char) * WIDTH);
-	if (!data->hit_side)
-	{
-		free(data->texture);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
-	}
 	data->facing = malloc(sizeof(char) * WIDTH);
-	if (!data->facing)
+	data->sprites = malloc(sizeof(t_sprite) * data->sprite_count);
+	data->hit = malloc(sizeof(t_hit *) * WIDTH);
+	data->hit_count = malloc(sizeof(int) * WIDTH);
+	int x = 0;
+	while (x < WIDTH)
 	{
-		free(data->hit_side);
-		free(data->texture);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
+		data->hit[x] = malloc(sizeof(t_hit) * 10);
+		if (!data->hit[x])
+        {
+            int j = 0;
+            while (j < x)
+            {
+                free(data->hit[j]);
+                j++;
+            }
+            free(data->hit);
+            free(data->hit_count);
+            return (NULL);
+        }
+		data->hit_count[x] = 0;
+		x++;
 	}
-	data->cdoor = malloc(sizeof(double) * WIDTH);
-	data->ttu = malloc(sizeof(char) * WIDTH);
-	data->texX = malloc(sizeof(int) * WIDTH);
-	if (!data->texX)
-	{
-		free(data->facing);
-		free(data->texture);
-		free(data->hit_side);
-		free(data->wallDistances);
-		free(data);
-		return (NULL);
-	}
+	init_sprites(data);
 	return (data);
 }
+
+

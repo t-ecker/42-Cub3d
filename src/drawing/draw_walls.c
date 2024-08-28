@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 10:11:49 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:55:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+void	print_mapp(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->Map[i])
+	{
+		printf("%s\n", data->Map[i]);
+		i++;
+	}
+	printf("\n");
+}
 
 void	redraw(void *param)
 {
@@ -20,8 +33,8 @@ void	redraw(void *param)
 	setPlane(data);
 	castRays(data);
 	clear_image(data->cubed->walls);
-  clear_image(data->cubed->info);
-	draw_walls(data->cubed, data);
+  	clear_image(data->cubed->info);
+	draw(data);
 }
 
 void	my_put_pixel(mlx_image_t *img, int x, int y, int color)
@@ -46,103 +59,156 @@ int get_texture_color(mlx_texture_t *texture, int x, int y)
     return (color.final);
 }
 
-
-mlx_texture_t *get_texture(t_data *data, int x)
+int is_pixel_transp(mlx_image_t* image, int x, int y)
 {
-	mlx_texture_t *texture;
+	uint8_t* pixel;
+	uint8_t alpha;
 
-	if (data->ttu[x] != '0')
-	{
-		if (data->ttu[x] == 'K')
-			texture = data->texture->DO;
-		if (data->ttu[x] == 'F')
-			texture = data->texture->F;
-		if (data->ttu[x] == 'D')
-			texture = data->texture->D;
-		return (texture);
-	}
-    if (data->hit_side[x] == 'n')
-		texture = data->texture->n;
-    if (data->hit_side[x] == 's')
-		texture = data->texture->s;
-    if (data->hit_side[x] == 'w')
-		texture = data->texture->w;
-    if (data->hit_side[x] == 'e')
-		texture = data->texture->e;
-    return (texture);
+    if (x < 0 || x >= (int)image->width || y < 0 || y >= (int)image->height)
+        return (0);
+    pixel = &image->pixels[(y * image->width + x) * 4];
+    alpha = pixel[3];
+    if (alpha == 0)
+        return (1);
+    return (0);
 }
 
-void	draw_over(t_data *data, int x)
+int	add_fog(int color, int fog, double fog_factor, double distance)
 {
-	int height;
-	int startY;
-	int endY;
-
-	if (data->wallDistances[x] == 0.0)
-		return ;
-	height = HEIGHT / data->wallDistances[x];
-	startY = -height / 2 + HEIGHT / 2;
-	endY = height / 2 + HEIGHT / 2;
-	if (startY < 0)
-		startY = 0;
-	if (endY >= HEIGHT)
-		endY = HEIGHT - 1;
-	mlx_texture_t *texture = get_texture(data, x);
-	data->texture->step = 1.0 * texture->height / height;
-	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+	t_color after;
 	
-	while(startY < endY)
+	if (fog == 2)
+		return (color);
+	if (fog_factor == INT_MAX)
+		fog_factor = (distance - 1) / (3.5 - 1);
+    if (fog_factor < 0) fog_factor = 0;
+    if (fog_factor > 1) fog_factor = 1;
+
+	after.a = color & 0xFF;
+	after.r = (int)((1.0 - fog_factor) * ((color >> 24) & 0xFF));
+	after.g = (int)((1.0 - fog_factor) * ((color >> 16) & 0xFF));
+	after.b = (int)((1.0 - fog_factor) * ((color >> 8) & 0xFF));
+
+	return (after.r << 24) | (after.g << 16) | (after.b << 8) | after.a;
+}
+
+void draw_sprites(t_data *data, int x, int hit_c)
+{
+    double spriteX = data->sprites[data->hit[x][hit_c].sprite_t].x - data->posX;
+    double spriteY = data->sprites[data->hit[x][hit_c].sprite_t].y - data->posY;
+
+    double invDet = 1.0 / (data->planeX * data->dirY - data->dirX * data->planeY);
+
+    double transformX = invDet * (data->dirY * spriteX - data->dirX * spriteY);
+    double transformY = invDet * (-data->planeY * spriteX + data->planeX * spriteY);
+
+    int spriteScreenX = (int)((WIDTH / 2) * (1 + transformX / transformY));
+
+    int height = abs((int)(HEIGHT / transformY));
+    int spriteWidth = abs((int)(HEIGHT / transformY));
+
+    int startY = -height / 2 + HEIGHT / 2;
+    if (startY < 0)
+		startY = 0;
+    int endY = height / 2 + HEIGHT / 2;
+    if (endY >= HEIGHT)
+		endY = HEIGHT - 1;
+
+	int texX = (int)((x - (-spriteWidth / 2 + spriteScreenX)) * data->sprites[data->hit[x][hit_c].sprite_t].tex->width / spriteWidth);
+
+	data->texture->step = 1.0 * data->sprites[data->hit[x][hit_c].sprite_t].tex->height / height;
+	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+
+	while (startY < endY)
 	{
-		data->texture->texY = (int)data->texture->tex_pos % texture->height;
+		data->texture->texY = (int)data->texture->tex_pos % data->sprites[data->hit[x][hit_c].sprite_t].tex->height;
 		data->texture->tex_pos += data->texture->step;
 
-		int color = get_texture_color(texture, data->texX[x], data->texture->texY);
-		if (color != 0x00000000)
-			my_put_pixel(data->cubed->walls, x, startY, color);
+		if (transformY > 0 && transformY < data->hit[x][data->hit_count[x]].distance)
+		{
+			if (is_pixel_transp(data->cubed->walls, x, startY))
+			{
+				int color = get_texture_color(data->sprites[data->hit[x][hit_c].sprite_t].tex, texX, data->texture->texY);
+				if (color != 0x00000000)
+					my_put_pixel(data->cubed->walls, x, startY, add_fog(color, data->weapon, INT_MAX, transformY));
+			}
+		}
 		startY++;
 	}
 }
 
-void	draw_walls(t_cubed *cubed, t_data *data)
+
+
+void	draw_walls(t_data *data, int x, int hit_c)
 {
-	int x;
 	int height;
 	int startY;
 	int endY;
+	int color;
+
+	height = HEIGHT / data->hit[x][hit_c].distance;
+			
+	startY = -height / 2 + HEIGHT / 2;
+	if (startY < 0)
+		startY = 0;
+	endY = height / 2 + HEIGHT / 2;
+	if (endY >= HEIGHT)
+		endY = HEIGHT - 1;
+		
+	data->texture->step = 1.0 * data->hit[x][hit_c].tex->height / height;
+	data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+	while(startY < endY)
+	{
+		data->texture->texY = (int)data->texture->tex_pos % data->hit[x][hit_c].tex->height;
+		data->texture->tex_pos += data->texture->step;
+		if (is_pixel_transp(data->cubed->walls, x, startY))
+		{
+			color = get_texture_color(data->hit[x][hit_c].tex, data->hit[x][hit_c].texX, data->texture->texY);
+			if (color != 0x00000000)
+				my_put_pixel(data->cubed->walls, x, startY, add_fog(color, data->weapon, INT_MAX, data->hit[x][hit_c].distance));	
+		}
+		startY++;
+	}
+}
+
+void	draw(t_data *data)
+{
+	int x;
+	int hit_c;
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		height = HEIGHT / data->wallDistances[x];
-		startY = -height / 2 + HEIGHT / 2;
-		if (startY < 0)
-			startY = 0;
-		endY = height / 2 + HEIGHT / 2;
-		if (endY >= HEIGHT)
-			endY = HEIGHT - 1;
-		mlx_texture_t *texture = get_texture(data, x);
-        data->texture->step = 1.0 * texture->height / height;
-        data->texture->tex_pos = (startY - HEIGHT / 2 + height / 2) * data->texture->step;
+		hit_c = 0;
+		while (hit_c <= data->hit_count[x])
+		{
+			if (data->hit[x][hit_c].distance > 0)
+			{
+				if (data->hit[x][hit_c].type == 'S')
+					draw_sprites(data, x, hit_c);
+				else
+					draw_walls(data, x, hit_c);
+				
+			}
+			hit_c++;
+		}
 		if (x == WIDTH / 2)
 		{
-			if (data->facing[x] == 'F' && data->wallDistances[x] < 1.2)
-				draw_info(data, 0);
-			if ((data->facing[x] == 'D' && data->cdoor[x] < 1.0))
-				draw_info(data, 1);
-			if (data->facing[x] == 'K' && data->cdoor[x] < 1.0)
-				draw_info(data, 2);
-		}
-		while(startY < endY)
-		{
-			data->texture->texY = (int)data->texture->tex_pos % texture->height;
-			data->texture->tex_pos += data->texture->step;
-        	my_put_pixel(cubed->walls, x, startY, get_texture_color(texture, data->texX[x], data->texture->texY));
-			startY++;
-		}
-		if (data->cdoor[x] > 0.0)
-		{
-			cast_one_ray(data, "KD", x);
-			draw_over(data, x);
+			if (data->facing[x] == 'F' && data->hit[x][0].type == 'F' && data->hit[x][0].distance < 1.2)
+				draw_info(data, 'F');
+			if ((data->facing[x] == 'D' && data->hit[x][0].type == 'D' && data->hit[x][0].distance < 1.2))
+				draw_info(data, 'D');
+			if (data->facing[x] == 'K' && data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
+				draw_info(data, 'K');
+			// printf("%c\n", data->facing[x]);
+			// printf("hc :%i\n", data->hit_count[x]);
+			// printf("dist W: %f\n", data->hit[x][data->hit_count[x]].distance);
+			// printf("dist D: %f\n", data->hit[x][0].distance);
+			// printf("type :%c\n", data->hit[x][0].type);
+			// printf("type :%c\n", data->hit[x][0].type);
+			// printf("x N:%i\n", data->hit[x][0].texX);
+			// printf("x W:%i\n", data->hit[x][data->hit_count[x]].texX);		
+			// printf("type W:%c\n", data->hit[x][data->hit_count[x]].type);
 		}
 		x++;
 	}
