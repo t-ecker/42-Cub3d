@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 04:19:02 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:07:40 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_texture
 	mlx_texture_t	*victory;
 	mlx_texture_t	*death;
 	mlx_texture_t	*monster;
+	mlx_texture_t	*monster_s;
 	mlx_texture_t	*pos;
 	double step;
 	double tex_pos;

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/26 21:33:33 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:53:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,10 @@ void castRays(t_data *data)
                     newY = 0;
                 if (newX < 0)
                     newX = 0;
-                if (newY >= 10)
-                    newY = 10 - 1;
-                if (newX >= 14)
-                    newX = 14 - 1;
+                if (newY >= data->input->map_height)
+                    newY = data->input->map_height - 1;
+                if (newX >= data->input->map_width)
+                    newX = data->input->map_width - 1;
                 
                 if (ft_strchr("KD", data->Map[(int)newY][(int)newX]))
                 {
