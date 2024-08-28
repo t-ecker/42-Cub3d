@@ -27,6 +27,9 @@ void	print_input(t_input *input)
 	printf("Player posX: %f\n", input->pos_x);
 	printf("View direction: %c\n", input->view_dir);
 	printf("\n");
+	printf("Map height: %d\n", input->map_height);
+	printf("Map width: %d\n", input->map_width);
+	printf("\n");
 }
 
 void	print_map(t_input *input)

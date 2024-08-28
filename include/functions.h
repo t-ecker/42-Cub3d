@@ -47,13 +47,20 @@ int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			draw_info(t_data *data, char flag);
 void			draw_bg(t_data *data, t_input *input);
 void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y);
+int				ft_minimap(t_data *data);
 void			redraw(void *param);
+
+//ANIMATIONS
+void			gunshot_anim(t_data *data);
 
 //CONTROLS
 void			ft_window_hook(struct mlx_key_data key, void *param);
 void			ft_movement_hook(void *param);
 void			ft_camera_hook(void *param);
+void			ft_cursor_camera_hook(void *param);
 void			ft_shoot_hook(struct mlx_key_data key, void *param);
+void			ft_mouse_shoot_hook(mouse_key_t button, action_t action,
+					modifier_key_t mods, void *param);
 void			ft_light_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);
 void			collision(t_data *data, double newX, double newY);
@@ -76,11 +83,9 @@ void			pad_strings(char **arr);
 void			print_input(t_input *input);
 void			print_map(t_input *input);
 void			print_dist(t_data *data);
-void			print_mapp(t_data *data);
 
 //wallDist
 void			castRays(t_data *data);
 void			cast_one_ray(t_data *data, char *str, int x);
-
 
 #endif

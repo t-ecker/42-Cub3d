@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 19:53:55 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:32:13 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_camera_hook(void *param)
 	double	oldDirX;
 	double	oldDirY;
 
-	angle = 3 * (M_PI / 180);
+	angle = 4 * (M_PI / 180);
 	data = param;
 	oldDirX = data->dirX;
 	oldDirY = data->dirY;
@@ -123,8 +123,9 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 		ft_dark_img(data->cubed->light);
 		clear_image(data->cubed->bg);
 		draw_bg(data, data->input);
-		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
-		draw_hand(data);
+		clear_image(data->cubed->hand);
+		draw_overlay_part(data->cubed->hand, data->texture->hand,
+			0, 0);
 	}
 	else if (key.key == MLX_KEY_2 && key.action == MLX_PRESS)
 	{
@@ -132,8 +133,9 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 		clear_image(data->cubed->light);
 		clear_image(data->cubed->bg);
 		draw_bg(data, data->input);
-		mlx_delete_image(data->cubed->mlx, data->cubed->hand);
-		draw_hand(data);
+		clear_image(data->cubed->hand);
+		draw_overlay_part(data->cubed->hand, data->texture->hand,
+			0, 0);
 	}
 	if (data->weapon == 1)
 		ft_light_hook(key, param);
@@ -145,6 +147,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_cursor_camera_hook, data);
+	mlx_mouse_hook(data->cubed->mlx, ft_mouse_shoot_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   wall_dist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
 /*   Updated: 2024/08/26 21:33:33 by tomecker         ###   ########.fr       */
@@ -14,7 +14,7 @@
 
 void    get_texX(t_data *data, t_ray ray, int x, int hc)
 {
-    
+
 
     if (ray.side == 0)
         data->texture->wall_x = data->posY + data->hit[x][hc].distance * ray.rayDirY;
@@ -26,7 +26,6 @@ void    get_texX(t_data *data, t_ray ray, int x, int hc)
         data->hit[x][hc].texX = data->hit[x][hc].tex->height - data->hit[x][hc].texX - 1;
     if (ray.side == 1 && ray.rayDirY < 0)
         data->hit[x][hc].texX = data->hit[x][hc].tex->height - data->hit[x][hc].texX - 1;
-    
 }
 
 int check_sprites(t_data *data, int x, int hit_c, t_ray ray)
@@ -169,9 +168,9 @@ void castRays(t_data *data)
                 }
             }
             if (ft_strchr("1F", data->Map[ray.mapY][ray.mapX]))
-				hit = 1;
+				        hit = 1;
         }
-        
+
 		if (ray.side == 0)
 			data->hit[x][hit_c].distance = ray.sideDistX - ray.deltaDistX;
 		else

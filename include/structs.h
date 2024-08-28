@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 16:06:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/22 04:19:02 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_input
 {
 	char			**map;
 	int				map_height;
+	int				map_width;
 	char			*wall_n;
 	char			*wall_e;
 	char			*wall_w;
@@ -56,6 +57,8 @@ typedef struct s_cubed
 	mlx_image_t	*info;
 	mlx_image_t	*victory;
 	mlx_image_t	*hand;
+	mlx_image_t	*minimap;
+	mlx_image_t	*pos;
 	mlx_image_t	*light;
 	char		*title;
 }				t_cubed;
@@ -92,7 +95,7 @@ typedef struct s_texture
 	mlx_texture_t *s;
 	mlx_texture_t *w;
 	mlx_texture_t *e;
-  mlx_texture_t *F;
+	mlx_texture_t *F;
 	mlx_texture_t *D;
 	mlx_texture_t *DO;
 	mlx_texture_t *infoF;
@@ -107,6 +110,7 @@ typedef struct s_texture
 	mlx_texture_t	*victory;
 	mlx_texture_t	*death;
 	mlx_texture_t	*monster;
+	mlx_texture_t	*pos;
 	double step;
 	double tex_pos;
 	int texY;

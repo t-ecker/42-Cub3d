@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 15:19:37 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/21 23:46:12 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_parse_map_line(char *line, t_input *input)
 	{
 		input->map = malloc(sizeof(char *) * 2);
 		input->map[0] = ft_strdup(line);
+		input->map_width = ft_strlen(line);
 		input->map[1] = NULL;
 	}
 	else
@@ -56,6 +57,8 @@ void	ft_parse_map_line(char *line, t_input *input)
 		while (input->map[i] != NULL)
 			i++;
 		input->map[i] = ft_strdup(line);
+		if (ft_strlen(line) > input->map_width)
+			input->map_width = ft_strlen(line);
 		input->map[i + 1] = NULL;
 	}
 }
