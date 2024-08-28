@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/26 22:19:54 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:33:23 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_mouse_shoot_hook(mouse_key_t button, action_t action,
 	t_data	*data;
 
 	data = (t_data *)param;
+	(void)mods;
 	if (data->weapon == 2)
 	{
 		if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
@@ -68,12 +69,7 @@ void	ft_mouse_shoot_hook(mouse_key_t button, action_t action,
 			clear_image(data->cubed->hand);
 			draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
 		}
-		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_REPEAT)
-		{
-			clear_image(data->cubed->hand);
-			draw_overlay_part(data->cubed->hand, data->texture->recoil, 0, 0);
-		}
-		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE && !mods)
+		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
 		{
 			clear_image(data->cubed->hand);
 			draw_overlay_part(data->cubed->hand, data->texture->hand, 0, 0);
