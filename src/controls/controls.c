@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 13:59:24 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/28 22:04:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 		&& ((data->facing[WIDTH / 2] == 'D'
 				&& data->Map[(int)(data->posY
 					+ data->dirY)][(int)(data->posX + data->dirX)] == 'D')
-			|| (data->facing[WIDTH / 2] == 'K'
+			|| ((data->facing[WIDTH / 2] == 'K' || data->facing[WIDTH / 2] == 'S')
 				&& data->Map[(int)data->posY][(int)data->posX] != 'K'
 				&& data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
 					+ data->dirX)] == 'K')))

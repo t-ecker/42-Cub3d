@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 21:58:17 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/08/28 22:05:43 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,17 +199,8 @@ void	draw(t_data *data)
 				draw_info(data, 'F');
 			if ((data->facing[x] == 'D' && data->hit[x][0].type == 'D' && data->hit[x][0].distance < 1.2))
 				draw_info(data, 'D');
-			if (data->facing[x] == 'K' && data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
+			if ((data->facing[x] == 'K' || data->facing[x] == 'S') && data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
 				draw_info(data, 'K');
-			// printf("%c\n", data->facing[x]);
-			// printf("hc :%i\n", data->hit_count[x]);
-			// printf("dist W: %f\n", data->hit[x][data->hit_count[x]].distance);
-			// printf("dist D: %f\n", data->hit[x][0].distance);
-			// printf("type :%c\n", data->hit[x][0].type);
-			// printf("type :%c\n", data->hit[x][0].type);
-			// printf("x N:%i\n", data->hit[x][0].texX);
-			// printf("x W:%i\n", data->hit[x][data->hit_count[x]].texX);		
-			// printf("type W:%c\n", data->hit[x][data->hit_count[x]].type);
 		}
 		x++;
 	}
