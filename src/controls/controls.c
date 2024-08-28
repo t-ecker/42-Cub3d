@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 23:36:56 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/08/26 22:22:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_camera_hook(void *param)
 	double	oldDirX;
 	double	oldDirY;
 
-	angle = 3 * (M_PI / 180);
+	angle = 4 * (M_PI / 180);
 	data = param;
 	oldDirX = data->dirX;
 	oldDirY = data->dirY;
@@ -143,6 +143,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_cursor_camera_hook, data);
+	// mlx_mouse_hook(data->cubed->mlx, ft_mouse_shoot_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
 }

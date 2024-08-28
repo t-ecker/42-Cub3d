@@ -138,7 +138,6 @@ int	check_map(char **map, t_input *input)
 	if (!input->view_dir)
 		return (0);
 	pad_strings(map);
-	print_map(input);
 	if (!check_map_horizontal(map))
 		return (0);
 	if (!check_map_vertical(map))
