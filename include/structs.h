@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 17:40:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 00:16:09 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,13 @@ typedef struct s_texture
 	double step;
 	double tex_pos;
 	int texY;
+	int startY;
+	int endY;
+	int texX;
+	double transformX;
+	double transformY;
+	int height;
+	double	invdet;
 	double wall_x;
 }	t_texture;
 

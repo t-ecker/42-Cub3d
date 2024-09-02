@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:28:00 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 01:24:49 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/02 23:42:02 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	setDir(t_data *data, t_input *input)
 	}
 }
 
-void	setPlane(t_data *data)
+void	setplane(t_data *data)
 {
 	double fov;
 

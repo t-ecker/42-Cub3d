@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_overlay.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 01:23:12 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 00:30:17 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y)
+void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture,
+		int dst_x, int dst_y)
 {
 	int	y;
 	int	x;
@@ -23,7 +24,8 @@ void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int 
 		x = 0;
 		while (x < (int)texture->width)
 		{
-			my_put_pixel(img, dst_x + x, dst_y + y, get_texture_color(texture, x, y));
+			my_put_pixel(img, dst_x + x, dst_y + y,
+				get_texture_color(texture, x, y));
 			x++;
 		}
 		y++;
@@ -54,4 +56,17 @@ void	draw_overlay(t_data *data)
 			data->texture->dark);
 	mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);
 	draw_hand(data);
+}
+
+void	draw_info(t_data *data, char flag)
+{
+	if (flag == 'F')
+		draw_overlay_part(data->cubed->info, data->texture->infoF,
+			(WIDTH - data->texture->infoF->width) / 2, 20);
+	else if (flag == 'D')
+		draw_overlay_part(data->cubed->info, data->texture->infoD,
+			(WIDTH - data->texture->infoD->width) / 2, 20);
+	else if (flag == 'K')
+		draw_overlay_part(data->cubed->info, data->texture->infoDC,
+			(WIDTH - data->texture->infoDC->width) / 2, 20);
 }

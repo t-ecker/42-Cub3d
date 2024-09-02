@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 17:48:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 00:26:19 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ void	ft_draw_minimap_cube(int dst_x, int dst_y, unsigned int color,
 	}
 }
 
+void	pick_cubes(t_data *data, int x, int y, char cell)
+{
+	if (cell == '1')
+		ft_draw_minimap_cube(x, y, 0x444444FF, data->cubed->minimap);
+	else if (cell == '0'
+		|| cell == 'W'
+		|| cell == 'S'
+		|| cell == 'N'
+		|| cell == 'E')
+		ft_draw_minimap_cube(x, y, 0x00000000, data->cubed->minimap);
+	else if (cell == 'F')
+		ft_draw_minimap_cube(x, y, 0x00CF12FF, data->cubed->minimap);
+	else if (cell == 'D' || cell == 'K')
+		ft_draw_minimap_cube(x, y, 0xEFEB00FF, data->cubed->minimap);
+}
+
 void	ft_draw_minimap(t_data *data)
 {
 	int	i;
@@ -50,14 +66,7 @@ void	ft_draw_minimap(t_data *data)
 		x = 0;
 		while (j < data->input->map_width)
 		{
-			if (data->Map[i][j] == '1')
-				ft_draw_minimap_cube(x, y, 0x444444FF, data->cubed->minimap);
-			else if (data->Map[i][j] == '0' || data->Map[i][j] == 'W' || data->Map[i][j] == 'S' || data->Map[i][j] == 'N' || data->Map[i][j] == 'E')
-				ft_draw_minimap_cube(x, y, 0x00000000, data->cubed->minimap);
-			else if (data->Map[i][j] == 'F')
-				ft_draw_minimap_cube(x, y, 0x00CF12FF, data->cubed->minimap);
-			else if (data->Map[i][j] == 'D' || data->Map[i][j] == 'K')
-				ft_draw_minimap_cube(x, y, 0xEFEB00FF, data->cubed->minimap);
+			pick_cubes(data, x, y, data->Map[i][j]);
 			x += cube_size;
 			j++;
 		}
@@ -78,7 +87,8 @@ void	minimap_player_pos(void *param)
 		pos_x = data->posX * 10 - 2;
 		pos_y = data->posY * 10 - 2;
 		mlx_delete_image(data->cubed->mlx, data->cubed->pos);
-		data->cubed->pos = mlx_texture_to_image(data->cubed->mlx, data->texture->pos);
+		data->cubed->pos = mlx_texture_to_image(data->cubed->mlx,
+				data->texture->pos);
 		mlx_image_to_window(data->cubed->mlx, data->cubed->pos, 25 + pos_x,
 			HEIGHT - (data->input->map_height * 10) - 25 + pos_y);
 	}
@@ -87,7 +97,6 @@ void	minimap_player_pos(void *param)
 		mlx_delete_image(data->cubed->mlx, data->cubed->pos);
 		data->cubed->pos = NULL;
 	}
-	
 }
 
 int	ft_minimap(t_data *data)

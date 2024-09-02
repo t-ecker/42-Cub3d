@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 19:51:01 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 00:32:34 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,20 @@ void			draw(t_data *data);
 void			draw_overlay(t_data *data);
 void			draw_hand(t_data *data);
 void			ft_dark_img(mlx_image_t *img);
-void			setPlane(t_data *data);
+void			setplane(t_data *data);
 int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			draw_info(t_data *data, char flag);
 void			draw_bg(t_data *data, t_input *input);
-void			draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y);
+void			draw_overlay_part(mlx_image_t *img,
+					mlx_texture_t *texture, int dst_x, int dst_y);
 int				ft_minimap(t_data *data);
 void			redraw(void *param);
+void			draw_sprites(t_data *data, int x, int hit_c);
+int				get_texture_color(mlx_texture_t *texture, int x, int y);
+void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
+int				is_pixel_transp(mlx_image_t *image, int x, int y);
+int				add_fog(int color, int fog, double fog_factor, double distance);
+
 
 //ANIMATIONS
 void			gunshot_anim(t_data *data);
@@ -85,7 +92,14 @@ void			print_map(t_input *input);
 void			print_dist(t_data *data);
 
 //wallDist
-void			castRays(t_data *data);
+void			castrays(t_data *data);
 void			cast_one_ray(t_data *data, char *str, int x);
+int	dda(t_data *data, t_ray *ray, int x, int *hit_c);
+void	initilisation(t_data *data, t_ray *ray, int x, int *hit_c);
+void	get_tex_x(t_data *data, t_ray ray, int x, int hc);
+int	check_sprites(t_data *data, int x, int hit_c, t_ray ray);
+
+
+
 
 #endif

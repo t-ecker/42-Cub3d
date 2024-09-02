@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 19:52:06 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/02 23:42:23 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	init_bg_img(t_cubed *cubed, t_input *input, t_data *data)
 
 int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 {
-	setPlane(data);
-	castRays(data);
+	setplane(data);
+	castrays(data);
 	ft_hook(data);
 	if (!init_bg_img(cubed, input, data))
 		return (0);
