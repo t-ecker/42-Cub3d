@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 18:23:03 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:43:15 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void collision(t_data *data, double newX, double newY)
 	buffer = 0.3;
     if (data->Map[(int)newY][(int)newX] == 'M')
 	{
+        data->end = 1;
         clear_image(data->cubed->hand);
         draw_overlay_part(data->cubed->victory, data->texture->death, 0, 0);
     }
@@ -54,4 +55,5 @@ void collision(t_data *data, double newX, double newY)
         data->posX = newX;
     else if (canmoveY)
         data->posY = newY;
+  	clear_image(data->cubed->info);
 }

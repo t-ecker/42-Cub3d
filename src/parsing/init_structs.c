@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 15:00:27 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:41:44 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_texture *init_texture(t_input *input)
 	texture->victory = mlx_load_png("./assets/victory.png");
 	texture->death = mlx_load_png("./assets/death.png");
 	texture->flashlight = mlx_load_png("./assets/flashlight_1.png");
-	texture->monster = mlx_load_png("./assets/monsters/frogmon_stand.png");
-	texture->monster_s = mlx_load_png("./textures/monster.png");
+	texture->monster = mlx_load_png("./textures/monster.png");
+	texture->monster_s = mlx_load_png("./textures/monster2.png");
 	texture->pos = mlx_load_png("./assets/player_dot.png");
 	if (!texture->n || !texture->s || !texture->w || !texture->e)
 		return (NULL);
@@ -154,6 +154,7 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->posY = input->pos_y;
 	data->fov = 90;
 	data->weapon = 1;
+	data->end = 0;
 	data->toggle_light = 0;
 	data->sprite_count = ft_count_enemies(data, 'M');
 	setDir(data, input);

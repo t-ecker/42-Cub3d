@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 22:04:31 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:06:00 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 	if (key.key == MLX_KEY_F && key.action == MLX_PRESS
 		&& data->facing[WIDTH / 2] == 'F')
 	{
+		data->end = 1;
 		clear_image(data->cubed->hand);
 		draw_overlay_part(data->cubed->victory, data->texture->victory, 0, 0);
 	}
@@ -139,8 +140,8 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	}
 	if (data->weapon == 1)
 		ft_light_hook(key, param);
-	else if (data->weapon == 2)
-		ft_shoot_hook(key, param);
+	// else if (data->weapon == 2)
+	// 	ft_shoot_hook(key, param);
 	ft_gameplay_hook(key, param);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/25 00:47:00 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:48:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,21 @@ void	minimap_player_pos(void *param)
 	int		pos_y;
 
 	data = (t_data *)param;
-	pos_x = data->posX * 10 - 2;
-	pos_y = data->posY * 10 - 2;
-	mlx_delete_image(data->cubed->mlx, data->cubed->pos);
-	data->cubed->pos = mlx_texture_to_image(data->cubed->mlx, data->texture->pos);
-	mlx_image_to_window(data->cubed->mlx, data->cubed->pos, 25 + pos_x,
-		HEIGHT - (data->input->map_height * 10) - 25 + pos_y);
+	if (!data->end)
+	{
+		pos_x = data->posX * 10 - 2;
+		pos_y = data->posY * 10 - 2;
+		mlx_delete_image(data->cubed->mlx, data->cubed->pos);
+		data->cubed->pos = mlx_texture_to_image(data->cubed->mlx, data->texture->pos);
+		mlx_image_to_window(data->cubed->mlx, data->cubed->pos, 25 + pos_x,
+			HEIGHT - (data->input->map_height * 10) - 25 + pos_y);
+	}
+	else if (data->cubed->pos)
+	{
+		mlx_delete_image(data->cubed->mlx, data->cubed->pos);
+		data->cubed->pos = NULL;
+	}
+	
 }
 
 int	ft_minimap(t_data *data)

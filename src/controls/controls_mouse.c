@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 21:57:38 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:23:32 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	ft_mouse_shoot_hook(mouse_key_t button, action_t action,
 			else if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'S')
 			{
 				data->Map[(int)sprite->y][(int)sprite->x] = '0';
-				// sprite->tex = data->texture->;
 				sprite->status = 'D';
 			}
 		}
