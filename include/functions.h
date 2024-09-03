@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:22:43 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:54:15 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void			free_input(t_input *input);
 void			free_hits(t_data *data);
 void			free_data(t_data *data);
 void			free_all(t_data *data, t_cubed *cubed, t_input *input);
+void			delete_img(t_data *data);
+
 
 //UTILS
 void			remove_newline(char *line);

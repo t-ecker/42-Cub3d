@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:21:18 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:56:20 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_texture
 	mlx_texture_t	*death;
 	mlx_texture_t	*monster;
 	mlx_texture_t	*monster_s;
+	mlx_texture_t	*crosshair;
 	mlx_texture_t	*pos;
 	double			step;
 	double			tex_pos;

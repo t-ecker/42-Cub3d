@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:40:37 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:59:39 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_hits(t_data *data)
 void	free_data(t_data *data)
 {
 	free(data->sprites);
+	delete_img(data);
 	free(data->texture);
 	free_hits(data);
 	free(data);

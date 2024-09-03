@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:20:51 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/03 13:16:47 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:56:54 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	set_texture(t_texture *texture, t_input *input)
 	texture->monster = mlx_load_png("./textures/monster.png");
 	texture->monster_s = mlx_load_png("./textures/monster2.png");
 	texture->pos = mlx_load_png("./assets/player_dot.png");
+	texture->crosshair = mlx_load_png("./assets/crosshair_1.PNG");
 }
 
 int	check_texture2(t_texture *texture)

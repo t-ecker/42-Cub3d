@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:13:08 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:57:24 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ void	draw_hand(t_data *data)
 
 void	draw_overlay(t_data *data)
 {
-	mlx_texture_t	*crosshair;
-
-	crosshair = mlx_load_png("./assets/crosshair_1.PNG");
-	draw_overlay_part(data->cubed->overlay, crosshair,
-		(WIDTH - crosshair->width) / 2, HEIGHT / 2);
+	draw_overlay_part(data->cubed->overlay, data->texture->crosshair,
+		(WIDTH - data->texture->crosshair->width) / 2, HEIGHT / 2);
 	data->cubed->light = mlx_texture_to_image(data->cubed->mlx,
 			data->texture->dark);
 	mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);

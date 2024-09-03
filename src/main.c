@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:22:19 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:59:55 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 		return (0);
 	mlx_loop_hook(cubed->mlx, redraw, data);
 	mlx_loop(cubed->mlx);
-	mlx_terminate(cubed->mlx);
 	return (1);
 }
 
@@ -77,9 +76,10 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	if (!init_image(data->input, data->cubed, data))
-		return (1);
+		return (mlx_terminate(data->cubed->mlx), 1);
 	// print_input(input);
 	// print_map(input);
+	mlx_terminate(data->cubed->mlx);
 	free_all(data, data->cubed, data->input);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:45:02 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:25:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:59:11 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,30 @@ int	ft_count_map(t_data *data, char c)
 		i++;
 	}
 	return (count);
+}
+
+void	delete_img(t_data *data)
+{
+	mlx_delete_texture(data->texture->n);
+	mlx_delete_texture(data->texture->s);
+	mlx_delete_texture(data->texture->w);
+	mlx_delete_texture(data->texture->e);
+	mlx_delete_texture(data->texture->f);
+	mlx_delete_texture(data->texture->d);
+	mlx_delete_texture(data->texture->k);
+	mlx_delete_texture(data->texture->infof);
+	mlx_delete_texture(data->texture->infod);
+	mlx_delete_texture(data->texture->infok);
+	mlx_delete_texture(data->texture->shoot);
+	mlx_delete_texture(data->texture->recoil);
+	mlx_delete_texture(data->texture->hand);
+	mlx_delete_texture(data->texture->light);
+	mlx_delete_texture(data->texture->dark);
+	mlx_delete_texture(data->texture->victory);
+	mlx_delete_texture(data->texture->death);
+	mlx_delete_texture(data->texture->flashlight);
+	mlx_delete_texture(data->texture->monster);
+	mlx_delete_texture(data->texture->monster_s);
+	mlx_delete_texture(data->texture->pos);
+	mlx_delete_texture(data->texture->crosshair);
 }
