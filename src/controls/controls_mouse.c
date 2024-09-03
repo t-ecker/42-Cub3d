@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:38:07 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:42:57 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	handle_left_click(t_data *data, t_sprite *sprite)
 {
 	clear_image(data->cubed->hand);
 	draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
-	if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'A')
+	if (data->facing == 'S' && sprite->status == 'A')
 	{
 		sprite->tex = data->texture->monster_s;
 		sprite->status = 'S';
 	}
-	else if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'S')
+	else if (data->facing == 'S' && sprite->status == 'S')
 	{
 		data->Map[(int)sprite->y][(int)sprite->x] = '0';
 		sprite->status = 'D';

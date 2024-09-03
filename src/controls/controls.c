@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:09:01 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:42:39 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 
 	data = param;
 	if (key.key == MLX_KEY_E && key.action == MLX_PRESS
-		&& ((data->facing[WIDTH / 2] == 'D'
+		&& ((data->facing == 'D'
 				&& data->Map[(int)(data->posY
 					+ data->dirY)][(int)(data->posX + data->dirX)] == 'D')
-			|| ((data->facing[WIDTH / 2] == 'K'
-			|| data->facing[WIDTH / 2] == 'S')
+			|| ((data->facing == 'K'
+			|| data->facing == 'S')
 				&& data->Map[(int)data->posY][(int)data->posX] != 'K'
 				&& data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
 					+ data->dirX)] == 'K')))
@@ -120,7 +120,7 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 		change_door(data);
 	}
 	if (key.key == MLX_KEY_F && key.action == MLX_PRESS
-		&& data->facing[WIDTH / 2] == 'F')
+		&& data->facing == 'F')
 	{
 		data->end = 1;
 		clear_image(data->cubed->hand);

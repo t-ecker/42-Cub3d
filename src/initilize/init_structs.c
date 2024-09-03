@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 20:42:23 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:42:21 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	init_simple_data(t_data *data, t_input *input, t_cubed *cubed)
 	data->speed = 0.05;
 	data->weapon = 1;
 	data->end = 0;
+	data->facing = '0';
 	data->toggle_light = 0;
 	data->sprite_count = ft_count_map(data, 'M');
 }
@@ -106,14 +107,10 @@ t_data	*init_data(t_input *input, t_cubed *cubed)
 	data->texture = init_texture(input);
 	if (!data->texture)
 		return (free(data), NULL);
-	data->facing = malloc(sizeof(char) * WIDTH);
-	if (!data->facing)
-		return (free(data), free(data->texture), NULL);
 	if (init_hit(data))
-		return (free(data), free(data->texture), free(data->facing), NULL);
+		return (free(data->texture), free(data), NULL);
 	if (init_sprites(data))
-		return (free(data), free(data->texture), free(data->hit),
-			free(data->hit_count), NULL);
+		return (free_hits(data), free(data->texture), free(data), NULL);
 	setdir(data, input);
 	setplane(data);
 	return (data);

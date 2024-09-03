@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 21:12:08 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/02 21:18:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:57:06 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	initilize_ray(t_data *data, t_ray *ray, int x)
 
 void	initilisation(t_data *data, t_ray *ray, int x, int *hit_c)
 {
-	data->facing[x] = '0';
 	*hit_c = 0;
 	initilize_ray(data, ray, x);
 }

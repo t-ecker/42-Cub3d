@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:05:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:40:37 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,10 @@ void	free_input(t_input *input)
 	free(input);
 }
 
-void	free_cubed(t_cubed *cubed)
-{
-	free(cubed->title);
-	free(cubed);
-}
-
-void	free_data(t_data *data)
+void	free_hits(t_data *data)
 {
 	int	x;
 
-	free(data->sprites);
-	free(data->texture);
-	free(data->facing);
 	x = 0;
 	while (x < WIDTH)
 	{
@@ -60,13 +51,23 @@ void	free_data(t_data *data)
 	}
 	free(data->hit);
 	free(data->hit_count);
+}
+
+void	free_data(t_data *data)
+{
+	free(data->sprites);
+	free(data->texture);
+	free_hits(data);
 	free(data);
 }
 
 void	free_all(t_data *data, t_cubed *cubed, t_input *input)
 {
 	if (cubed)
-		free_cubed(cubed);
+	{
+		free(cubed->title);
+		free(cubed);
+	}
 	if (input)
 		free_input(input);
 	if (data)

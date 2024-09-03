@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:09:17 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:39:51 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_data
 	char **Map;
 	int *hit_count;
 	int sprite_count;
-	char *facing;
+	char facing;
 	int	weapon;
 	double speed;
 	int	toggle_light;

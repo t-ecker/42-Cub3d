@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 22:02:51 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:54:47 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	castrays(t_data *data)
 	t_ray	ray;
 	int		hit;
 	int		hit_c;
-	int		i;
 
 	x = 0;
 	while (x < WIDTH)
@@ -94,15 +93,8 @@ void	castrays(t_data *data)
 		while (hit == 0)
 			hit = dda(data, &ray, x, &hit_c);
 		set_wall_attributes(data, ray, x, hit_c);
-		i = 0;
 		if (x == WIDTH / 2)
-		{
-			data->facing[x] = data->hit[x][0].type;
-			while (data->hit[x][i].type == 'K')
-				i++;
-			if (data->hit[x][i].type == 'S')
-				data->facing[x] = 'S';
-		}
+			data->facing = data->hit[x][get_sprite(data)].type;
 		x++;
 	}
 }

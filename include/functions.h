@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:18:32 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:55:25 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,18 @@ void			ft_mouse_shoot_hook(mouse_key_t button, action_t action,
 void			ft_light_hook(struct mlx_key_data key, void *param);
 void			ft_hook(t_data *data);
 void			collision(t_data *data, double newX, double newY);
-int	get_sprite(t_data *data);
-void	move_forward(t_data *data, double speed);
-void	move_right(t_data *data, double speed);
-void	change_door(t_data *data);
-void	change_weapon(t_data *data, int weapon);
+int				get_sprite(t_data *data);
+void			move_forward(t_data *data, double speed);
+void			move_right(t_data *data, double speed);
+void			change_door(t_data *data);
+void			change_weapon(t_data *data, int weapon);
 
 
 
 //FREEING
 void			free_params(t_input *input);
 void			free_input(t_input *input);
-void			free_cubed(t_cubed *cubed);
+void			free_hits(t_data *data);
 void			free_data(t_data *data);
 void			free_all(t_data *data, t_cubed *cubed, t_input *input);
 

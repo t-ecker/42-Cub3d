@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:45:02 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:18:17 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:53:35 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	get_sprite(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->hit[WIDTH / 2][i].type == 'K')
+	while (data->hit[WIDTH / 2][i].type == 'K'
+		|| (data->sprite_count > i
+		&& data->sprites[data->hit[WIDTH / 2][i].sprite_t].status == 'D'))
 		i++;
 	return (i);
 }

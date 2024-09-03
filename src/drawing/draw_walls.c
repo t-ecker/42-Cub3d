@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 22:52:39 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:51:34 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ void	draw_walls(t_data *data, int x, int hit_c)
 
 void	check_info(t_data *data, int x)
 {
-	if (data->facing[x] == 'F' && data->hit[x][0].type == 'F'
+	// printf("%c\n", data->facing);
+	if (data->facing == 'F' && data->hit[x][0].type == 'F'
 		&& data->hit[x][0].distance < 1.2)
 		draw_info(data, 'F');
-	if ((data->facing[x] == 'D' && data->hit[x][0].type == 'D'
+	if ((data->facing == 'D' && data->hit[x][0].type == 'D'
 		&& data->hit[x][0].distance < 1.2))
 		draw_info(data, 'D');
-	if ((data->facing[x] == 'K' || data->facing[x] == 'S')
+	if ((data->facing == 'K' || data->facing == 'S')
 		&& data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
 		draw_info(data, 'K');
 }
