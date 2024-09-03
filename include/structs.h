@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:28:15 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:21:18 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_data
 	char		facing;
 	int			weapon;
 	double		speed;
+	int			minimap;
 	int			toggle_light;
 	int			end;
 	t_cubed		*cubed;

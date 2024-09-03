@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:15:47 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:21:42 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	init_simple_data(t_data *data, t_input *input, t_cubed *cubed)
 	data->fov = 90;
 	data->speed = 0.05;
 	data->weapon = 1;
+	data->minimap = 0;
 	data->end = 0;
 	data->facing = '0';
 	data->toggle_light = 0;

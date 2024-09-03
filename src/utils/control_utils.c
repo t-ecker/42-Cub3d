@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:24:31 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:32:43 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,17 @@ void	change_weapon(t_data *data, int weapon)
 {
 	data->weapon = weapon;
 	if (weapon == 1)
+	{
 		ft_dark_img(data->cubed->light);
+		clear_image(data->cubed->minimap);
+		data->minimap = 0;
+	}
 	else
+	{
+		data->minimap = 1;
+		ft_draw_minimap(data);
 		clear_image(data->cubed->light);
+	}
 	clear_image(data->cubed->bg);
 	draw_bg(data, data->input);
 	clear_image(data->cubed->hand);

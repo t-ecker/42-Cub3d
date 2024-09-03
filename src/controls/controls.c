@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:55:45 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:32:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,19 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 		data->end = 1;
 		clear_image(data->cubed->hand);
 		draw_overlay_part(data->cubed->victory, data->texture->victory, 0, 0);
+	}
+	if (key.key == MLX_KEY_M && key.action == MLX_PRESS)
+	{
+		if (data->minimap)
+		{
+			data->minimap = 0;
+			clear_image(data->cubed->minimap);
+		}
+		else
+		{
+			data->minimap = 1;
+			ft_draw_minimap(data);
+		}
 	}
 }
 

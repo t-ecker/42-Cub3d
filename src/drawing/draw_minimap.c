@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:12:44 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:27:51 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	minimap_player_pos(void *param)
 	int		pos_y;
 
 	data = (t_data *)param;
-	if (!data->end)
+	if (!data->end && data->minimap)
 	{
 		pos_x = data->pos_x * 10 - 2;
 		pos_y = data->pos_y * 10 - 2;
@@ -99,7 +99,7 @@ void	minimap_player_pos(void *param)
 	}
 }
 
-int	ft_minimap(t_data *data)
+int	init_minimap_img(t_data *data)
 {
 	int	width;
 	int	height;
@@ -115,7 +115,7 @@ int	ft_minimap(t_data *data)
 		free_all(data, data->cubed, data->input);
 		return (0);
 	}
-	ft_draw_minimap(data);
+	// ft_draw_minimap(data);
 	data->cubed->pos = mlx_new_image(data->cubed->mlx, 5, 5);
 	mlx_loop_hook(data->cubed->mlx, minimap_player_pos, data);
 	return (1);

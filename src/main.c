@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 10:27:43 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:22:19 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 		return (0);
 	if (!init_overlay_img(cubed, input, data))
 		return (0);
-	if (!ft_minimap(data))
+	if (!init_minimap_img(data))
 		return (0);
 	if (!init_info_img(cubed, input, data))
 		return (0);

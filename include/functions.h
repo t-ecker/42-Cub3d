@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:52:13 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:22:43 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				init_walls_img(t_cubed *cubed, t_input *input, t_data *data);
 int				init_bg_img(t_cubed *cubed, t_input *input, t_data *data);
 int				init_info_img(t_cubed *cubed, t_input *input, t_data *data);
 int				init_victory_img(t_cubed *cubed, t_input *input, t_data *data);
+int				init_minimap_img(t_data *data);
 t_texture		*init_texture(t_input *input);
 int				init_sprites(t_data *data);
 unsigned int	parse_color(char *colors);
@@ -63,6 +64,8 @@ int				get_texture_color(mlx_texture_t *texture, int x, int y);
 void			my_put_pixel(mlx_image_t *img, int x, int y, int color);
 int				is_pixel_transp(mlx_image_t *image, int x, int y);
 int				add_fog(int color, int fog, double fog_factor, double distance);
+void			ft_draw_minimap(t_data *data);
+
 
 //CONTROLS
 void			ft_window_hook(struct mlx_key_data key, void *param);
