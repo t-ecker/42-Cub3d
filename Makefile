@@ -6,7 +6,7 @@
 #    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/09/03 10:08:05 by tomecker         ###   ########.fr        #
+#    Updated: 2024/09/03 10:25:44 by tomecker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,8 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/initilize/init_textures.c\
 					src/initilize/init_sprites.c\
 					src/initilize/parsing.c\
-					src/initilize/parsing_utils.c\
 					src/controls/controls.c\
 					src/controls/collision.c\
-					src/controls/control_utils.c\
 					src/controls/controls_mouse.c\
 					src/drawing/draw_bg.c\
 					src/raycasting/wall_dist.c\
@@ -47,7 +45,9 @@ SRC_FILES       =	src/checkers/checkers.c\
 					src/drawing/draw_minimap.c\
 					src/utils/utils.c\
 					src/utils/utils_2.c\
-					src/utils/utils_3.c\
+					src/utils/drawing_utils.c\
+					src/utils/init_utils.c\
+					src/utils/control_utils.c\
 					src/utils/freeing.c\
 					src/utils/debug.c\
 					src/main.c
