@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 19:52:06 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:09:16 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_overlay_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
-  draw_overlay(data);
+	draw_overlay(data);
 	return (1);
 }
 
@@ -62,7 +62,6 @@ int	init_walls_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
-  draw(data);
 	return (1);
 }
 
@@ -76,29 +75,6 @@ int	init_bg_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
-  draw_bg(data, input);
-	return (1);
-}
-
-int	init_image(t_input *input, t_cubed *cubed, t_data *data)
-{
-	setPlane(data);
-	castRays(data);
-	ft_hook(data);
-	if (!init_bg_img(cubed, input, data))
-		return (0);
-	if (!init_walls_img(cubed, input, data))
-		return (0);
-	if (!init_overlay_img(cubed, input, data))
-		return (0);
-	if (!ft_minimap(data))
-		return (0);
-	if (!init_info_img(cubed, input, data))
-		return (0);
-	if (!init_victory_img(cubed, input, data))
-		return (0);
-	mlx_loop_hook(cubed->mlx, redraw, data);
-	mlx_loop(cubed->mlx);
-	mlx_terminate(cubed->mlx);
+	draw_bg(data, input);
 	return (1);
 }

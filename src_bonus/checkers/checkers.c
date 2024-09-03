@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 16:57:41 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:18:42 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_isappr(char c)
 {
 	return ((c >= '0' && c <= '9') || c == 'N'
 		|| c == 'W' || c == 'S' || c == 'E'
-		|| c == ' ');
+		|| c == ' ' || c == 'F' || c == 'D' || c == 'M');
 }
 
 int	check_args(int argc, char **argv)
@@ -62,6 +62,8 @@ int	check_map(char **map, t_input *input)
 	if (!check_map_horizontal(map))
 		return (0);
 	if (!check_map_vertical(map))
+		return (0);
+	if (!check_map_doors(map, input))
 		return (0);
 	return (1);
 }

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_overlay.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 01:23:12 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:57:24 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int dst_y)
+void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture,
+		int dst_x, int dst_y)
 {
 	int	y;
 	int	x;
@@ -23,7 +24,8 @@ void	draw_overlay_part(mlx_image_t *img, mlx_texture_t *texture, int dst_x, int 
 		x = 0;
 		while (x < (int)texture->width)
 		{
-			my_put_pixel(img, dst_x + x, dst_y + y, get_texture_color(texture, x, y));
+			my_put_pixel(img, dst_x + x, dst_y + y,
+				get_texture_color(texture, x, y));
 			x++;
 		}
 		y++;
@@ -45,13 +47,23 @@ void	draw_hand(t_data *data)
 
 void	draw_overlay(t_data *data)
 {
-	mlx_texture_t	*crosshair;
-
-	crosshair = mlx_load_png("./assets/crosshair_1.PNG");
-	draw_overlay_part(data->cubed->overlay, crosshair,
-		(WIDTH - crosshair->width) / 2, HEIGHT / 2);
+	draw_overlay_part(data->cubed->overlay, data->texture->crosshair,
+		(WIDTH - data->texture->crosshair->width) / 2, HEIGHT / 2);
 	data->cubed->light = mlx_texture_to_image(data->cubed->mlx,
 			data->texture->dark);
 	mlx_image_to_window(data->cubed->mlx, data->cubed->light, 0, 0);
 	draw_hand(data);
+}
+
+void	draw_info(t_data *data, char flag)
+{
+	if (flag == 'F')
+		draw_overlay_part(data->cubed->info, data->texture->infof,
+			(WIDTH - data->texture->infof->width) / 2, 20);
+	else if (flag == 'D')
+		draw_overlay_part(data->cubed->info, data->texture->infod,
+			(WIDTH - data->texture->infod->width) / 2, 20);
+	else if (flag == 'K')
+		draw_overlay_part(data->cubed->info, data->texture->infok,
+			(WIDTH - data->texture->infok->width) / 2, 20);
 }
