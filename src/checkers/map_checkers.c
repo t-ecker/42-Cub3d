@@ -6,18 +6,16 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 03:42:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/27 20:33:11 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:25:24 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-int	check_map_characters(char **map, t_input *input)
+int	check_map_characters(char **map, t_input *input, int j)
 {
 	int	i;
-	int	j;
 
-	j = -1;
 	while (map[++j])
 	{
 		i = -1;
@@ -112,8 +110,8 @@ int	check_sides(char **map, int x, int y, t_input *input)
 
 int	check_map_doors(char **map, t_input *input)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < input->map_height)
@@ -128,21 +126,5 @@ int	check_map_doors(char **map, t_input *input)
 		}
 		y++;
 	}
-	return (1);
-}
-
-int	check_map(char **map, t_input *input)
-{
-	if (!check_map_characters(map, input))
-		return (0);
-	if (!input->view_dir)
-		return (0);
-	pad_strings(map);
-	if (!check_map_horizontal(map))
-		return (0);
-	if (!check_map_vertical(map))
-		return (0);
-	if (!check_map_doors(map, input))
-		return (0);
 	return (1);
 }

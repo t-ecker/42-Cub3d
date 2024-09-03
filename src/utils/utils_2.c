@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:45:02 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/20 19:01:16 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:18:17 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	pad_strings(char **arr)
+void	pad_strings(char **arr, int i)
 {
 	int	max_length;
-	int	i;
 	int	len;
 
 	if (arr == NULL)
 		return ;
 	max_length = 0;
-	i = -1;
 	while (arr[++i])
 	{
 		len = ft_strlen(arr[i]);
@@ -40,4 +38,36 @@ void	pad_strings(char **arr)
 		}
 	}
 	arr[i] = NULL;
+}
+
+int	get_sprite(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->hit[WIDTH / 2][i].type == 'K')
+		i++;
+	return (i);
+}
+
+int	ft_count_map(t_data *data, char c)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (i < data->input->map_height)
+	{
+		j = 0;
+		while (j < data->input->map_width)
+		{
+			if (data->Map[i][j] == c)
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }

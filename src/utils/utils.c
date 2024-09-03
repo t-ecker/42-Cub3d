@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 02:09:50 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/22 01:10:58 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:17:33 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,19 @@ int	rgb_to_rgba_hex(int r, int g, int b, int a)
 	return (rgba);
 }
 
-void	clear_image(mlx_image_t *image)
+int	count_char(char *str, char c)
 {
-	uint32_t transparent_color;
-	uint32_t y;
-	uint32_t x;
+	int	i;
+	int	c_count;
 
-	y = 0;
-	transparent_color = 0x00000000;
-	while (y < image->height)
+	i = -1;
+	c_count = 0;
+	while (str[++i])
 	{
-		x = 0;
-		while (x < image->width)
-		{
-			mlx_put_pixel(image, x, y, transparent_color);
-			x++;
-		}
-		y++;
+		if (str[i] == c)
+			c_count++;
 	}
+	return (c_count);
 }
 
 char	*ft_str_char_rm(char *str, char c)
@@ -73,13 +68,7 @@ char	*ft_str_char_rm(char *str, char c)
 
 	if (!str)
 		return (NULL);
-	c_count = 0;
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == c)
-			c_count++;
-	}
+	c_count = count_char(str, c);
 	edited = malloc(ft_strlen(str) - c_count + 1);
 	if (!edited)
 		return (NULL);

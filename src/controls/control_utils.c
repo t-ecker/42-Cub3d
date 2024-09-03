@@ -6,54 +6,54 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 17:43:15 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:54:28 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-int	detect(char c)
+void	move_forward(t_data *data, double speed)
 {
-	return (c == '1' || c == 'D' || c == 'F');
+	double	new_x;
+	double	new_y;
+
+	new_x = data->posX + data->dirX / speed;
+	new_y = data->posY + data->dirY / speed;
+	collision(data, new_x, new_y);
 }
 
-void collision(t_data *data, double newX, double newY)
+void	move_right(t_data *data, double speed)
 {
-    float buffer;
-    int canmoveX;
-    int canmoveY;
-	
-	canmoveY= 1;
-	canmoveX= 1;
-	buffer = 0.3;
-    if (data->Map[(int)newY][(int)newX] == 'M')
-	{
-        data->end = 1;
-        clear_image(data->cubed->hand);
-        draw_overlay_part(data->cubed->victory, data->texture->death, 0, 0);
-    }
-    if (detect(data->Map[(int)(data->posY + buffer)][(int)(newX + buffer)]) ||
-        detect(data->Map[(int)(data->posY - buffer)][(int)(newX + buffer)]) ||
-        detect(data->Map[(int)(data->posY + buffer)][(int)(newX - buffer)]) ||
-        detect(data->Map[(int)(data->posY - buffer)][(int)(newX - buffer)]) ||
-        detect(data->Map[(int)data->posY][(int)(newX + buffer)]) ||
-        detect(data->Map[(int)data->posY][(int)(newX - buffer)]))
-        canmoveX = 0;
-    if (detect(data->Map[(int)(newY + buffer)][(int)(data->posX + buffer)]) ||
-        detect(data->Map[(int)(newY + buffer)][(int)(data->posX - buffer)]) ||
-        detect(data->Map[(int)(newY - buffer)][(int)(data->posX + buffer)]) ||
-        detect(data->Map[(int)(newY - buffer)][(int)(data->posX - buffer)]) ||
-        detect(data->Map[(int)(newY + buffer)][(int)data->posX]) ||
-        detect(data->Map[(int)(newY - buffer)][(int)data->posX]))
-        canmoveY = 0;
-    if (canmoveX && canmoveY)
-	{
-        data->posX = newX;
-        data->posY = newY;
-    }
-	else if (canmoveX)
-        data->posX = newX;
-    else if (canmoveY)
-        data->posY = newY;
-  	clear_image(data->cubed->info);
+	double	new_x;
+	double	new_y;
+
+	new_x = data->posX + data->planeX / speed;
+	new_y = data->posY + data->planeY / speed;
+	collision(data, new_x, new_y);
+}
+
+void	change_weapon(t_data *data, int weapon)
+{
+	data->weapon = weapon;
+	if (weapon == 1)
+		ft_dark_img(data->cubed->light);
+	else
+		clear_image(data->cubed->light);
+	clear_image(data->cubed->bg);
+	draw_bg(data, data->input);
+	clear_image(data->cubed->hand);
+	draw_overlay_part(data->cubed->hand, data->texture->hand,
+		0, 0);
+}
+
+void	change_door(t_data *data)
+{
+	if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+			+ data->dirX)] == 'D')
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+				+ data->dirX)] = 'K';
+	else if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+			+ data->dirX)] == 'K')
+		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
+				+ data->dirX)] = 'D';
 }

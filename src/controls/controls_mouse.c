@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 17:23:32 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:56:02 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,43 +55,36 @@ void	ft_cursor_camera_hook(void *param)
 	center_mouse(param);
 }
 
-int	get_sprite(t_data *data)
+void	handle_left_click(t_data *data, t_sprite *sprite)
 {
-	int i;
-
-	i = 0;
-	while (data->hit[WIDTH / 2][i].type == 'K')
-		i++;
-	return (i);
+	clear_image(data->cubed->hand);
+	draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
+	if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'A')
+	{
+		sprite->tex = data->texture->monster_s;
+		sprite->status = 'S';
+	}
+	else if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'S')
+	{
+		data->Map[(int)sprite->y][(int)sprite->x] = '0';
+		sprite->status = 'D';
+	}
 }
 
 void	ft_mouse_shoot_hook(mouse_key_t button, action_t action,
 	modifier_key_t mods, void *param)
 {
-	t_data	*data;
-	t_sprite *sprite;
+	t_data		*data;
+	t_sprite	*sprite;
 
 	data = (t_data *)param;
 	(void)mods;
 	if (data->weapon == 2)
 	{
-		sprite = &data->sprites[data->hit[WIDTH / 2][get_sprite(data)].sprite_t];
+		sprite = &data->sprites[data->hit[WIDTH / 2] \
+		[get_sprite(data)].sprite_t];
 		if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-		{
-			clear_image(data->cubed->hand);
-			draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
-			if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'A')
-			{
-				sprite->tex = data->texture->monster_s;
-				sprite->status = 'S';
-
-			}
-			else if (data->facing[WIDTH / 2] == 'S' && sprite->status == 'S')
-			{
-				data->Map[(int)sprite->y][(int)sprite->x] = '0';
-				sprite->status = 'D';
-			}
-		}
+			handle_left_click(data, sprite);
 		else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
 		{
 			clear_image(data->cubed->hand);

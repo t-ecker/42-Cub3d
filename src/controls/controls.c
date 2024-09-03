@@ -6,76 +6,99 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 23:43:16 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:09:01 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	ft_movement_hook(void *param)
+// void	ft_shoot_hook(struct mlx_key_data key, void *param)
+// {
+// 	t_data	*data;
+
+// 	data = (t_data *)param;
+// 	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+// 	{
+// 		clear_image(data->cubed->hand);
+// 		draw_overlay_part(data->cubed->hand, data->texture->shoot, 0, 0);
+// 	}
+// 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_REPEAT)
+// 	{
+// 		clear_image(data->cubed->hand);
+// 		draw_overlay_part(data->cubed->hand, data->texture->recoil, 0, 0);
+// 	}
+// 	else if (key.key == MLX_KEY_SPACE && key.action == MLX_RELEASE)
+// 	{
+// 		clear_image(data->cubed->hand);
+// 		draw_overlay_part(data->cubed->hand, data->texture->hand, 0, 0);
+// 	}
+// }
+
+void	ft_light_hook(struct mlx_key_data key, void *param)
 {
-	double	newX;
-	double	newY;
-	mlx_t	*mlx;
 	t_data	*data;
 
 	data = (t_data *)param;
+	if (key.key == MLX_KEY_SPACE && key.action == MLX_PRESS)
+	{
+		if (data->toggle_light == 0)
+			data->toggle_light = 1;
+		else
+			data->toggle_light = 0;
+	}
+	if (data->toggle_light)
+	{
+		draw_overlay_part(data->cubed->light, data->texture->light, 0, 0);
+	}
+	else if (!data->toggle_light)
+		ft_dark_img(data->cubed->light);
+	clear_image(data->cubed->hand);
+	draw_overlay_part(data->cubed->hand, data->texture->flashlight,
+		0, 0);
+}
+
+void	ft_movement_hook(void *param)
+{
+	t_data	*data;
+	mlx_t	*mlx;
+	double	speed;
+
+	data = (t_data *)param;
+	speed = 1 / data->speed;
 	mlx = data->cubed->mlx;
-	newX = data->posX;
-	newY = data->posY;
-	if (mlx_is_key_down(mlx, MLX_KEY_W) && mlx_is_key_down(mlx,
-			MLX_KEY_LEFT_SHIFT))
-	{
-		newX += data->dirX / 10;
-		newY += data->dirY / 10;
-		collision(data, newX, newY);
-	}
+	if (mlx_is_key_down(mlx, MLX_KEY_W)
+		&& mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
+		move_forward(data, speed / 2);
 	else if (mlx_is_key_down(mlx, MLX_KEY_W))
-	{
-		newX += data->dirX / 20;
-		newY += data->dirY / 20;
-		collision(data, newX, newY);
-	}
+		move_forward(data, speed);
 	else if (mlx_is_key_down(mlx, MLX_KEY_S))
-	{
-		newX -= data->dirX / 20;
-		newY -= data->dirY / 20;
-		collision(data, newX, newY);
-	}
+		move_forward(data, -speed);
 	else if (mlx_is_key_down(mlx, MLX_KEY_D))
-	{
-		newX += data->planeX / 20;
-		newY += data->planeY / 20;
-		collision(data, newX, newY);
-	}
+		move_right(data, speed);
 	else if (mlx_is_key_down(mlx, MLX_KEY_A))
-	{
-		newX -= data->planeX / 20;
-		newY -= data->planeY / 20;
-		collision(data, newX, newY);
-	}
+		move_right(data, -speed);
 }
 
 void	ft_camera_hook(void *param)
 {
 	t_data	*data;
 	double	angle;
-	double	oldDirX;
-	double	oldDirY;
+	double	olddir_x;
+	double	olddir_y;
 
 	angle = 4 * (M_PI / 180);
 	data = param;
-	oldDirX = data->dirX;
-	oldDirY = data->dirY;
+	olddir_x = data->dirX;
+	olddir_y = data->dirY;
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_RIGHT))
 	{
-		data->dirX = cos(angle) * oldDirX - sin(angle) * oldDirY;
-		data->dirY = sin(angle) * oldDirX + cos(angle) * oldDirY;
+		data->dirX = cos(angle) * olddir_x - sin(angle) * olddir_y;
+		data->dirY = sin(angle) * olddir_x + cos(angle) * olddir_y;
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_LEFT))
 	{
-		data->dirX = cos(angle) * oldDirX + sin(angle) * oldDirY;
-		data->dirY = -sin(angle) * oldDirX + cos(angle) * oldDirY;
+		data->dirX = cos(angle) * olddir_x + sin(angle) * olddir_y;
+		data->dirY = -sin(angle) * olddir_x + cos(angle) * olddir_y;
 	}
 }
 
@@ -88,19 +111,13 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 		&& ((data->facing[WIDTH / 2] == 'D'
 				&& data->Map[(int)(data->posY
 					+ data->dirY)][(int)(data->posX + data->dirX)] == 'D')
-			|| ((data->facing[WIDTH / 2] == 'K' || data->facing[WIDTH / 2] == 'S')
+			|| ((data->facing[WIDTH / 2] == 'K'
+			|| data->facing[WIDTH / 2] == 'S')
 				&& data->Map[(int)data->posY][(int)data->posX] != 'K'
 				&& data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
 					+ data->dirX)] == 'K')))
 	{
-		if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-				+ data->dirX)] == 'D')
-			data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-					+ data->dirX)] = 'K';
-		else if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-				+ data->dirX)] == 'K')
-			data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-					+ data->dirX)] = 'D';
+		change_door(data);
 	}
 	if (key.key == MLX_KEY_F && key.action == MLX_PRESS
 		&& data->facing[WIDTH / 2] == 'F')
@@ -119,37 +136,12 @@ void	ft_window_hook(struct mlx_key_data key, void *param)
 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
 		mlx_close_window(data->cubed->mlx);
 	if (key.key == MLX_KEY_1 && key.action == MLX_PRESS)
-	{
-		data->weapon = 1;
-		ft_dark_img(data->cubed->light);
-		clear_image(data->cubed->bg);
-		draw_bg(data, data->input);
-		clear_image(data->cubed->hand);
-		draw_overlay_part(data->cubed->hand, data->texture->hand,
-			0, 0);
-	}
+		change_weapon(data, 1);
 	else if (key.key == MLX_KEY_2 && key.action == MLX_PRESS)
-	{
-		data->weapon = 2;
-		clear_image(data->cubed->light);
-		clear_image(data->cubed->bg);
-		draw_bg(data, data->input);
-		clear_image(data->cubed->hand);
-		draw_overlay_part(data->cubed->hand, data->texture->hand,
-			0, 0);
-	}
+		change_weapon(data, 2);
 	if (data->weapon == 1)
 		ft_light_hook(key, param);
 	// else if (data->weapon == 2)
 	// 	ft_shoot_hook(key, param);
 	ft_gameplay_hook(key, param);
-}
-
-void	ft_hook(t_data *data)
-{
-	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_cursor_camera_hook, data);
-	mlx_mouse_hook(data->cubed->mlx, ft_mouse_shoot_hook, data);
-	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
-	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
 }

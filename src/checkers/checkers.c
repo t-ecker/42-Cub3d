@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/28 14:17:55 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:18:42 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ int	check_params(t_input *input)
 		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
 	if (!(ft_strstr(input->wall_n, ".png") || ft_strstr(input->wall_n, ".PNG")))
 		return (ft_putendl_fd("Wrong texture filetype", 2), 0);
+	return (1);
+}
+
+int	check_map(char **map, t_input *input)
+{
+	if (!check_map_characters(map, input, -1))
+		return (0);
+	if (!input->view_dir)
+		return (0);
+	pad_strings(map, -1);
+	if (!check_map_horizontal(map))
+		return (0);
+	if (!check_map_vertical(map))
+		return (0);
+	if (!check_map_doors(map, input))
+		return (0);
 	return (1);
 }
 

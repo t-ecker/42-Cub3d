@@ -6,7 +6,7 @@
 #    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/09/03 00:31:57 by tomecker         ###   ########.fr        #
+#    Updated: 2024/09/03 10:08:05 by tomecker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,14 @@ OBJ_DIR         = ./obj
 
 SRC_FILES       =	src/checkers/checkers.c\
 					src/checkers/map_checkers.c\
-					src/parsing/parsing.c\
-					src/parsing/init_structs.c\
-					src/parsing/init_images.c\
-					src/parsing/parsing_utils.c\
+					src/initilize/init_structs.c\
+					src/initilize/init_images.c\
+					src/initilize/init_textures.c\
+					src/initilize/init_sprites.c\
+					src/initilize/parsing.c\
+					src/initilize/parsing_utils.c\
 					src/controls/controls.c\
-					src/controls/controls_2.c\
+					src/controls/collision.c\
 					src/controls/control_utils.c\
 					src/controls/controls_mouse.c\
 					src/drawing/draw_bg.c\

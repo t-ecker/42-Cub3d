@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:43:10 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/02 22:43:21 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:15:30 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,24 @@ int	add_fog(int color, int fog, double fog_factor, double distance)
 	after.g = (int)((1.0 - fog_factor) * ((color >> 16) & 0xFF));
 	after.b = (int)((1.0 - fog_factor) * ((color >> 8) & 0xFF));
 	return ((after.r << 24) | (after.g << 16) | (after.b << 8) | after.a);
+}
+
+void	clear_image(mlx_image_t *image)
+{
+	uint32_t	transparent_color;
+	uint32_t	y;
+	uint32_t	x;
+
+	y = 0;
+	transparent_color = 0x00000000;
+	while (y < image->height)
+	{
+		x = 0;
+		while (x < image->width)
+		{
+			mlx_put_pixel(image, x, y, transparent_color);
+			x++;
+		}
+		y++;
+	}
 }
