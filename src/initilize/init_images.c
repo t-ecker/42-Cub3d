@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:22:07 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/02 18:48:36 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:09:16 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	init_walls_img(t_cubed *cubed, t_input *input, t_data *data)
 		free_all(data, cubed, input);
 		return (0);
 	}
-	draw(data);
 	return (1);
 }
 
