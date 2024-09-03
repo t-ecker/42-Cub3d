@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:54:15 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:40:54 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int				is_pixel_transp(mlx_image_t *image, int x, int y);
 int				add_fog(int color, int fog, double fog_factor, double distance);
 void			ft_draw_minimap(t_data *data);
 
-
 //CONTROLS
 void			ft_window_hook(struct mlx_key_data key, void *param);
 void			ft_movement_hook(void *param);
@@ -84,6 +83,7 @@ void			move_right(t_data *data, double speed);
 void			change_door(t_data *data);
 int				check_door_collision(t_data *data);
 void			change_weapon(t_data *data, int weapon);
+void			check_minimap(struct mlx_key_data key, t_data *data);
 
 //FREEING
 void			free_params(t_input *input);
@@ -92,7 +92,6 @@ void			free_hits(t_data *data);
 void			free_data(t_data *data);
 void			free_all(t_data *data, t_cubed *cubed, t_input *input);
 void			delete_img(t_data *data);
-
 
 //UTILS
 void			remove_newline(char *line);

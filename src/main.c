@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:59:55 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:36:33 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_image(data->input, data->cubed, data))
 		return (mlx_terminate(data->cubed->mlx), 1);
-	// print_input(input);
-	// print_map(input);
 	mlx_terminate(data->cubed->mlx);
 	free_all(data, data->cubed, data->input);
 	return (0);

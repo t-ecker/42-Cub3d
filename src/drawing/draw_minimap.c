@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:27:51 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:40:02 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	init_minimap_img(t_data *data)
 		free_all(data, data->cubed, data->input);
 		return (0);
 	}
-	// ft_draw_minimap(data);
 	data->cubed->pos = mlx_new_image(data->cubed->mlx, 5, 5);
 	mlx_loop_hook(data->cubed->mlx, minimap_player_pos, data);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:32:43 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:38:55 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,21 @@ void	change_door(t_data *data)
 			+ data->dir_x)] == 'K')
 		data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
 				+ data->dir_x)] = 'D';
+}
+
+void	check_minimap(struct mlx_key_data key, t_data *data)
+{
+	if (key.key == MLX_KEY_M && key.action == MLX_PRESS)
+	{
+		if (data->minimap)
+		{
+			data->minimap = 0;
+			clear_image(data->cubed->minimap);
+		}
+		else
+		{
+			data->minimap = 1;
+			ft_draw_minimap(data);
+		}
+	}
 }
