@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:45:02 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:53:35 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:25:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_count_map(t_data *data, char c)
 		j = 0;
 		while (j < data->input->map_width)
 		{
-			if (data->Map[i][j] == c)
+			if (data->map[i][j] == c)
 				count++;
 			j++;
 		}

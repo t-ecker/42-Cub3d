@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:27:44 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/02 19:31:52 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:15:35 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sprite_position(t_data *data)
 	int		k;
 	char	**map;
 
-	map = data->Map;
+	map = data->map;
 	i = -1;
 	k = 0;
 	while (++i < data->input->map_height)

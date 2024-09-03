@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 21:12:08 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/03 12:57:06 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:21:46 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 
 void	initilize_ray2(t_data *data, t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->raydir_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (data->posX - ray->mapX) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->sidedist_x = (data->pos_x - ray->map_x) * ray->deltadist_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - data->posX) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->sidedist_x = (ray->map_x + 1.0 - data->pos_x) * ray->deltadist_x;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->raydir_y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (data->posY - ray->mapY) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->sidedist_y = (data->pos_y - ray->map_y) * ray->deltadist_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - data->posY) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->sidedist_y = (ray->map_y + 1.0 - data->pos_y) * ray->deltadist_y;
 	}
 }
 
 void	initilize_ray(t_data *data, t_ray *ray, int x)
 {
-	ray->cameraX = 2 * x / (double)WIDTH - 1;
-	ray->rayDirX = data->dirX + data->planeX * ray->cameraX;
-	ray->rayDirY = data->dirY + data->planeY * ray->cameraX;
-	ray->mapX = (int)data->posX;
-	ray->mapY = (int)data->posY;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = INT_MAX;
+	ray->camera_x = 2 * x / (double)WIDTH - 1;
+	ray->raydir_x = data->dir_x + data->plane_x * ray->camera_x;
+	ray->raydir_y = data->dir_y + data->plane_y * ray->camera_x;
+	ray->map_x = (int)data->pos_x;
+	ray->map_y = (int)data->pos_y;
+	if (ray->raydir_x == 0)
+		ray->deltadist_x = INT_MAX;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = INT_MAX;
+		ray->deltadist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->deltadist_y = INT_MAX;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->deltadist_y = fabs(1 / ray->raydir_y);
 	initilize_ray2(data, ray);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 01:46:18 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:42:57 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:11:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	ft_cursor_camera_hook(void *param)
 
 	data = param;
 	mlx_get_mouse_pos(data->cubed->mlx, &cursorx, &cursory);
-	old_dir_x = data->dirX;
-	old_dir_y = data->dirY;
-	data->dirX = cos(get_angle(cursorx)) * old_dir_x
+	old_dir_x = data->dir_x;
+	old_dir_y = data->dir_y;
+	data->dir_x = cos(get_angle(cursorx)) * old_dir_x
 		- sin(get_angle(cursorx)) * old_dir_y;
-	data->dirY = sin(get_angle(cursorx)) * old_dir_x
+	data->dir_y = sin(get_angle(cursorx)) * old_dir_x
 		+ cos(get_angle(cursorx)) * old_dir_y;
 	center_mouse(param);
 }
@@ -66,7 +66,7 @@ void	handle_left_click(t_data *data, t_sprite *sprite)
 	}
 	else if (data->facing == 'S' && sprite->status == 'S')
 	{
-		data->Map[(int)sprite->y][(int)sprite->x] = '0';
+		data->map[(int)sprite->y][(int)sprite->x] = '0';
 		sprite->status = 'D';
 	}
 }

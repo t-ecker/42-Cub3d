@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:03:04 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:42:21 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:15:47 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	init_simple_data(t_data *data, t_input *input, t_cubed *cubed)
 {
 	data->cubed = cubed;
 	data->input = input;
-	data->Map = input->map;
-	data->posX = input->pos_x;
-	data->posY = input->pos_y;
+	data->map = input->map;
+	data->pos_x = input->pos_x;
+	data->pos_y = input->pos_y;
 	data->fov = 90;
 	data->speed = 0.05;
 	data->weapon = 1;

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 17:15:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 00:30:17 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:13:08 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void	draw_overlay(t_data *data)
 void	draw_info(t_data *data, char flag)
 {
 	if (flag == 'F')
-		draw_overlay_part(data->cubed->info, data->texture->infoF,
-			(WIDTH - data->texture->infoF->width) / 2, 20);
+		draw_overlay_part(data->cubed->info, data->texture->infof,
+			(WIDTH - data->texture->infof->width) / 2, 20);
 	else if (flag == 'D')
-		draw_overlay_part(data->cubed->info, data->texture->infoD,
-			(WIDTH - data->texture->infoD->width) / 2, 20);
+		draw_overlay_part(data->cubed->info, data->texture->infod,
+			(WIDTH - data->texture->infod->width) / 2, 20);
 	else if (flag == 'K')
-		draw_overlay_part(data->cubed->info, data->texture->infoDC,
-			(WIDTH - data->texture->infoDC->width) / 2, 20);
+		draw_overlay_part(data->cubed->info, data->texture->infok,
+			(WIDTH - data->texture->infok->width) / 2, 20);
 }

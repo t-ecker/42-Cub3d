@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 00:09:54 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 00:26:19 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:12:44 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_draw_minimap(t_data *data)
 		x = 0;
 		while (j < data->input->map_width)
 		{
-			pick_cubes(data, x, y, data->Map[i][j]);
+			pick_cubes(data, x, y, data->map[i][j]);
 			x += cube_size;
 			j++;
 		}
@@ -84,8 +84,8 @@ void	minimap_player_pos(void *param)
 	data = (t_data *)param;
 	if (!data->end)
 	{
-		pos_x = data->posX * 10 - 2;
-		pos_y = data->posY * 10 - 2;
+		pos_x = data->pos_x * 10 - 2;
+		pos_y = data->pos_y * 10 - 2;
 		mlx_delete_image(data->cubed->mlx, data->cubed->pos);
 		data->cubed->pos = mlx_texture_to_image(data->cubed->mlx,
 				data->texture->pos);

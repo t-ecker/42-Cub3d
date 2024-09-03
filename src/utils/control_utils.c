@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 09:54:28 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:24:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	move_forward(t_data *data, double speed)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->posX + data->dirX / speed;
-	new_y = data->posY + data->dirY / speed;
+	new_x = data->pos_x + data->dir_x / speed;
+	new_y = data->pos_y + data->dir_y / speed;
 	collision(data, new_x, new_y);
 }
 
@@ -27,8 +27,8 @@ void	move_right(t_data *data, double speed)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->posX + data->planeX / speed;
-	new_y = data->posY + data->planeY / speed;
+	new_x = data->pos_x + data->plane_x / speed;
+	new_y = data->pos_y + data->plane_y / speed;
 	collision(data, new_x, new_y);
 }
 
@@ -48,12 +48,12 @@ void	change_weapon(t_data *data, int weapon)
 
 void	change_door(t_data *data)
 {
-	if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-			+ data->dirX)] == 'D')
-		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-				+ data->dirX)] = 'K';
-	else if (data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-			+ data->dirX)] == 'K')
-		data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-				+ data->dirX)] = 'D';
+	if (data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
+			+ data->dir_x)] == 'D')
+		data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
+				+ data->dir_x)] = 'K';
+	else if (data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
+			+ data->dir_x)] == 'K')
+		data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
+				+ data->dir_x)] = 'D';
 }

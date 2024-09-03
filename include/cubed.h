@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:01 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/25 01:40:11 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:06:16 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-
-# define textureW 64
-# define textureH 64
 
 //LIBRAIRES
 # include "../Libft/libft.h"

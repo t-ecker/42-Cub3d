@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:42:39 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:12:20 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,17 @@ void	ft_camera_hook(void *param)
 
 	angle = 4 * (M_PI / 180);
 	data = param;
-	olddir_x = data->dirX;
-	olddir_y = data->dirY;
+	olddir_x = data->dir_x;
+	olddir_y = data->dir_y;
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_RIGHT))
 	{
-		data->dirX = cos(angle) * olddir_x - sin(angle) * olddir_y;
-		data->dirY = sin(angle) * olddir_x + cos(angle) * olddir_y;
+		data->dir_x = cos(angle) * olddir_x - sin(angle) * olddir_y;
+		data->dir_y = sin(angle) * olddir_x + cos(angle) * olddir_y;
 	}
 	if (mlx_is_key_down(data->cubed->mlx, MLX_KEY_LEFT))
 	{
-		data->dirX = cos(angle) * olddir_x + sin(angle) * olddir_y;
-		data->dirY = -sin(angle) * olddir_x + cos(angle) * olddir_y;
+		data->dir_x = cos(angle) * olddir_x + sin(angle) * olddir_y;
+		data->dir_y = -sin(angle) * olddir_x + cos(angle) * olddir_y;
 	}
 }
 
@@ -109,13 +109,13 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 	data = param;
 	if (key.key == MLX_KEY_E && key.action == MLX_PRESS
 		&& ((data->facing == 'D'
-				&& data->Map[(int)(data->posY
-					+ data->dirY)][(int)(data->posX + data->dirX)] == 'D')
+				&& data->map[(int)(data->pos_y
+					+ data->dir_y)][(int)(data->pos_x + data->dir_x)] == 'D')
 			|| ((data->facing == 'K'
 			|| data->facing == 'S')
-				&& data->Map[(int)data->posY][(int)data->posX] != 'K'
-				&& data->Map[(int)(data->posY + data->dirY)][(int)(data->posX
-					+ data->dirX)] == 'K')))
+				&& data->map[(int)data->pos_y][(int)data->pos_x] != 'K'
+				&& data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
+					+ data->dir_x)] == 'K')))
 	{
 		change_door(data);
 	}

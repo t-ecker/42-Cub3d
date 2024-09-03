@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 19:20:51 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/02 19:34:53 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:16:47 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	set_texture(t_texture *texture, t_input *input)
 	texture->s = mlx_load_png(input->wall_s);
 	texture->w = mlx_load_png(input->wall_w);
 	texture->e = mlx_load_png(input->wall_e);
-	texture->D = mlx_load_png("./textures/CRATE_2C.PNG");
-	texture->DO = mlx_load_png("./textures/CRATE_2M_OPEN.png");
-	texture->F = mlx_load_png("./textures/CONSOLE_1B.PNG");
-	texture->infoD = mlx_load_png("./assets/1.PNG");
-	texture->infoDC = mlx_load_png("./assets/2.PNG");
-	texture->infoF = mlx_load_png("./assets/3.PNG");
+	texture->d = mlx_load_png("./textures/CRATE_2C.PNG");
+	texture->k = mlx_load_png("./textures/CRATE_2M_OPEN.png");
+	texture->f = mlx_load_png("./textures/CONSOLE_1B.PNG");
+	texture->infod = mlx_load_png("./assets/1.PNG");
+	texture->infok = mlx_load_png("./assets/2.PNG");
+	texture->infof = mlx_load_png("./assets/3.PNG");
 	texture->shoot = mlx_load_png("./assets/pistol_shoot.png");
 	texture->recoil = mlx_load_png("./assets/pistol_recoil.png");
 	texture->hand = mlx_load_png("./assets/pistol_static.png");
@@ -72,17 +72,17 @@ int	check_texture1(t_texture *texture)
 		return (1);
 	if (!texture->e)
 		return (1);
-	if (!texture->D)
+	if (!texture->d)
 		return (1);
-	if (!texture->DO)
+	if (!texture->k)
 		return (1);
-	if (!texture->F)
+	if (!texture->f)
 		return (1);
-	if (!texture->infoD)
+	if (!texture->infod)
 		return (1);
-	if (!texture->infoDC)
+	if (!texture->infok)
 		return (1);
-	if (!texture->infoF)
+	if (!texture->infof)
 		return (1);
 	if (!texture->shoot)
 		return (1);

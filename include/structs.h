@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 12:39:51 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:28:15 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 
 typedef struct s_ray
 {
-	double rayDirX;
-	double sideDistX;
-	double sideDistY;
-	double rayDirY;
-	double cameraX;
-	int mapY;
-	int mapX;
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
-	int stepX;
-	int stepY;
-	int side;
+	double	raydir_x;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	raydir_y;
+	double	camera_x;
+	int		map_y;
+	int		map_x;
+	double	deltadist_x;
+	double	deltadist_y;
+	// double	perpwalldist;
+	int		step_x;
+	int		step_y;
+	int		side;
 }	t_ray;
 
 typedef struct s_input
@@ -65,42 +65,42 @@ typedef struct s_cubed
 
 typedef struct s_sprite
 {
-	double x;
-	double y;
-	char status;
-	mlx_texture_t *tex;
+	double			x;
+	double			y;
+	char			status;
+	mlx_texture_t	*tex;
 }	t_sprite;
 
 typedef struct s_hit
 {
-    double distance;
-    char type;
-	int texX;
-	mlx_texture_t *tex;
-	int sprite_t;
-} t_hit;
+	double			distance;
+	char			type;
+	int				tex_x;
+	mlx_texture_t	*tex;
+	int				sprite_t;
+}			t_hit;
 
 typedef struct s_color
 {
-	int r;
-	int g;
-	int b;
-	int a;
-	int final;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+	int	final;
 }	t_color;
 
 typedef struct s_texture
 {
-	mlx_texture_t *n;
-	mlx_texture_t *s;
-	mlx_texture_t *w;
-	mlx_texture_t *e;
-	mlx_texture_t *F;
-	mlx_texture_t *D;
-	mlx_texture_t *DO;
-	mlx_texture_t *infoF;
-	mlx_texture_t *infoD;
-	mlx_texture_t *infoDC;
+	mlx_texture_t	*n;
+	mlx_texture_t	*s;
+	mlx_texture_t	*w;
+	mlx_texture_t	*e;
+	mlx_texture_t	*f;
+	mlx_texture_t	*d;
+	mlx_texture_t	*k;
+	mlx_texture_t	*infof;
+	mlx_texture_t	*infod;
+	mlx_texture_t	*infok;
 	mlx_texture_t	*shoot;
 	mlx_texture_t	*recoil;
 	mlx_texture_t	*hand;
@@ -112,41 +112,41 @@ typedef struct s_texture
 	mlx_texture_t	*monster;
 	mlx_texture_t	*monster_s;
 	mlx_texture_t	*pos;
-	double step;
-	double tex_pos;
-	int texY;
-	int startY;
-	int endY;
-	int texX;
-	double transformX;
-	double transformY;
-	int height;
-	double	invdet;
-	double wall_x;
+	double			step;
+	double			tex_pos;
+	int				tex_y;
+	int				start_y;
+	int				end_y;
+	int				tex_x;
+	double			transform_x;
+	double			transform_y;
+	int				height;
+	double			invdet;
+	double			wall_x;
 }	t_texture;
 
 typedef struct s_data
 {
-	float fov;
-	double posX;
-	double posY;
-	double planeX;
-	double planeY;
-	double dirX;
-	double dirY;
-	char **Map;
-	int *hit_count;
-	int sprite_count;
-	char facing;
-	int	weapon;
-	double speed;
-	int	toggle_light;
-	int end;
-	t_cubed *cubed;
-	t_input *input;
-	t_texture *texture;
-	t_hit **hit;
-	t_sprite *sprites;
+	float		fov;
+	double		pos_x;
+	double		pos_y;
+	double		plane_x;
+	double		plane_y;
+	double		dir_x;
+	double		dir_y;
+	char		**map;
+	int			*hit_count;
+	int			sprite_count;
+	char		facing;
+	int			weapon;
+	double		speed;
+	int			toggle_light;
+	int			end;
+	t_cubed		*cubed;
+	t_input		*input;
+	t_texture	*texture;
+	t_hit		**hit;
+	t_sprite	*sprites;
 }	t_data;
 
 #endif
