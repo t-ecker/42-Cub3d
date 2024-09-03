@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_utils.c                                    :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:43:10 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/03 18:49:04 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:15:30 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,25 @@ int	is_pixel_transp(mlx_image_t *image, int x, int y)
 	if (alpha == 0)
 		return (1);
 	return (0);
+}
+
+int	add_fog(int color, int fog, double fog_factor, double distance)
+{
+	t_color	after;
+
+	if (fog == 2)
+		return (color);
+	if (fog_factor == INT_MAX)
+		fog_factor = (distance - 1) / (3.5 - 1);
+	if (fog_factor < 0)
+		fog_factor = 0;
+	if (fog_factor > 1)
+		fog_factor = 1;
+	after.a = color & 0xFF;
+	after.r = (int)((1.0 - fog_factor) * ((color >> 24) & 0xFF));
+	after.g = (int)((1.0 - fog_factor) * ((color >> 16) & 0xFF));
+	after.b = (int)((1.0 - fog_factor) * ((color >> 8) & 0xFF));
+	return ((after.r << 24) | (after.g << 16) | (after.b << 8) | after.a);
 }
 
 void	clear_image(mlx_image_t *image)

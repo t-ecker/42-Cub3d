@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 15:40:54 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:40:17 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			print_map(t_input *input);
 //raycasting
 void			castrays(t_data *data);
 int				dda(t_data *data, t_ray *ray, int x, int *hit_c);
-void			initilisation(t_data *data, t_ray *ray, int x, int *hit_c);
+void			initialization(t_data *data, t_ray *ray, int x, int *hit_c);
 void			get_tex_x(t_data *data, t_ray ray, int x, int hc);
 int				check_sprites(t_data *data, int x, int hit_c, t_ray ray);
 #endif

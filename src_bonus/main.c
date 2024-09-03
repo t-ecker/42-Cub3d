@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 19:35:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:09:29 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	leaks(void)
 void	ft_hook(t_data *data)
 {
 	mlx_loop_hook(data->cubed->mlx, ft_camera_hook, data);
+	mlx_loop_hook(data->cubed->mlx, ft_cursor_camera_hook, data);
+	mlx_mouse_hook(data->cubed->mlx, ft_mouse_shoot_hook, data);
 	mlx_key_hook(data->cubed->mlx, ft_window_hook, data);
 	mlx_loop_hook(data->cubed->mlx, ft_movement_hook, data);
 }
@@ -32,6 +34,14 @@ int	init_image(t_input *input, t_cubed *cubed, t_data *data)
 	if (!init_bg_img(cubed, input, data))
 		return (0);
 	if (!init_walls_img(cubed, input, data))
+		return (0);
+	if (!init_overlay_img(cubed, input, data))
+		return (0);
+	if (!init_minimap_img(data))
+		return (0);
+	if (!init_info_img(cubed, input, data))
+		return (0);
+	if (!init_victory_img(cubed, input, data))
 		return (0);
 	draw(data);
 	mlx_loop_hook(cubed->mlx, redraw, data);

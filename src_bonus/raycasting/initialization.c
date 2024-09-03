@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initilisation.c                                    :+:      :+:    :+:   */
+/*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 21:12:08 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/03 13:21:46 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:42:47 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	initilize_ray2(t_data *data, t_ray *ray)
+void	initialize_ray2(t_data *data, t_ray *ray)
 {
 	if (ray->raydir_x < 0)
 	{
@@ -36,7 +36,7 @@ void	initilize_ray2(t_data *data, t_ray *ray)
 	}
 }
 
-void	initilize_ray(t_data *data, t_ray *ray, int x)
+void	initialize_ray(t_data *data, t_ray *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)WIDTH - 1;
 	ray->raydir_x = data->dir_x + data->plane_x * ray->camera_x;
@@ -51,11 +51,11 @@ void	initilize_ray(t_data *data, t_ray *ray, int x)
 		ray->deltadist_y = INT_MAX;
 	else
 		ray->deltadist_y = fabs(1 / ray->raydir_y);
-	initilize_ray2(data, ray);
+	initialize_ray2(data, ray);
 }
 
-void	initilisation(t_data *data, t_ray *ray, int x, int *hit_c)
+void	initialization(t_data *data, t_ray *ray, int x, int *hit_c)
 {
 	*hit_c = 0;
-	initilize_ray(data, ray, x);
+	initialize_ray(data, ray, x);
 }

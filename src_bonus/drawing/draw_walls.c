@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 17:12:29 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:57:45 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	redraw(void *param)
 	setplane(data);
 	castrays(data);
 	clear_image(data->cubed->walls);
+	clear_image(data->cubed->info);
 	draw(data);
 }
 
@@ -38,7 +39,8 @@ void	print_wall_line(t_data *data, int x, int hit_c)
 					data->hit[x][hit_c].tex_x, data->texture->tex_y);
 			if (color != 0x00000000)
 				my_put_pixel(data->cubed->walls, x, data->texture->start_y,
-					color);
+					add_fog(color, data->weapon, INT_MAX,
+						data->hit[x][hit_c].distance));
 		}
 		data->texture->start_y++;
 	}
@@ -61,14 +63,42 @@ void	draw_walls(t_data *data, int x, int hit_c)
 	print_wall_line(data, x, hit_c);
 }
 
+void	check_info(t_data *data, int x)
+{
+	if (data->facing == 'F' && data->hit[x][0].type == 'F'
+		&& data->hit[x][0].distance < 1.2)
+		draw_info(data, 'F');
+	if ((data->facing == 'D' && data->hit[x][0].type == 'D'
+		&& data->hit[x][0].distance < 1.2))
+		draw_info(data, 'D');
+	if ((data->facing == 'K' || data->facing == 'S')
+		&& data->hit[x][0].type == 'K'
+		&& data->hit[x][0].distance < 1.2 && check_door_collision(data))
+		draw_info(data, 'K');
+}
+
 void	draw(t_data *data)
 {
 	int	x;
+	int	hit_c;
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		draw_walls(data, x, 0);
+		hit_c = 0;
+		while (hit_c <= data->hit_count[x])
+		{
+			if (data->hit[x][hit_c].distance > 0)
+			{
+				if (data->hit[x][hit_c].type == 'S')
+					draw_sprites(data, x, hit_c);
+				else
+					draw_walls(data, x, hit_c);
+			}
+			hit_c++;
+		}
+		if (x == WIDTH / 2)
+			check_info(data, x);
 		x++;
 	}
 }

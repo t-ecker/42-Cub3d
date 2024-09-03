@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 03:42:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 19:35:17 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:45:21 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,25 @@ int	check_sides(char **map, int x, int y, t_input *input)
 		if (map[y - 1][x] == '1' && map[y + 1][x] == '1')
 			return (1);
 	return (0);
+}
+
+int	check_map_doors(char **map, t_input *input)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < input->map_height)
+	{
+		x = 0;
+		while (x < input->map_width)
+		{
+			if (map[y][x] == 'D')
+				if (!check_sides(map, x, y, input))
+					return (printf("wrong door palcement\n"), 0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }

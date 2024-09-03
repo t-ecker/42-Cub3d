@@ -6,11 +6,12 @@
 #    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/09/03 10:25:44 by tomecker         ###   ########.fr        #
+#    Updated: 2024/09/03 19:44:26 by tomecker         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = cub3d
+NAME_BONUS      = cub3d_bonus
 
 CC              = cc
 CFLAGS			= -Wall -Wextra -Werror
@@ -23,38 +24,65 @@ MAKELIBMLX		= ./MLX42/build/libmlx42.a
 LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -L/opt/homebrew/lib -lft -ldl -lglfw -pthread -lm
 
 SRC_DIR         = ./src
+SRC_DIR_BONUS   = ./src_bonus
 OBJ_DIR         = ./obj
+OBJ_DIR_BONUS   = ./obj_bonus
 
-SRC_FILES       =	src/checkers/checkers.c\
-					src/checkers/map_checkers.c\
-					src/initilize/init_structs.c\
-					src/initilize/init_images.c\
-					src/initilize/init_textures.c\
-					src/initilize/init_sprites.c\
-					src/initilize/parsing.c\
-					src/controls/controls.c\
-					src/controls/collision.c\
-					src/controls/controls_mouse.c\
-					src/drawing/draw_bg.c\
-					src/raycasting/wall_dist.c\
-					src/raycasting/dda.c\
-					src/raycasting/initilisation.c\
-					src/drawing/draw_walls.c\
-					src/drawing/draw_sprites.c\
-					src/drawing/draw_overlay.c\
-					src/drawing/draw_minimap.c\
-					src/utils/utils.c\
-					src/utils/utils_2.c\
-					src/utils/drawing_utils.c\
-					src/utils/init_utils.c\
-					src/utils/control_utils.c\
-					src/utils/freeing.c\
-					src/utils/debug.c\
-					src/main.c
+SRC_FILES_BONUS =	./src_bonus/checkers/checkers.c\
+					./src_bonus/checkers/map_checkers.c\
+					./src_bonus/initialize/init_structs.c\
+					./src_bonus/initialize/init_images.c\
+					./src_bonus/initialize/init_textures.c\
+					./src_bonus/initialize/init_sprites.c\
+					./src_bonus/initialize/parsing.c\
+					./src_bonus/controls/controls.c\
+					./src_bonus/controls/collision.c\
+					./src_bonus/controls/controls_mouse.c\
+					./src_bonus/drawing/draw_bg.c\
+					./src_bonus/raycasting/wall_dist.c\
+					./src_bonus/raycasting/dda.c\
+					./src_bonus/raycasting/initialization.c\
+					./src_bonus/drawing/draw_walls.c\
+					./src_bonus/drawing/draw_sprites.c\
+					./src_bonus/drawing/draw_overlay.c\
+					./src_bonus/drawing/draw_minimap.c\
+					./src_bonus/utils/utils.c\
+					./src_bonus/utils/utils_2.c\
+					./src_bonus/utils/drawing_utils.c\
+					./src_bonus/utils/init_utils.c\
+					./src_bonus/utils/control_utils.c\
+					./src_bonus/utils/freeing.c\
+					./src_bonus/utils/debug.c\
+					./src_bonus/main.c
+
+SRC_FILES		=	./src/checkers/checkers.c\
+					./src/checkers/map_checkers.c\
+					./src/initialize/init_structs.c\
+					./src/initialize/init_images.c\
+					./src/initialize/init_textures.c\
+					./src/initialize/parsing.c\
+					./src/controls/controls.c\
+					./src/controls/collision.c\
+					./src/drawing/draw_bg.c\
+					./src/raycasting/wall_dist.c\
+					./src/raycasting/dda.c\
+					./src/raycasting/initialization.c\
+					./src/drawing/draw_walls.c\
+					./src/utils/utils.c\
+					./src/utils/utils_2.c\
+					./src/utils/drawing_utils.c\
+					./src/utils/init_utils.c\
+					./src/utils/control_utils.c\
+					./src/utils/freeing.c\
+					./src/utils/debug.c\
+					./src/main.c
 
 OBJ_FILES		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+OBJ_FILES_BONUS	=	$(patsubst $(SRC_DIR_BONUS)/%.c, $(OBJ_DIR_BONUS)/%.o, $(SRC_FILES_BONUS))
 
 all:			clear_screen $(NAME) visual_feedback
+
+bonus:			clear_screen $(NAME_BONUS) visual_feedback
 
 libmlx:
 				mkdir -p $(LIBMLX)/build
@@ -80,11 +108,23 @@ WHITE		=	\033[0;97m
 $(NAME): $(OBJ_FILES) $(LIBFT) $(MAKELIBMLX)
 	$(CC) $(CFLAGS) $(HEADERFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBS)
 
+$(NAME_BONUS): $(OBJ_FILES_BONUS) $(LIBFT) $(MAKELIBMLX)
+	$(CC) $(CFLAGS) $(HEADERFLAGS) -o $(NAME_BONUS) $(OBJ_FILES_BONUS) $(LIBS)
+
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
+$(OBJ_DIR_BONUS):
+	mkdir -p $(OBJ_DIR_BONUS)
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(HEADERFLAGS) -c $< -o $@
+
+$(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c | $(OBJ_DIR_BONUS)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(HEADERFLAGS) -c $< -o $@
+
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
@@ -112,6 +152,7 @@ visual_feedback:
 clean:
 	@echo "$(CYAN)"
 	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR_BONUS)
 	make clean -C $(LIBFT_DIR)
 	@clear
 	@echo "$(DEF_COLOR)"
@@ -119,6 +160,7 @@ clean:
 fclean: clean
 	@echo "$(CYAN)"
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 	make fclean -C $(LIBFT_DIR)
 	rm -rf $(LIBMLX)/build
 	@clear

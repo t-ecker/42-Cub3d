@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 19:28:19 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:53:31 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	detect(char c)
 {
-	return (c == '1');
+	return (c == '1' || c == 'D' || c == 'F');
 }
 
 int	check_x(t_data *data, double new_x, float buffer)
@@ -48,6 +48,13 @@ void	collision(t_data *data, double new_x, double new_y)
 	int		canmove_y;
 
 	buffer = 0.3;
+	if (data->map[(int)new_y][(int)new_x] == 'M')
+	{
+		data->end = 1;
+		clear_image(data->cubed->hand);
+		draw_overlay_part(data->cubed->victory, data->texture->death, 0, 0);
+		return ;
+	}
 	canmove_x = check_x(data, new_x, buffer);
 	canmove_y = check_y(data, new_y, buffer);
 	if (canmove_x && canmove_y)
@@ -59,4 +66,17 @@ void	collision(t_data *data, double new_x, double new_y)
 		data->pos_x = new_x;
 	else if (canmove_y)
 		data->pos_y = new_y;
+}
+
+int	check_door_collision(t_data *data)
+{
+	double	buffer;
+
+	buffer = 0.3;
+	if (data->map[(int)data->pos_y][(int)(data->pos_x + buffer)] != 'K'
+		&& data->map[(int)data->pos_y][(int)(data->pos_x - buffer)] != 'K'
+		&& data->map[(int)(data->pos_y + buffer)][(int)(data->pos_x)] != 'K'
+		&& data->map[(int)(data->pos_y - buffer)][(int)(data->pos_x)] != 'K')
+		return (1);
+	return (0);
 }
