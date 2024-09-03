@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 21:23:20 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/02 22:02:40 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:16:00 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cell_middle_pos(t_data *data, t_ray *ray, double *new_x, double *new_y)
 	if (ray->side == 0)
 	{
 		pos_x = (ray->sideDistX - ray->deltaDistX) * ray->rayDirX + data->posX;
-		pos_y = (ray->sideDistX - ray->deltaDistX) * ray->rayDirY + data->posX;
+		pos_y = (ray->sideDistX - ray->deltaDistX) * ray->rayDirY + data->posY;
 		*new_x = pos_x + ray->deltaDistX * 0.5 * ray->rayDirX;
 		*new_y = pos_y + ray->deltaDistX * 0.5 * ray->rayDirY;
 	}
