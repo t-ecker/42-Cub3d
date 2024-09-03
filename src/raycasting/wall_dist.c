@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:34 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:23:38 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:38:22 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,12 @@ void	castrays(t_data *data)
 			hit = dda(data, &ray, x, &hit_c);
 		set_wall_attributes(data, ray, x, hit_c);
 		if (x == WIDTH / 2)
-			data->facing = data->hit[x][get_sprite(data)].type;
+		{
+			if (data->hit[x][get_sprite(data)].type == 'S')
+				data->facing = 'S';
+			else
+				data->facing = data->hit[x][0].type;
+		}
 		x++;
 	}
 }

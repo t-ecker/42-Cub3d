@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:57 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:27:04 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:52:13 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				get_sprite(t_data *data);
 void			move_forward(t_data *data, double speed);
 void			move_right(t_data *data, double speed);
 void			change_door(t_data *data);
+int				check_door_collision(t_data *data);
 void			change_weapon(t_data *data, int weapon);
 
 //FREEING

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:02:11 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:12:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:55:45 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_gameplay_hook(struct mlx_key_data key, void *param)
 					+ data->dir_y)][(int)(data->pos_x + data->dir_x)] == 'D')
 			|| ((data->facing == 'K'
 			|| data->facing == 'S')
-				&& data->map[(int)data->pos_y][(int)data->pos_x] != 'K'
+				&& check_door_collision(data)
 				&& data->map[(int)(data->pos_y + data->dir_y)][(int)(data->pos_x
 					+ data->dir_x)] == 'K')))
 	{

@@ -6,7 +6,7 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:28:44 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:57:45 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	check_info(t_data *data, int x)
 		&& data->hit[x][0].distance < 1.2))
 		draw_info(data, 'D');
 	if ((data->facing == 'K' || data->facing == 'S')
-		&& data->hit[x][0].type == 'K' && data->hit[x][0].distance < 1.2)
+		&& data->hit[x][0].type == 'K'
+		&& data->hit[x][0].distance < 1.2 && check_door_collision(data))
 		draw_info(data, 'K');
 }
 
