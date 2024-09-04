@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
+#    By: tecker <tecker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/09/04 12:38:45 by dolifero         ###   ########.fr        #
+#    Updated: 2024/09/04 12:50:21 by tecker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,10 +105,10 @@ CYAN		=	\033[2;96m
 BR_CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
-$(NAME): $(OBJ_FILES) $(LIBFT) $(MAKELIBMLX)
+$(NAME): $(MAKELIBMLX) $(OBJ_FILES) $(LIBFT)
 	$(CC) $(CFLAGS) $(HEADERFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBS)
 
-$(NAME_BONUS): $(OBJ_FILES_BONUS) $(LIBFT) $(MAKELIBMLX)
+$(NAME_BONUS): $(MAKELIBMLX) $(OBJ_FILES_BONUS) $(LIBFT)
 	$(CC) $(CFLAGS) $(HEADERFLAGS) -o $(NAME_BONUS) $(OBJ_FILES_BONUS) $(LIBS)
 
 $(OBJ_DIR):
