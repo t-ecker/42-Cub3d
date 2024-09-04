@@ -1,0 +1,7 @@
+NO ./textures/backroom_v1.png
+SO ./textures/backroom_h1.png
+WE ./textures/backroom_v2.png
+EA ./textures/backroom_h2.png
+
+C 135,206,250
+F 105,105,105
