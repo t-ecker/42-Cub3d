@@ -6,36 +6,28 @@
 /*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:25:16 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/18 17:03:55 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:25:21 by tomecker         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-void	collision(t_data *data, double newX, double newY)
+void	move_forward(t_data *data, double speed)
 {
-	float	buffer;
-	int		canmoveX;
-	int		canmoveY;
+	double	new_x;
+	double	new_y;
 
-	canmoveX = 1;
-	canmoveY = 1;
-	buffer = 0.3;
-  if ((ft_strchr("1D", data->Map[(int)data->posY][(int)(newX + buffer)]) && newX > data->posX) ||
-        (ft_strchr("1D", data->Map[(int)data->posY][(int)(newX - buffer)]) && newX < data->posX))
-     canmoveX = 0;
+	new_x = data->pos_x + data->dir_x / speed;
+	new_y = data->pos_y + data->dir_y / speed;
+	collision(data, new_x, new_y);
+}
 
-  if ((ft_strchr("1D", data->Map[(int)(newY + buffer)][(int)data->posX]) && newY > data->posY) ||
-        (ft_strchr("1D", data->Map[(int)(newY - buffer)][(int)data->posX]) && newY < data->posY))
-     canmoveY = 0;
-	if (canmoveX && canmoveY)
-	{
-		data->posX = newX;
-		data->posY = newY;
-	}
-	else if (canmoveX)
-		data->posX = newX;
-	else if (canmoveY)
-		data->posY = newY;
+void	move_right(t_data *data, double speed)
+{
+	double	new_x;
+	double	new_y;
 
+	new_x = data->pos_x + data->plane_x / speed;
+	new_y = data->pos_y + data->plane_y / speed;
+	collision(data, new_x, new_y);
 }
