@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:19:41 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 16:57:41 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 03:34:14 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_map(char **map, t_input *input)
 int	check_input(t_input *input)
 {
 	if (!input)
-		return (ft_putendl_fd("Input allocation failed", 2), 0);
+		return (0);
 	if (!check_params(input))
 	{
 		ft_putendl_fd("Error", 2);

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/08/21 23:46:12 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/04 03:36:11 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_input	*parse_file(char *filename)
 
 	input = init_input();
 	if (!input)
-		return (NULL);
+		return (ft_putendl_fd("Input allocation failed", 2), NULL);
 	fd = open(filename, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -87,5 +87,7 @@ t_input	*parse_file(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!input->map)
+		return (ft_putendl_fd("Map is missing", 2), free_params(input), NULL);
 	return (input);
 }
