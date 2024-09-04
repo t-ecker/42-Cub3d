@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+         #
+#    By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 22:40:28 by dolifero          #+#    #+#              #
-#    Updated: 2024/09/03 19:44:26 by tomecker         ###   ########.fr        #
+#    Updated: 2024/09/04 12:38:45 by dolifero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT_DIR       = Libft
 LIBFT           = $(LIBFT_DIR)/libft.a
 LIBMLX			= ./MLX42
 MAKELIBMLX		= ./MLX42/build/libmlx42.a
-LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -L/opt/homebrew/lib -lft -ldl -lglfw -pthread -lm
+LIBS			= $(MAKELIBMLX) -L$(LIBFT_DIR) -lft -ldl -lglfw -pthread -lm
 
 SRC_DIR         = ./src
 SRC_DIR_BONUS   = ./src_bonus

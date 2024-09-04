@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:06:15 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:06:00 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:34:15 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_bg(t_data *data, t_input *input)
 		fog_factor = 1.2 - ((double)(HEIGHT / 2 - i) / (HEIGHT / 2));
 		while (++j < WIDTH)
 			my_put_pixel(data->cubed->bg, j, i,
-				add_fog(input->ceiling, data->weapon, fog_factor, 0));
+				add_fog(input->ceiling, 1, fog_factor, 0));
 		i++;
 	}
 	while (i < HEIGHT)
@@ -34,7 +34,7 @@ void	draw_bg(t_data *data, t_input *input)
 		fog_factor = 1.2 - ((double)(i - HEIGHT / 2) / (HEIGHT / 2));
 		while (++j < WIDTH)
 			my_put_pixel(data->cubed->bg, j, i,
-				add_fog(input->floor, data->weapon,
+				add_fog(input->floor, 1,
 					fog_factor, 0));
 		i++;
 	}

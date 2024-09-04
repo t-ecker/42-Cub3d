@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:22:58 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 19:35:22 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:16:07 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cubed.h"
-
-void	leaks(void)
-{
-	system("leaks cub3d");
-}
 
 void	ft_hook(t_data *data)
 {

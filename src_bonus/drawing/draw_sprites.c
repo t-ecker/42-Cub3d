@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:44:57 by tomecker          #+#    #+#             */
-/*   Updated: 2024/09/03 13:14:42 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:31:37 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	printf_sprite_lines(t_data *data, double transform_y, int x, int hit_c)
 						data->texture->tex_x, data->texture->tex_y);
 				if (color != 0x00000000 && (color & 0xFF) > 200)
 					my_put_pixel(data->cubed->walls, x, data->texture->start_y,
-						add_fog(color, data->weapon, INT_MAX, transform_y));
+						add_fog(color, 1, INT_MAX, transform_y));
 			}
 		}
 		data->texture->start_y++;

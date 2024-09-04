@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 01:26:38 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 13:57:45 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:31:29 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_wall_line(t_data *data, int x, int hit_c)
 					data->hit[x][hit_c].tex_x, data->texture->tex_y);
 			if (color != 0x00000000)
 				my_put_pixel(data->cubed->walls, x, data->texture->start_y,
-					add_fog(color, data->weapon, INT_MAX,
+					add_fog(color, 1, INT_MAX,
 						data->hit[x][hit_c].distance));
 		}
 		data->texture->start_y++;

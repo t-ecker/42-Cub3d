@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:50:32 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 19:17:14 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:03:51 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	free_input(t_input *input)
 
 	free_params(input);
 	i = 0;
-	while (input->map[i])
+	while (input->map && input->map[i])
 	{
 		free(input->map[i]);
 		i++;
 	}
-	free(input->map);
+	if (input->map)
+		free(input->map);
 	free(input);
 }
 

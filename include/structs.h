@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomecker <tomecker@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 22:21:53 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/03 14:56:20 by tomecker         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:47:04 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_ray
 	int		map_x;
 	double	deltadist_x;
 	double	deltadist_y;
-	// double	perpwalldist;
 	int		step_x;
 	int		step_y;
 	int		side;

@@ -6,7 +6,7 @@
 /*   By: dolifero <dolifero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 01:21:19 by dolifero          #+#    #+#             */
-/*   Updated: 2024/09/04 03:36:11 by dolifero         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:10:26 by dolifero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_parse_param(char *line, t_input *input)
 	{
 		ft_putendl_fd("Error", 2);
 		ft_putendl_fd("Ivalid file content", 2);
-		free_params(input);
+		free_input(input);
+		free(line);
 		exit(1);
 	}
 }
@@ -88,6 +89,6 @@ t_input	*parse_file(char *filename)
 		line = get_next_line(fd);
 	}
 	if (!input->map)
-		return (ft_putendl_fd("Map is missing", 2), free_params(input), NULL);
+		return (ft_putendl_fd("Map is missing", 2), free_input(input), NULL);
 	return (input);
 }
