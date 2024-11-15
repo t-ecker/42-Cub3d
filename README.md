@@ -25,3 +25,10 @@
  - Functional doors;
  - Animated enemies with hitboxes;
  - Exit and death screens;
+## Gameplay footage:
+
+![image](https://github.com/user-attachments/assets/159277aa-9885-4019-b0c7-c6360b0503f2)
+
+![image](https://github.com/user-attachments/assets/41d9be73-d4d9-4d2b-8896-e14b23ea4947)
+
+![image](https://github.com/user-attachments/assets/eddc74f0-9cd5-4a97-b669-069c0de7dcbe)
