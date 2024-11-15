@@ -13,3 +13,15 @@
  - Make (makefile clones the MLX42), might need an older version of MLX42
  - You are good to go!
  - Usage: `./cub3d maps/valid/*.cub` or for the best experience: `.cub3d_bonus maps/bonus/*.cub`
+
+## Key features:
+ - 3D maze with a map reader and possibility to create one's own maps;
+ - Darkness and light effects;
+ - Textures for each side of the walls;
+ - Flashlight and a gun;
+ - Camera mouse controls;
+ - Dynamic HUD with gameplay hints and more;
+ - Minimap;
+ - Functional doors;
+ - Animated enemies with hitboxes;
+ - Exit and death screens;
