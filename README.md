@@ -4,7 +4,7 @@
 ![image](https://github.com/user-attachments/assets/eeeb25e4-7c37-4800-b9ca-a1dcd55b974f)
 
 ## Description:
- A horror game where player dwells in the dark corridors of a maze seeking for escape. Beware of what lurks in the shadows, don't turn off the flashlight and always keep your gun ready. Escape the maze!
+ A horror game where player wanders in the dark corridors of a maze seeking for escape. Beware of what lurks in the shadows, don't turn off the flashlight and always keep your gun ready. Escape the maze!
 
  ![image](https://github.com/user-attachments/assets/3fb5afa6-4dba-43b1-a810-83d013b42340)
 
