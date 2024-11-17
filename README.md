@@ -1,7 +1,23 @@
-# Cub3d!
-> Our first raycaster with MLX42!
+<div align="center">
+ <img src=https://github.com/user-attachments/assets/eeeb25e4-7c37-4800-b9ca-a1dcd55b974f alt="cub3d" width="500"/>
+ <br>
+ <br>
+ <b>Made by <a href=https://github.com/oliferovych/>dolifero</a> & <a href=https://github.com/t-ecker/>tecker</a></b>
+ <br>
+ <br>
+ <b>Intra score: 125/125</b>
+ <br>
+ <b>Started: 07.08.2024</b>
+ <br>
+ <b>Finished: 04.09.2024</b>
+</div>
 
-![image](https://github.com/user-attachments/assets/eeeb25e4-7c37-4800-b9ca-a1dcd55b974f)
+# Cub3d!
+> **Our first raycaster with MLX42!**
+
+ **Summary:**  *This project is inspired by the world-famous Wolfenstein 3D game, which
+was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to
+make a dynamic view inside a maze, in which you’ll have to find your way.*
 
 ## Description:
  A horror game where player wanders within the dark corridors of a maze seeking for escape. Beware of what lurks in the shadows, don't turn off the flashlight and always keep your gun ready. Escape the maze!
