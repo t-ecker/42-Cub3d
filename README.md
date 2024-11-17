@@ -12,7 +12,7 @@
  - Pull the git
  - Make (makefile clones the MLX42), might need an older version of MLX42
  - You are good to go!
- - Usage: `./cub3d maps/valid/*.cub` or for the best experience: `.cub3d_bonus maps/bonus/*.cub`
+ - Usage: `./cub3d maps/valid/*.cub` or for the best experience: `./cub3d_bonus maps/bonus/*.cub`
 
 ## Key features:
  - 3D maze with a map reader and possibility to create one's own maps;
